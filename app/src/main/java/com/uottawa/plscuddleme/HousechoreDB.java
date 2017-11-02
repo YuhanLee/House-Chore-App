@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.Cursor;
-import java.util.Date;
 
 /**
  * Created by Yuhan on 10/31/2017.
@@ -19,18 +18,19 @@ public class HousechoreDB extends SQLiteOpenHelper {
     public static final String COLUMN_HOUSECHORENAME = "housechoreName";
     public static final String COLUMN_ASSIGNEDBY = "assigneBy";
     public static final String COLUMN_ASSIGNEDTO = "assigneTo";
+    public static final String COLUMN_DELETEDBY = "deletedBy";
     public static final String COLUMN_DUEDATE = "dueDate";
+    public static final String COLUMN_PRIORITY = "priority";
+    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_STATUS = "status";
+    public static final String COLUMN_REWARD = "reward";
     public static final String COLUMN_NOTE = "TEXT";
 
-    //constructor
     public HousechoreDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
-
-
-
     public void onCreate(SQLiteDatabase db) {
         String CREATE_HOUSECHORE_TABLE =
                 "CREATE TABLE " +TABLE_HOUSECHORE+ "("
@@ -38,12 +38,18 @@ public class HousechoreDB extends SQLiteOpenHelper {
                         +COLUMN_HOUSECHORENAME+ "TEXT,"
                         +COLUMN_ASSIGNEDBY+ "TEXT,"
                         +COLUMN_ASSIGNEDTO+ "TEXT,"
+                        +COLUMN_DELETEDBY+ "TEXT,"
                         +COLUMN_DUEDATE+ "STRING,"
+                        +COLUMN_PRIORITY+ "STRING,"
+                        +COLUMN_CATEGORY+ "STRING,"
+                        +COLUMN_STATUS+ "STRING,"
+                        +COLUMN_REWARD+ "TEXT,"
                         +COLUMN_NOTE+ "TEXT,"
                         +")";
         db.execSQL(CREATE_HOUSECHORE_TABLE);
     }
 
+    //TODO know the difference between TEXT and STRING in SQL
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,13 +61,21 @@ public class HousechoreDB extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_HOUSECHORENAME, housechore.getHousechoreName());
-        values.put(COLUMN_ASSIGNEDBY, housechore.getAssignedBy());
         values.put(COLUMN_ASSIGNEDTO, housechore.getAssignedTo());
+        values.put(COLUMN_ASSIGNEDBY, housechore.getAssignedBy());
+        values.put(COLUMN_DELETEDBY, housechore.getDeletedBy());
         values.put(COLUMN_DUEDATE, housechore.getDueDate().toString());
+        values.put(COLUMN_PRIORITY, housechore.getPriority());
+        values.put(COLUMN_CATEGORY, housechore.getCategory());
+        values.put(COLUMN_STATUS, housechore.getCompletedStatus());
+        values.put(COLUMN_REWARD, housechore.getReward());
         values.put(COLUMN_NOTE, housechore.getNote());
+
+       // values.put(COLUMN_REWARD, housechore.getNote());
         db.insert(TABLE_HOUSECHORE, null, values);
         db.close();
     }
+    //TODO check for duplicate here??? or should call findHousechore before adding a housechore?
 
 
     public Housechore findHousechore(String housechorename) {
