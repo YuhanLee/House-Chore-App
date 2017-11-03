@@ -20,6 +20,8 @@ public class FamilyMember {
         this._rewards = _rewards;
     }
 
+    // TODO a lot
+
 
     public int get_id() {
         return _id;
