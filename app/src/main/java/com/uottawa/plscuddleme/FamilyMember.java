@@ -5,61 +5,62 @@ package com.uottawa.plscuddleme;
  */
 
 public class FamilyMember {
-    private int _id;
-    private String _userName;
-    private String _userRole;
-    private int _numberOfAssignedTasks;
-    private int _rewards;
+    private int id;
+    private String familyMemberName;
+    private String userRole;
+    private int numberOfAssignedTasks;
+    private int rewards;
 
 
-    public FamilyMember(int _id, String _userName, String _userRole, int _numberOfAssignedTasks, int _rewards) {
-        this._id = _id;
-        this._userName = _userName;
-        this._userRole = _userRole;
-        this._numberOfAssignedTasks = _numberOfAssignedTasks;
-        this._rewards = _rewards;
+    public FamilyMember() {}
+
+    public FamilyMember(int id, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
+        this.id = id;
+        this.familyMemberName = familyMemberName;
+        this.userRole = userRole;
+        this.numberOfAssignedTasks = numberOfAssignedTasks;
+        this.rewards = rewards;
     }
 
-    // TODO a lot
 
 
-    public int get_id() {
-        return _id;
+    public int getID() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setID(int id) {
+        this.id = id;
     }
 
-    public String get_userName() {
-        return _userName;
+    public String getfamilyMemberName() {
+        return familyMemberName;
     }
 
-    public void set_userName(String _userName) {
-        this._userName = _userName;
+    public void setfamilyMemberName(String familyMemberName) {
+        this.familyMemberName = familyMemberName;
     }
 
-    public String get_userRole() {
-        return _userRole;
+    public String getUserRole() {
+        return userRole;
     }
 
-    public void set_userRole(String _userRole) {
-        this._userRole = _userRole;
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
     }
 
-    public int get_numberOfAssignedTasks() {
-        return _numberOfAssignedTasks;
+    public int getNumberOfAssignedTasks() {
+        return numberOfAssignedTasks;
     }
 
-    public void set_numberOfAssignedTasks(int _numberOfAssignedTasks) {
-        this._numberOfAssignedTasks = _numberOfAssignedTasks;
+    public void setNumberOfAssignedTasks(int numberOfAssignedTasks) {
+        this.numberOfAssignedTasks = numberOfAssignedTasks;
     }
 
-    public int get_rewards() {
-        return _rewards;
+    public int getRewards() {
+        return rewards;
     }
 
-    public void set_rewards(int _rewards) {
-        this._rewards = _rewards;
+    public void setRewards(int rewards) {
+        this.rewards = rewards;
     }
 }

@@ -87,7 +87,7 @@ public class HousechoreDB extends SQLiteOpenHelper {
         Housechore housechore = new Housechore();
         if (cursor.moveToFirst()) {
             housechore.setID(Integer.parseInt(cursor.getString(0)));
-            housechore.setHousechoreName((cursor.getString(1));
+            housechore.setHousechoreName((cursor.getString(1)));
             //TODO get more values set!!!!!!!!!!!!!!!!!!
 
             cursor.close();

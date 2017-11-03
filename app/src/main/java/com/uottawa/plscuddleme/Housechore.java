@@ -7,116 +7,119 @@ import java.util.Date;
  */
 
 public class Housechore {
-    private int _id;
-    private String _housechoreName;
-    private String _assignedBy;
-    private String _assignedTo;
-    private String _deletedBy;
-    private Date _dueDate;
-    private String _priority;
-    private String _category;
-    private Boolean _statusCompleted;
-    private int _reward;
-    private String _note;
+    private int id;
+    private String housechoreName;
+    private String assignedBy;
+    private String assignedTo;
+    private String deletedBy;
+    private Date dueDate;
+    private String priority;
+    private String category;
+    private Boolean statusCompleted;
+    private int reward;
+    private String note;
 //TODO consider if should add user previlage for deletion --> if so then need to add an extra attribute.
 
 
+    public Housechore() {
+
+    }
 
     public Housechore (int id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
-        _id = id;
-        _housechoreName = housechoreName;
-        _assignedTo = assignedTo;
-        _assignedBy = assignedBy;
-        _deletedBy = deletedBy; //null at the beginning
-        _dueDate = dueDate;
-        _priority = priority;
-        _category = category;
-        _statusCompleted = statusCompleted;
-        _reward = reward;
-        _note = note;
+        this.id = id;
+        this.housechoreName = housechoreName;
+        this.assignedTo = assignedTo;
+        this.assignedBy = assignedBy;
+        this.deletedBy = deletedBy; //null at the beginning
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.category = category;
+        this.statusCompleted = statusCompleted;
+        this.reward = reward;
+        this.note = note;
     }
 
     public void setID(int id) {
-        _id = id;
+        this.id = id;
     }
 
     public int getID() {
-        return _id;
+        return id;
     }
 
     public void setHousechoreName (String housechoreName) {
-        _housechoreName = housechoreName;
+        this.housechoreName = housechoreName;
     }
     public String getHousechoreName() {
-        return _housechoreName;
+        return housechoreName;
     }
 
     public void setAssignedTo (String personAssigned) {
-        _assignedTo = personAssigned;
+        this.assignedTo = personAssigned;
     }
     public String getAssignedTo() {
-        return _assignedTo;
+        return assignedTo;
     }
 
     public void setAssignedBy (String taskAssignedBy) {
-        _assignedBy = taskAssignedBy;
+        this.assignedBy = taskAssignedBy;
     }
 
     public String getAssignedBy() {
-        return _assignedBy;
+        return assignedBy;
     }
 
-    public void setDeletedBy (String taskDeletedBy) {
-        _deletedBy = taskDeletedBy;
+    public void setDeletedBy(String taskDeletedBy) {
+        this.deletedBy = taskDeletedBy;
     }
 
     public String getDeletedBy () {
-       return _deletedBy;
+       return deletedBy;
     }
 
     public void setDueDate (Date dueDate) {
-        _dueDate = dueDate;
+        this.dueDate = dueDate;
     }
     public Date getDueDate() {
-        return _dueDate;
+        return dueDate;
     }
 
-    public void setPriority(int priority) {
-        _priority = priority;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
     public String getPriority() {
-        return _priority;
+        return priority;
     }
 
     public void setCategory(String category) {
-        _category = category;
+        category = category;
     }
 
     public String getCategory() {
-        return _category;
+        return category;
     }
 
     public void setCompletionStatus(boolean completed) {
-        _statusCompleted = completed;
+        statusCompleted = completed;
     }
 
     public boolean getCompletedStatus() {
-        return _statusCompleted;
+        return statusCompleted;
     }
 
     public void setReward(int reward) {
-        _reward = reward;
+        reward = reward;
     }
     public int getReward() {
-        return _reward;
+        return reward;
     }
 
     public void setNote(String note) {
-        _note = note;
+        note = note;
     }
     public String getNote() {
-        return _note;
+        return note;
     }
 
 }
