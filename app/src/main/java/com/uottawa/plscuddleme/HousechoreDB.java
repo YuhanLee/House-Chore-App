@@ -113,4 +113,6 @@ public class HousechoreDB extends SQLiteOpenHelper {
         db.close();
         return result;
     }
+
+    //TODO implement a method so that the table can be seen
 }
