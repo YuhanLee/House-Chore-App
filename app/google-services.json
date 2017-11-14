@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "744861517104",
+    "firebase_url": "https://housechoremanagement.firebaseio.com",
+    "project_id": "housechoremanagement",
+    "storage_bucket": "housechoremanagement.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744861517104:android:2fe11687e736c532",
+        "android_client_info": {
+          "package_name": "com.uottawa.plscuddleme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744861517104-h8ia4armdgufnopmkl1ggor46av1engi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uottawa.plscuddleme",
+            "certificate_hash": "27982f805b392699b0a4cd3ae225d1848a81c421"
+          }
+        },
+        {
+          "client_id": "744861517104-20p33igdc9ltlpju7cejsrluk8qrkafk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4xckl46wI6XiunS8IUfkk5pR7_ys-bW8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744861517104-20p33igdc9ltlpju7cejsrluk8qrkafk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
