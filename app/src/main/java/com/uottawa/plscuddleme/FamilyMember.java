@@ -55,7 +55,6 @@ public class FamilyMember {
     public void setNumberOfAssignedTasks(int numberOfAssignedTasks) {
         this.numberOfAssignedTasks = numberOfAssignedTasks;
     }
-
     public int getRewards() {
         return rewards;
     }
