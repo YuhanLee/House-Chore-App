@@ -19,6 +19,10 @@
         <activity
             android:name=".drawer"
             android:label="@string/title_activity_drawer"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Tasks"
+            android:label="@string/title_activity_tasks"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
