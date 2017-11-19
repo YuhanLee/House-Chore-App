@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by Yuhan on 10/31/2017.
  */
 
-public class Housechore {
+public class HousechoreObj {
     private int id;
     private String housechoreName;
     private String assignedBy;
@@ -18,14 +18,13 @@ public class Housechore {
     private Boolean statusCompleted;
     private int reward;
     private String note;
-//TODO consider if should add user previlage for deletion --> if so then need to add an extra attribute.
 
 
-    public Housechore() {
+    public HousechoreObj() {
 
     }
 
-    public Housechore (int id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
+    public HousechoreObj(int id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;

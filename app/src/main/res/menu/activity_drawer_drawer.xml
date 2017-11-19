@@ -5,29 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:id="@+id/nav_chores"
+            android:icon="@drawable/assignment_icon"
+            android:title="@string/open_chores" />
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:id="@+id/nav_shoppingList"
+            android:icon="@drawable/shoppinglist_icon"
+            android:title="@string/shopping_list" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:id="@+id/nav_schedule"
+            android:icon="@drawable/schedule_icon"
+            android:title="@string/schedule" />
         <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_people"
+            android:icon="@drawable/people_icon"
+            android:title="@string/people" />
+        <item
+            android:id="@+id/nav_reward"
+            android:icon="@drawable/reward_icon"
+            android:title="@string/rewards" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/others">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/setting_icon"
+                android:title="@string/settings" />
             <item
                 android:id="@+id/nav_send"
                 android:icon="@drawable/ic_menu_send"

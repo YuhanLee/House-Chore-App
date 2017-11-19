@@ -6,14 +6,14 @@ import java.util.Date;
  * Created by Yuhan on 11/1/2017.
  */
 
-public class Item {
+public class ItemObj {
     private int id;
     private String itemName;
     private Date dueDate;
     private String note;
 
 
-    public Item(int id, String itemName, Date dueDate, String note) {
+    public ItemObj(int id, String itemName, Date dueDate, String note) {
         this.id = id;
         this.itemName = itemName;
         this.dueDate = dueDate;

@@ -4,7 +4,7 @@ package com.uottawa.plscuddleme;
  * Created by user on 11/1/2017.
  */
 
-public class FamilyMember {
+public class FamilyMemberObj {
     private int id;
     private String familyMemberName;
     private String userRole;
@@ -12,9 +12,9 @@ public class FamilyMember {
     private int rewards;
 
 
-    public FamilyMember() {}
+    public FamilyMemberObj() {}
 
-    public FamilyMember(int id, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
+    public FamilyMemberObj(int id, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
         this.id = id;
         this.familyMemberName = familyMemberName;
         this.userRole = userRole;
