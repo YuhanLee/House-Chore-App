@@ -7,7 +7,7 @@
     tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
 
     <EditText
-        android:id="@+id/enter_choreName"
+        android:id="@+id/enter_chore_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/enter_chore_name" />
@@ -16,8 +16,10 @@
         android:id="@+id/enter_assignee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/enter_choreName"
+        android:layout_below="@id/enter_chore_name"
         android:hint="@string/enter_assignee" />
+    <!--TODO: need to pick familyMember dynamically -->
+
 
     <EditText
         android:id="@+id/enter_dueDate"
@@ -25,28 +27,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_assignee"
         android:hint="@string/enter_due_date" />
-
-    <EditText
+    <!--TODO: need to get datepicker. Maybe use dialog for the date selection-->
+    <!--TODO: need to restrcit date not in the past -->
+    <Spinner
         android:id="@+id/enter_priority"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_dueDate"
-        android:hint="@string/enter_priority" />
+        android:entries="priority_array"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
-    <EditText
+    <Spinner
         android:id="@+id/enter_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_priority"
-        android:hint="@string/enter_category" />
+        android:entries="category_array"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    <!--TODO: default value of the text will have to be set to "select prioirty!-->
+    <!--https://stackoverflow.com/questions/867518/how-to-make-an-android-spinner-with-initial-text-select-one-->
 
-
-    <EditText
+    <Spinner
         android:id="@+id/enter_rewards"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_category"
-        android:hint="@string/enter_rewards" />
+        android:entries="reward_array"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
     <Button
         android:id="@+id/buttonUpdateChore"

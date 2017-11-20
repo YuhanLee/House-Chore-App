@@ -38,6 +38,9 @@ public class HousechoreDB extends AppCompatActivity {
 
     List<Housechore> housechores;
 
+
+    //TODO: assignedBy and statusCompleted values have to be set as user and false at the beginning
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
