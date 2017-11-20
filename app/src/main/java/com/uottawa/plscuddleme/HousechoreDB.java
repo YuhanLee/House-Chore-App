@@ -47,7 +47,7 @@ public class HousechoreDB extends AppCompatActivity {
         setContentView(R.layout.add_housechore);
 
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
-        editHousechoreName = (EditText) findViewById(R.id.enter_choreName);
+        editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
         editChoreAssignedTo = (EditText) findViewById(R.id.enter_assignee);
         editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
         editChorePriority = (EditText) findViewById(R.id.enter_priority);
@@ -106,7 +106,7 @@ public class HousechoreDB extends AppCompatActivity {
         final View dialogView = inflater.inflate(R.layout.update_housechore, null);
         dialogBuilder.setView(dialogView);
         //TODO ensure the following ids exist in the update_housechore.xml
-        final EditText editChoreName = (EditText) dialogView.findViewById(R.id.enter_choreName);
+        final EditText editChoreName = (EditText) dialogView.findViewById(R.id.enter_chore_name);
         final EditText editChoreAssignedTo = (EditText) dialogView.findViewById(R.id.enter_assignee);
         final EditText editChoreDueDate = (EditText) dialogView.findViewById(R.id.enter_dueDate);
         final EditText editChorePriority = (EditText) dialogView.findViewById(R.id.enter_priority);

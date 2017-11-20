@@ -28,7 +28,7 @@ public class HousechoreList extends ArrayAdapter <Housechore> {
 
         View listViewItem = inflater.inflate(R.layout.add_housechore, null, true);
 
-        TextView textViewchoreName = (TextView) listViewItem.findViewById(R.id.enter_choreName);
+        TextView textViewchoreName = (TextView) listViewItem.findViewById(R.id.enter_chore_name);
         TextView textViewAssignee = (TextView) listViewItem.findViewById(R.id.enter_assignee);
         TextView textViewDueDate = (TextView) listViewItem.findViewById(R.id.enter_dueDate);
         TextView textViewPriority = (TextView) listViewItem.findViewById(R.id.enter_priority);

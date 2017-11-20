@@ -34,7 +34,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_dueDate"
-        android:entries="priority_array"
+        android:entries="@array/priority_array"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_priority"
-        android:entries="category_array"
+        android:entries="@array/category_array"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
     <!--TODO: default value of the text will have to be set to "select prioirty!-->
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_category"
-        android:entries="reward_array"
+        android:entries="@array/reward_array"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
