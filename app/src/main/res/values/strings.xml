@@ -28,4 +28,14 @@
     <string name="logout">Logout</string>
     <string name="user_name">User Name</string>
     <string name="number_of_open_chores">Number of Open Chores:</string>
+    <string name="enter_chore_name">Enter Chore Name</string>
+    <string name="enter_assignee">Enter Assignee</string>
+    <string name="housechore">Housechore</string>
+    <string name="enter_due_date">Enter Due Date</string>
+    <string name="enter_priority">Enter Priority</string>
+    <string name="enter_category">Enter Category</string>
+    <string name="enter_rewards">Enter Rewards</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
 </resources>

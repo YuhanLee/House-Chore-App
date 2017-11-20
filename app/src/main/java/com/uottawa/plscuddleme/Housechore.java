@@ -6,8 +6,8 @@ import java.util.Date;
  * Created by Yuhan on 10/31/2017.
  */
 
-public class HousechoreObj {
-    private int id;
+public class Housechore {
+    private String id;
     private String housechoreName;
     private String assignedBy;
     private String assignedTo;
@@ -20,11 +20,11 @@ public class HousechoreObj {
     private String note;
 
 
-    public HousechoreObj() {
+    public Housechore() {
 
     }
 
-    public HousechoreObj(int id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;
@@ -38,11 +38,11 @@ public class HousechoreObj {
         this.note = note;
     }
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 

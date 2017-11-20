@@ -1,7 +1,7 @@
 package com.uottawa.plscuddleme;
 
 /**
- * Created by user on 11/1/2017.
+ * Created by Yuhan on 11/1/2017.
  */
 
 public class FamilyMemberObj {

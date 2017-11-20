@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/fragment_housechoreList"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
+
+<EditText
+    android:id="@+id/enter_choreName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/enter_chore_name" />
+
+<EditText
+    android:id="@+id/enter_assignee"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_choreName"
+    android:hint="@string/enter_assignee" />
+
+<EditText
+    android:id="@+id/enter_dueDate"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_assignee"
+    android:hint="@string/enter_due_date" />
+
+<EditText
+    android:id="@+id/enter_priority"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_dueDate"
+    android:hint="@string/enter_priority" />
+
+<EditText
+    android:id="@+id/enter_category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_priority"
+    android:hint="@string/enter_category" />
+
+
+<EditText
+    android:id="@+id/enter_rewards"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_category"
+    android:hint="@string/enter_rewards" />
+
+<Button
+    android:id="@+id/addButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/enter_rewards"
+    android:layout_centerInParent="true"
+    android:text="@string/add" />
+
+
+<TextView
+    android:id="@+id/housechore_hint"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/addButton"
+    android:text="@string/housechore"
+    android:textAlignment="center"
+    />
+
+<ListView
+    android:id="@+id/listViewHousechore"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/housechore_hint">
+</ListView>
+
+</RelativeLayout>
