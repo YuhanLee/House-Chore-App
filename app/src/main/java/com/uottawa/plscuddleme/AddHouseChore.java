@@ -29,9 +29,9 @@ public class AddHouseChore extends AppCompatActivity {
     EditText editHousechoreName;
     EditText editChoreAssignedTo;
     EditText editChoredueDate;
-    EditText editChorePriority;
-    EditText editChoreCategory;
-    EditText editChoreRewards;
+    Spinner editChorePriority;
+    Spinner editChoreCategory;
+    Spinner editChoreRewards;
 
     Button buttonAddChore;
     ListView listViewHousechores;
