@@ -30,7 +30,7 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/cute_pup" />
+            android:src="@drawable/cute_pup" />
 
         <EditText
             android:id="@+id/signin_username"

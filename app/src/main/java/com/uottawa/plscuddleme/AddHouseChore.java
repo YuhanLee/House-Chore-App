@@ -16,15 +16,15 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.google.firebase.database.*;
 
 
-public class HousechoreDB extends AppCompatActivity {
+public class AddHouseChore extends AppCompatActivity {
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
     EditText editChoreAssignedTo;
@@ -50,9 +50,9 @@ public class HousechoreDB extends AppCompatActivity {
         editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
         editChoreAssignedTo = (EditText) findViewById(R.id.enter_assignee);
         editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
-        editChorePriority = (EditText) findViewById(R.id.enter_priority);
-        editChoreCategory = (EditText) findViewById(R.id.enter_category);
-        editChoreRewards = (EditText) findViewById(R.id.enter_rewards);
+        editChorePriority = (Spinner) findViewById(R.id.enter_priority);
+        editChoreCategory = (Spinner) findViewById(R.id.enter_category);
+        editChoreRewards = (Spinner) findViewById(R.id.enter_rewards);
 
         listViewHousechores = (ListView) findViewById(R.id.listViewHousechore);
         buttonAddChore = (Button) findViewById(R.id.addButton);
@@ -90,7 +90,7 @@ public class HousechoreDB extends AppCompatActivity {
                     Housechore housechore = postSnapshot.getValue(Housechore.class);
                     housechores.add(housechore);
                 }
-                HousechoreList housechoreAdapter = new HousechoreList(HousechoreDB.this, housechores);
+                HousechoreList housechoreAdapter = new HousechoreList(AddHouseChore.this, housechores);
                 listViewHousechores.setAdapter(housechoreAdapter);
             }
 

@@ -11,4 +11,5 @@
         android:layout_centerVertical="true"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:text="@string/people" />
+
 </RelativeLayout>
