@@ -44,7 +44,7 @@ public class drawer extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        displaySelectedScreen(R.id.nav_openChores);
+//        displaySelectedScreen(R.id.nav_openChores);
         Log.i(TAG, "oncreate after called display nav_openChores");
     }
 
