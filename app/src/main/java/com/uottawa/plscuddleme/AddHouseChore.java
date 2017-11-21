@@ -4,6 +4,7 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/19/2017.
  */
 
+import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
