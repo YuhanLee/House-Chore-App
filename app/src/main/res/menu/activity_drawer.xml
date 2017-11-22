@@ -24,10 +24,7 @@
             android:id="@+id/nav_people"
             android:icon="@drawable/family_icon"
             android:title="@string/family_members" />
-        <item
-            android:id="@+id/nav_reward"
-            android:icon="@drawable/reward_icon"
-            android:title="@string/rewards" />
+
     </group>
 
     <item android:title="@string/others">
@@ -35,7 +32,7 @@
             <item
                 android:id="@+id/nav_logOut"
                 android:icon="@drawable/accounts_icon"
-                android:title="Accounts" />
+                android:title="@string/logout" />
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/setting_icon"

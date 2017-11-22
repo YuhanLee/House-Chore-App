@@ -7,6 +7,11 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
         <RelativeLayout
             android:layout_marginTop="?android:attr/actionBarSize"
             android:id="@+id/top_container"
@@ -84,9 +89,10 @@
         </RelativeLayout>
 
         <ListView
-            android:id="@+id/list_view"
+            android:id="@+id/housechore_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/filter_container"></ListView>
+            android:layout_below="@id/filter_container">
+        </ListView>
 
     </RelativeLayout>

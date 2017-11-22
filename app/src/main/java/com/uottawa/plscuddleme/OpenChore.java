@@ -45,7 +45,7 @@ public class OpenChore extends Fragment {
         });
 
         String[] choreList = {"Walk Dog", "Do the Dishes", "Clean Room", "Make Bed", "Take Trash Out"};
-        ListView listView = (ListView)getView().findViewById(R.id.list_view);
+        ListView listView = (ListView)getView().findViewById(R.id.housechore_list);
         ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
         listView.setAdapter(adapter);
 
