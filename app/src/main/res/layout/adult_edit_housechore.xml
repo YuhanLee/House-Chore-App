@@ -20,13 +20,14 @@
         android:hint="@string/enter_assignee" />
     <!--TODO: need to pick familyMember dynamically -->
 
-
     <EditText
         android:id="@+id/enter_dueDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/enter_assignee"
-        android:hint="@string/enter_due_date" />
+        android:hint="@string/enter_due_date"
+        android:ems="10"
+        android:inputType="date"/>
     <!--TODO: need to get datepicker. Maybe use dialog for the date selection-->
     <!--TODO: need to restrcit date not in the past -->
     <Spinner

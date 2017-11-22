@@ -4,7 +4,6 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/19/2017.
  */
 
-import android.app.Activity;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -104,9 +103,9 @@ public class AddHouseChore extends AppCompatActivity {
     private void showUpdateDeleteDialog(final String housechoreId, String housechoreName) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_housechore, null);
+        final View dialogView = inflater.inflate(R.layout.adult_edit_housechore, null);
         dialogBuilder.setView(dialogView);
-        //TODO ensure the following ids exist in the update_housechore.xml
+        //TODO ensure the following ids exist in the adult_edit_housechore.xml.xml
         final EditText editChoreName = (EditText) dialogView.findViewById(R.id.enter_chore_name);
         final EditText editChoreAssignedTo = (EditText) dialogView.findViewById(R.id.enter_assignee);
         final EditText editChoreDueDate = (EditText) dialogView.findViewById(R.id.enter_dueDate);
