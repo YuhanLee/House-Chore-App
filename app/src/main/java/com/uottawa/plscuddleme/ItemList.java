@@ -11,11 +11,11 @@ import android.widget.ArrayAdapter;
 
 import java.util.List;
 
-public class ItemList extends ArrayAdapter<ItemObj> {
+public class ItemList extends ArrayAdapter<Resource> {
     private Activity context;
-    List<ItemObj> items;
+    List<Resource> items;
 
-    public ItemList(Activity context, List<ItemObj> items) {
+    public ItemList(Activity context, List<Resource> items) {
         super(context, R.layout.activity_item_list, items);
         this.context = context;
         this.items = items;
