@@ -1,21 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/list_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-    <Switch
-        android:id="@+id/switch1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        android:text="Only Show My Tasks" />
-
-    <ListView
-        android:layout_marginTop="?android:attr/actionBarSize"
-        android:id="@+id/list_view"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/list_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent">
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_marginTop="?android:attr/actionBarSize"
+            android:id="@+id/top_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/filterChore"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:text="Filter" />
+
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/filterChore"
+                android:layout_alignBottom="@+id/filterChore"
+                android:layout_alignParentRight="true"
+                android:layout_weight="1"
+                android:text="Only Show My Tasks" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/filter_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/top_container">
+
+            <CheckBox
+                android:id="@+id/assigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Assigned" />
+
+            <Button
+                android:id="@+id/hideFilter"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:text="x" />
+
+            <CheckBox
+                android:id="@+id/unassigned"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/assigned"
+                android:text="Unassigned" />
+
+            <CheckBox
+                android:id="@+id/priorityLow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/unassigned"
+                android:text="Priority (Low)" />
+
+            <CheckBox
+                android:id="@+id/priorityHigh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/priorityLow"
+                android:text="Priority (High)" />
+
+            <CheckBox
+                android:id="@+id/categoryFilters"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/priorityHigh"
+                android:text="Category" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/filter_container"></ListView>
+
+    </RelativeLayout>

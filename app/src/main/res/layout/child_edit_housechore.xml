@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_housechoreList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
+
+    <TextView
+        android:id="@+id/display_chore_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Chore Name"
+        android:textSize="15sp"></TextView>
+
+    <TextView
+        android:id="@+id/display_assignee"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_chore_name"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Assignee"
+        android:textSize="15sp"></TextView>
+    <!--TODO: need to pick familyMember dynamically -->
+
+    <TextView
+        android:id="@+id/display_dueDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_assignee"
+        android:ems="10"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Due Date"
+        android:textSize="15sp"></TextView>
+
+    <TextView
+        android:id="@+id/display_rewards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_dueDate"
+        android:ems="10"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Rewards"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/display_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_rewards"
+        android:ems="10"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Category"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/display_priority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_category"
+        android:ems="10"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Priority"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/display_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/display_priority"
+        android:ems="10"
+        android:gravity="center"
+        android:paddingLeft="4pt"
+        android:paddingTop="5pt"
+        android:text="Notes"
+        android:textSize="15sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@id/display_notes">
+
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel" />
+
+        <Button
+            android:id="@+id/buttonAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/buttonCancel"
+            android:layout_weight="1"
+            android:text="Accept" />
+    </LinearLayout>
+
+
+</RelativeLayout>
