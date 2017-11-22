@@ -11,7 +11,6 @@ public class Housechore {
     private String housechoreName;
     private String assignedBy;
     private String assignedTo;
-    private String deletedBy;
     private Date dueDate;
     private String priority;
     private String category;
@@ -24,12 +23,11 @@ public class Housechore {
 
     }
 
-    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, String deletedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;
         this.assignedBy = assignedBy;
-        this.deletedBy = deletedBy; //null at the beginning
         this.dueDate = dueDate;
         this.priority = priority;
         this.category = category;
@@ -66,14 +64,6 @@ public class Housechore {
 
     public String getAssignedBy() {
         return assignedBy;
-    }
-
-    public void setDeletedBy(String taskDeletedBy) {
-        this.deletedBy = taskDeletedBy;
-    }
-
-    public String getDeletedBy () {
-       return deletedBy;
     }
 
     public void setDueDate (Date dueDate) {

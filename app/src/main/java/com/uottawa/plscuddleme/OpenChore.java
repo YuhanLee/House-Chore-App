@@ -1,8 +1,10 @@
 package com.uottawa.plscuddleme;
 
 import android.app.Fragment;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +20,11 @@ import java.util.List;
 
 public class OpenChore extends Fragment {
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Open OpenChore");
+        getActivity().setTitle("OpenChore");
 
         String[] choreList = {"Walk Dog", "Do the Dishes", "Clean Room", "Make Bed", "Take Trash Out"};
         ListView listView = (ListView)getView().findViewById(R.id.list_view);
