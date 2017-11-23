@@ -26,7 +26,7 @@ public class OpenChore extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("OpenChore");
+        getActivity().setTitle("Chores");
 
         tv = (RelativeLayout)getView().findViewById(R.id.filter_container);
 

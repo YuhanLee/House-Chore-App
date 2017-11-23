@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/cute_pup" />
+        app:srcCompat="@drawable/qiangqiang_ava" />
 
     <LinearLayout
         android:layout_width="match_parent"

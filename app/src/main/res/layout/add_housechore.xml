@@ -17,6 +17,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/enter_chore_name"
+    android:inputType="date"
     android:hint="@string/enter_assignee" />
     <!--TODO: need to pick familyMember dynamically -->
 
@@ -76,11 +77,5 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:textAlignment="center"
     />
 
-<ListView
-    android:id="@+id/listViewHousechore"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/housechore_hint">
-</ListView>
 
 </RelativeLayout>

@@ -54,7 +54,6 @@ public class AddHouseChore extends AppCompatActivity {
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
         editChoreRewards = (Spinner) findViewById(R.id.enter_rewards);
 
-        listViewHousechores = (ListView) findViewById(R.id.listViewHousechore);
         buttonAddChore = (Button) findViewById(R.id.addButton);
 
         housechores = new ArrayList<>();
