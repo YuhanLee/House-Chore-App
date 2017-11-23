@@ -29,7 +29,7 @@ public class OpenChore extends Fragment {
         getActivity().setTitle("Chores");
 
         tv = (RelativeLayout)getView().findViewById(R.id.filter_container);
-
+        setLayoutInvisible();
         Button filterButton = (Button)getView().findViewById(R.id.filterChore);
         filterButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {

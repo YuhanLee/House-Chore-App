@@ -3,12 +3,75 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nav_shoppingList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:text="@string/shopping_list" />
+    <RelativeLayout
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:id="@+id/add_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@android:color/transparent"
+            android:text="+"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/button2"
+            android:ems="10"
+            android:hint="Enter Item Name"
+            android:inputType="textPersonName" />
+    </RelativeLayout>
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/nav_shoppingList"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:background="@color/cyan"-->
+        <!--android:paddingBottom="150dp"-->
+        <!--android:paddingLeft="100dp"-->
+        <!--android:paddingRight="100dp"-->
+        <!--android:paddingTop="150dp"-->
+        <!--android:layout_marginTop="70dp"-->
+        <!--android:text="@string/shopping_list">-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox1"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="CheckBox" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/checkBox1"-->
+            <!--android:text="CheckBox" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox3"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/checkBox2"-->
+            <!--android:text="CheckBox" />-->
+
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkBox4"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_below="@id/checkBox3"-->
+            <!--android:text="CheckBox" />-->
+    <!--</RelativeLayout>-->
+
+    <ListView
+        android:id="@+id/list_shopping"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/add_container"></ListView>
+
 </RelativeLayout>

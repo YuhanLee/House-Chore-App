@@ -1,11 +1,13 @@
 package com.uottawa.plscuddleme;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
+import android.widget.Button;
 
 public class drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,6 +90,37 @@ public class drawer extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    private void showLogoutDialog() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.logout_confirm, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Logout?");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
+
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent toy = new Intent(drawer.this, MainActivity.class);
+                startActivity(toy);
+                b.dismiss();
+            }
+        });
+    }
+
     private void displaySelectedScreen(int navId) {
         Log.i(TAG, "called displaySelectedScreen!");
         Fragment fragment = null;
@@ -102,13 +136,14 @@ public class drawer extends AppCompatActivity
             case R.id.nav_schedule:
                 fragment = new Schedule();
                 Log.i(TAG, "*Schedule");
-
                 break;
             case R.id.nav_people:
                 fragment = new FamilyMembers();
                 Log.i(TAG, "*People");
                 break;
-
+            case R.id.nav_logout:
+                showLogoutDialog();
+                break;
         }
         if (fragment != null) {
             Log.i(TAG, "*is not null");

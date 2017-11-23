@@ -20,7 +20,7 @@
 
             <Button
                 android:id="@+id/filterChore"
-                android:layout_width="200dp"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
@@ -88,11 +88,17 @@
 
         </RelativeLayout>
 
+    <SearchView
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/filter_container"
+        android:queryHint="Search.." />
+
         <ListView
             android:id="@+id/housechore_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/filter_container">
-        </ListView>
+            android:layout_below="@id/searchBar"></ListView>
 
     </RelativeLayout>
