@@ -108,10 +108,7 @@ public class drawer extends AppCompatActivity
                 fragment = new FamilyMembers();
                 Log.i(TAG, "*People");
                 break;
-            case R.id.nav_reward:
-                fragment = new Rewards();
-                Log.i(TAG, "*Rewards");
-                break;
+
         }
         if (fragment != null) {
             Log.i(TAG, "*is not null");

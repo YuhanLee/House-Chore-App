@@ -112,35 +112,33 @@ public class AddHouseChore extends AppCompatActivity {
         final EditText editChorePriority = (EditText) dialogView.findViewById(R.id.enter_priority);
         final EditText editChoreCategory = (EditText) dialogView.findViewById(R.id.enter_category);
         final EditText editChoreRewards = (EditText) dialogView.findViewById(R.id.enter_rewards);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateChore);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteChore);
 
         dialogBuilder.setTitle(housechoreName);
         final AlertDialog b = dialogBuilder.create();
         b.show();
         //this shows the toaster
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String name = editChoreName.getText().toString().trim();
-                String assignee = editChoreAssignedTo.getText().toString().trim();
-                String dueDate =editChoreDueDate.getText().toString().trim();
-                //TODO fix the date object
-                String priority = editChorePriority.getText().toString().trim();
-                String category = editChoreCategory.getText().toString().trim();
-                String reward = editChoreRewards.getText().toString();
-                //TODO fix the reward to an int type object
-
-                //TODO may have to change the Date object ?
-                //TODO look at android date objects and how the UI can be made nicely
-
-                if (!TextUtils.isEmpty(name)) {
-                    updateHousechore(housechoreId, name, assignee, dueDate, priority,category, reward);
-                }
-
-            }
-        });
+    //        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+    //            @Override
+    //            public void onClick(View view) {
+    //                String name = editChoreName.getText().toString().trim();
+    //                String assignee = editChoreAssignedTo.getText().toString().trim();
+    //                String dueDate =editChoreDueDate.getText().toString().trim();
+    //                //TODO fix the date object
+    //                String priority = editChorePriority.getText().toString().trim();
+    //                String category = editChoreCategory.getText().toString().trim();
+    //                String reward = editChoreRewards.getText().toString();
+    //                //TODO fix the reward to an int type object
+    //
+    //                //TODO may have to change the Date object ?
+    //                //TODO look at android date objects and how the UI can be made nicely
+    //
+    //                if (!TextUtils.isEmpty(name)) {
+    //                    updateHousechore(housechoreId, name, assignee, dueDate, priority,category, reward);
+    //                }
+    //
+    //            }
+    //        });
 
     }
 
