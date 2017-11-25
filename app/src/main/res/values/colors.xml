@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="cyan">#b2ffff</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="highPriority"> #F44336</color>
-    <color name="middlePriority">#FDD835</color>
-    <color name="lowPriority">#64DD17</color>
-    <color name="cyan">#b2ffff</color>
+    <color name="highPriorityLight"> #E57373</color> //light
+    <color name="highPriorityDark"> #EF5350</color> //darker
+    <color name="middlePriorityLight">#FFEE58</color>
+    <color name="middlePriorityDark">#FFEB3B</color>
+    <color name="lowPriorityLight">#B2FF59</color>
+    <color name="lowPriorityDark">#76FF03</color>
+    <color name="grayLight">#EEEEEE</color>
+    <color name="card_text">#263238</color>
+    <color name="lightBlue">#448AFF</color>
+    <color name="skyBlue">#FF80AB</color>
 </resources>

@@ -47,6 +47,13 @@
     <string name="add_the_mother_fucker">Add the mother fucker</string>
     <string name="my_profile">My Profile</string>
     <string name="family_members">Family Members</string>
+    <string name="wash_coco">Wash Coco</string>
+    <string name="due_date">Due Date</string>
+    <string name="assignee">Assignee:</string>
+    <string name="yuhan">Yuhan</string>
+    <string name="category">Category</string>
+    <string name="pet">Pet</string>
+    <string name="due_date">Due Date</string>
 
     <string-array name="priority_array">
         <item> High </item>

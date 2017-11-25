@@ -8,7 +8,7 @@
     android:orientation="vertical">
         <!--kid view high priority-->
         <!--TODO: fix view to be able to handle both-->
-        <RelativeLayout
+        o<RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
                 <LinearLayout
@@ -170,18 +170,31 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/chore_info"
                     android:layout_marginLeft="100dp"
-                    android:layout_marginTop="115dp"
+                    android:layout_marginTop="120dp"
                     android:textSize="20sp"
                     android:text="Dry Coco too!" />
 
                 <Button
+                    android:id="@+id/assign_to_button"
                     android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="Assign To Me"
+                    android:layout_marginLeft="80dp"
+                    android:text="Assign To"
+                    android:layout_below="@id/note_text"/>
+                <Button
+                    android:id="@+id/delete_chore_button"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/assign_to_button"
+                    android:text="Delete"
                     android:layout_centerHorizontal="true"
                     android:layout_below="@id/note_text"/>
 
         </RelativeLayout>
+
+
 
 </LinearLayout>
