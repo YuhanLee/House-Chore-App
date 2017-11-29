@@ -17,7 +17,6 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/enter_chore_name"
-    android:inputType="date"
     android:hint="@string/enter_assignee" />
     <!--TODO: need to pick familyMember dynamically -->
 
@@ -27,6 +26,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/enter_assignee"
+    android:inputType="date"
     android:hint="@string/enter_due_date" />
     <!--TODO: need to get datepicker -->
 

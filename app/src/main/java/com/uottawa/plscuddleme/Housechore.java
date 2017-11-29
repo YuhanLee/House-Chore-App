@@ -11,7 +11,7 @@ public class Housechore {
     private String housechoreName;
     private String assignedBy;
     private String assignedTo;
-    private Date dueDate;
+    private long dueDate;
     private String priority;
     private String category;
     private Boolean statusCompleted;
@@ -23,7 +23,7 @@ public class Housechore {
 
     }
 
-    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, Date dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, long dueDate, String priority, String category, Boolean statusCompleted, int reward, String note) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;
@@ -66,10 +66,10 @@ public class Housechore {
         return assignedBy;
     }
 
-    public void setDueDate (Date dueDate) {
+    public void setDueDate (long dueDate) {
         this.dueDate = dueDate;
     }
-    public Date getDueDate() {
+    public long getDueDate() {
         return dueDate;
     }
 

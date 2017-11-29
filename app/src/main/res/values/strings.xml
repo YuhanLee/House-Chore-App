@@ -53,7 +53,6 @@
     <string name="yuhan">Yuhan</string>
     <string name="category">Category</string>
     <string name="pet">Pet</string>
-    <string name="due_date">Due Date</string>
 
     <string-array name="priority_array">
         <item> High </item>
@@ -70,9 +69,9 @@
     </string-array>
 
     <string-array name="reward_array">
-        <item> High reward 5 </item>
-        <item> Medium reward 3 </item>
-        <item> Low reward 1 </item>
+        <item> 5 </item>
+        <item> 3 </item>
+        <item> 1 </item>
     </string-array>
 
     <string-array name="userRole_array">

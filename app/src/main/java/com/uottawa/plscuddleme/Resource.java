@@ -9,11 +9,11 @@ import java.util.Date;
 public class Resource {
     private int id;
     private String itemName;
-    private Date dueDate;
+    private long dueDate;
     private String note;
 
 
-    public Resource(int id, String itemName, Date dueDate, String note) {
+    public Resource(int id, String itemName, long dueDate, String note) {
         this.id = id;
         this.itemName = itemName;
         this.dueDate = dueDate;
@@ -28,11 +28,11 @@ public class Resource {
         return id;
     }
 
-    public void setDueDate (Date dueDate) {
+    public void setDueDate (long dueDate) {
         this.dueDate = dueDate;
     }
 
-    public Date getDueDate() {
+    public long getDueDate() {
         return dueDate;
     }
 
