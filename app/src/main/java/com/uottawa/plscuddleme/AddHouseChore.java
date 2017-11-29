@@ -40,6 +40,7 @@ public class AddHouseChore extends AppCompatActivity {
     Spinner editChorePriority;
     Spinner editChoreCategory;
     Spinner editChoreRewards;
+    EditText editNote;
 
     Button buttonAddChore;
 //    ListView listViewHousechores;
@@ -61,6 +62,7 @@ public class AddHouseChore extends AppCompatActivity {
         editChorePriority = (Spinner) findViewById(R.id.enter_priority);
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
         editChoreRewards = (Spinner) findViewById(R.id.enter_rewards);
+        editNote = (EditText) findViewById(R.id.enter_note);
 
         buttonAddChore = (Button) findViewById(R.id.addButton);
 
@@ -171,8 +173,9 @@ public class AddHouseChore extends AppCompatActivity {
         String stringAssignedTo = editChoreAssignedTo.getText().toString();
         String stringPriority = editChorePriority.getSelectedItem().toString();
         String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
+        String stringNote = editNote.getText().toString();
         int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-        Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, "N/A");
+        Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
         dR.setValue(housechore);
         Toast.makeText(getApplicationContext(), "Housechore Updated", Toast.LENGTH_LONG).show();
     }
@@ -191,6 +194,7 @@ public class AddHouseChore extends AppCompatActivity {
         String name = editHousechoreName.getText().toString().trim();
         if (!TextUtils.isEmpty(name)) {
             String id = databaseProducts.push().getKey();
+            Log.i(TAG, id);
             String stringHousechore = editHousechoreName.getText().toString();
             String stringAssignedTo = editChoreAssignedTo.getText().toString();
             String dateString = editChoredueDate.getText().toString();
@@ -203,10 +207,11 @@ public class AddHouseChore extends AppCompatActivity {
             }
             String stringPriority = editChorePriority.getSelectedItem().toString();
             String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
+            String stringNote = editNote.getText().toString();
             int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
 //            Log.i(TAG, String.valueOf(convertedDate.getTime()));
             Log.i(TAG, getDate(convertedDate.getTime(), "dd/MM/yyyy"));
-            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, "N/A");
+            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
             databaseProducts.child(id).setValue(housechore);
             editHousechoreName.setText("");
             editChoreAssignedTo.setText("");

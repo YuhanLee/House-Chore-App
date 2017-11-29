@@ -59,11 +59,18 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"/>
 
+    <EditText
+        android:id="@+id/enter_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/enter_rewards"
+        android:hint="@string/enter_note" />
+
 <Button
     android:id="@+id/addButton"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@id/enter_rewards"
+    android:layout_below="@id/enter_note"
     android:layout_centerInParent="true"
     android:text="@string/add" />
 
@@ -76,6 +83,5 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
     android:text="@string/housechore"
     android:textAlignment="center"
     />
-
 
 </RelativeLayout>

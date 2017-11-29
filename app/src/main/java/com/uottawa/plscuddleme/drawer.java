@@ -34,13 +34,8 @@ public class drawer extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
                 Intent toy1 = new Intent(drawer.this, AddHouseChore.class);
                 startActivity(toy1);
-
-
             }
         });
 
@@ -149,7 +144,7 @@ public class drawer extends AppCompatActivity
             Log.i(TAG, "*is not null");
 
             FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.drawer_layout, fragment);
+            ft.replace(R.id.content_frame, fragment);
             ft.commit();
         }
 
