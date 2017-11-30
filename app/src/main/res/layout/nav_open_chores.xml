@@ -19,12 +19,12 @@
 
             <Button
                 android:id="@+id/filterChore"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="2dp"
                 android:layout_weight="1"
-                android:text="Filter" />
+                android:text="@string/filter" />
 
             <Switch
                 android:id="@+id/switch1"
@@ -34,7 +34,7 @@
                 android:layout_alignBottom="@+id/filterChore"
                 android:layout_alignParentRight="true"
                 android:layout_weight="1"
-                android:text="Only Show My Tasks" />
+                android:text="@string/only_show_my_tasks" />
 
         </RelativeLayout>
 
@@ -48,42 +48,43 @@
                 android:id="@+id/assigned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Assigned" />
+                android:text="@string/assigned" />
 
             <Button
                 android:id="@+id/hideFilter"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                android:layout_marginRight="10dp"
                 android:layout_alignParentRight="true"
-                android:text="x" />
+                android:text="@string/x" />
 
             <CheckBox
                 android:id="@+id/unassigned"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/assigned"
-                android:text="Unassigned" />
+                android:text="@string/unassigned" />
 
             <CheckBox
                 android:id="@+id/priorityLow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/unassigned"
-                android:text="Priority (Low)" />
+                android:text="@string/priority_low" />
 
             <CheckBox
                 android:id="@+id/priorityHigh"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/priorityLow"
-                android:text="Priority (High)" />
+                android:text="@string/priority_high" />
 
             <CheckBox
                 android:id="@+id/categoryFilters"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/priorityHigh"
-                android:text="Category" />
+                android:text="@string/category" />
 
         </RelativeLayout>
 
@@ -98,6 +99,6 @@
             android:id="@+id/housechore_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/searchBar"></ListView>
+            android:layout_below="@id/searchBar" />
 
     </RelativeLayout>

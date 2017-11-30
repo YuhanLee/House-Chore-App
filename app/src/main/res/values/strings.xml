@@ -68,6 +68,13 @@
     <string name="new_member_sign_up_here">New Member? Sign up here</string>
     <string name="gimme_an_email">Gimme an email</string>
     <string name="think_of_a_password">Think of a password</string>
+    <string name="filter">Filter</string>
+    <string name="only_show_my_tasks">Only Show My Tasks</string>
+    <string name="assigned">Assigned</string>
+    <string name="x">x</string>
+    <string name="unassigned">Unassigned</string>
+    <string name="priority_low">Priority (Low)</string>
+    <string name="priority_high">Priority (High)</string>
 
 
     <string-array name="priority_array">
