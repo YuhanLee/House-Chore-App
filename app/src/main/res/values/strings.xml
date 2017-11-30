@@ -75,6 +75,8 @@
     <string name="unassigned">Unassigned</string>
     <string name="priority_low">Priority (Low)</string>
     <string name="priority_high">Priority (High)</string>
+    <string name="register">Register</string>
+    <string name="save_information">Save Information</string>
 
 
     <string-array name="priority_array">

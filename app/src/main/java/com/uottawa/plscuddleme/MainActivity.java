@@ -2,6 +2,7 @@ package com.uottawa.plscuddleme;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -18,15 +19,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 // MANDATORY
 //TODO [x] Can add a chore with name and description
@@ -56,23 +53,15 @@ import java.util.List;
 //first activity, when user opens app, will come to this page automatically
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = "MainActivity";
-
-    private DatabaseReference databaseFamilyMembers;
+    //firebase Ref
     private FirebaseAuth firebaseAuth;
-    private Button buttonSignin;
-    private EditText enterEmail;
-    private EditText enterPassword;
-    private TextView toRegisterLink;
+
+    //UI Ref
+    private Button buttonRegister;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+    private TextView textViewLogin;
     private ProgressDialog progressDialog;
-
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-//        updateUI(currentUser);
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,108 +69,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //initialize views
-        enterEmail = (EditText) findViewById(R.id.enterEmail);
-        enterPassword = (EditText) findViewById(R.id.enterPassword);
-        buttonSignin = (Button) findViewById(R.id.signIn_button);
-        toRegisterLink = (TextView) findViewById(R.id.goto_register);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        buttonRegister = (Button) findViewById(R.id.buttonRegister);
+        textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
-        buttonSignin.setOnClickListener(this);
-        toRegisterLink.setOnClickListener(this);
+        buttonRegister.setOnClickListener(this);
+        textViewLogin.setOnClickListener(this);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() != null) {
+            finish();
+            startActivity(new Intent (this, AddFamilyMember.class));
+        }
     }
 
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.signIn_button:
-                signIn(enterEmail.getText().toString().trim(),enterPassword.getText().toString().trim());
+            case R.id.buttonRegister:
+                registerUser();
                 break;
 
-            case R.id.goto_register:
-                startActivity(new Intent(this, SignupActivity.class));
+            case R.id.textViewLogin:
+                startActivity(new Intent(this, SignInActivity.class));
                 break;
+
         }
     }
 
-    private void signIn(String email, String password) {
-        Intent tmp = new Intent(MainActivity.this, drawer.class);
-        startActivity(tmp);
+    private void registerUser() {
+        String email = editTextEmail.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
-        //TODO fix signin if have time
-//        if (!validateForm()) {
-//            return;
-//        }
-//        progressDialog.show();
-//        firebaseAuth.signInWithEmailAndPassword(email, password)
-//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<AuthResult> task) {
-//                        if (task.isSuccessful()) {
-//                            // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithEmail:success");
-//                            FirebaseUser user = firebaseAuth.getCurrentUser();
-//                            updateUI(user);
-//                        } else {
-//                            // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-//                            Toast.makeText(MainActivity.this, "Authentication failed.",
-//                                    Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
-//                        }
-//                        progressDialog.dismiss();
-//                    }
-//                });
-    }
-
-    private boolean validateForm() {
-        boolean valid = true;
-
-        String email = enterEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            enterEmail.setError("Email Required.");
-            valid = false;
-        } else {
-            enterEmail.setError(null);
+            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
+            //stop function execution
+            return;
         }
 
-        String password = enterPassword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            enterPassword.setError("Password Required.");
-            valid = false;
-        } else {
-            enterPassword.setError(null);
+            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
+            return;
         }
-        return valid;
+
+        //if valid
+        progressDialog.setMessage("Registering User. Please wait...");
+        progressDialog.show();
+
+        firebaseAuth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            finish();
+                            startActivity(new Intent (getApplicationContext(),AddFamilyMember.class));
+                        } else {
+                            Toast.makeText(MainActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
     }
 
 
-    private void updateUI (FirebaseUser user) {
-        progressDialog.dismiss();
-        if (user != null) {
-//            mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,
-//                    user.getEmail(), user.isEmailVerified()));
-//            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-//
-//            findViewById(R.id.email_password_buttons).setVisibility(View.GONE);
-//            findViewById(R.id.email_password_fields).setVisibility(View.GONE);
-//            findViewById(R.id.signed_in_buttons).setVisibility(View.VISIBLE);
-//
-//            findViewById(R.id.verify_email_button).setEnabled(!user.isEmailVerified());
-        } else {
-//            mStatusTextView.setText(R.string.signed_out);
-//            mDetailTextView.setText(null);
-//
-//            findViewById(R.id.email_password_buttons).setVisibility(View.VISIBLE);
-//            findViewById(R.id.email_password_fields).setVisibility(View.VISIBLE);
-//            findViewById(R.id.signed_in_buttons).setVisibility(View.GONE);
-        }
-        //TODO --> need to update the UI. Update the drawer username to userNickName
-        openDrawer();
-    }
-    private void openDrawer() {
-        startActivity(new Intent (this, drawer.class));
-    }
 }

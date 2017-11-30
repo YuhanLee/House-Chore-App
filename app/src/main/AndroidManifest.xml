@@ -24,7 +24,7 @@
         <activity android:name=".ItemList"></activity>
         <activity android:name=".AddHouseChore"></activity>
         <activity android:name=".AddFamilyMember"></activity>
-        <activity android:name=".SignupActivity"></activity>
+        <activity android:name=".SignInActivity"></activity>
     </application>
 
 </manifest>

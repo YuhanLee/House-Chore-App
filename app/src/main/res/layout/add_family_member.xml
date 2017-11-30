@@ -27,14 +27,15 @@
             android:src="@drawable/coco_photogen" />
 
         <TextView
+            android:id="@+id/textViewUserEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="@string/select_a_new_avatar"
+            android:text="Welcome"
             android:layout_gravity="center" />
 
         <EditText
-            android:id="@+id/fam_userName"
+            android:id="@+id/userNickName"
             android:hint="@string/enter_nick_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -43,8 +44,18 @@
             android:ems="10"
             android:textAlignment="center" />
 
+        <EditText
+            android:id="@+id/userEmail"
+            android:hint="@string/enter_email"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:ems="10"
+            android:textAlignment="center" />
+
         <Spinner
-            android:id="@+id/fam_userRole"
+            android:id="@+id/memberRole"
             android:layout_height="wrap_content"
             android:layout_width="200dp"
             android:layout_marginTop="10dp"
@@ -53,12 +64,19 @@
             android:textAlignment="center" />
 
         <Button
-            android:id="@+id/bAddMember"
+            android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
-            android:text="@string/add" />
+            android:text="@string/save_information" />
+
+        <Button
+            android:id="@+id/buttonLogOut"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:layout_gravity="center" />
 
 
     </LinearLayout>

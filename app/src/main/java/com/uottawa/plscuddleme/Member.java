@@ -5,16 +5,23 @@ package com.uottawa.plscuddleme;
  */
 
 public class Member {
-    private String id;
-    private String memberEmail;
-    private String familyMemberName;
-    private String userRole;
-    private int numberOfAssignedTasks;
-    private int rewards;
+    public String id;
+    public String memberEmail;
+    public String familyMemberName;
+    public String userRole;
+    public int numberOfAssignedTasks;
+    public int rewards;
 
 
     public Member() {}
 
+    public Member(String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
+        this.memberEmail = memberEmail;
+        this.familyMemberName = familyMemberName;
+        this.userRole = userRole;
+        this.numberOfAssignedTasks = numberOfAssignedTasks;
+        this.rewards = rewards;
+    }
     public Member(String id, String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
         this.id = id;
         this.memberEmail = memberEmail;
