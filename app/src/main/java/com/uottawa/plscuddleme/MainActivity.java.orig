@@ -18,7 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;[MafN
+import com.google.firebase.database.DatabaseReference;
+<<<<<<< Updated upstream
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -48,6 +49,29 @@ import java.util.List;
 //TODO [] Handle adding a duplicate chore
 //TODO [] Handle date must be after today when editting and adding
 //TODO []
+
+
+public class MainActivity extends Activity {
+    private static final String TAG = "Main Activity";
+    private String[] mPageNames;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private ListView mDrawerList;
+
+    public Button but1;
+
+    public void init() {
+        but1 = (Button)findViewById(R.id.signin_button);
+        but1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toy = new Intent(MainActivity.this, drawer.class);
+                startActivity(toy);
+            }
+        });
+    }
+=======
+>>>>>>> Stashed changes
 
 /**
  * Created by Yuhan on 11/29/2017.

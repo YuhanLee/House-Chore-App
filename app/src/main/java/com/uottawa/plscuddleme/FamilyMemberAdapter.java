@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 public class FamilyMemberAdapter extends ArrayAdapter {
 
-    private static final String TAG = "FamilyMember Adapter";
+    private static final String TAG = "Member Adapter";
     private final Context context;
     private final String[] members;
     public FamilyMemberAdapter(Context context, String[] famList) {

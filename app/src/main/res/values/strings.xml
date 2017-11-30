@@ -54,6 +54,21 @@
     <string name="yuhan">Yuhan</string>
     <string name="category">Category</string>
     <string name="pet">Pet</string>
+    <string name="enter_email">Email Please</string>
+    <string name="enter_password">Password Please</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="enter_nick_name">Enter Nick Name</string>
+    <string name="existing_member_signin">Already a member? Sign in here</string>
+    <string name="select_a_new_avatar">Select a new avatar!</string>
+    <string name="update_your_info">Update your info!</string>
+    <string name="verify_password">* Verify Password</string>
+
+
+    <string name="error_user_exists">Users already exist</string>
+    <string name="new_member_sign_up_here">New Member? Sign up here</string>
+    <string name="gimme_an_email">Gimme an email</string>
+    <string name="think_of_a_password">Think of a password</string>
+
 
     <string-array name="priority_array">
         <item> High </item>
@@ -77,7 +92,7 @@
 
     <string-array name="userRole_array">
         <item> Adult </item>
-        <item> Pumpkin </item>
+        <item> Child </item>
     </string-array>
 
 

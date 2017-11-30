@@ -99,8 +99,6 @@ public class AddHouseChore extends AppCompatActivity {
                     Housechore housechore = postSnapshot.getValue(Housechore.class);
                     housechores.add(housechore);
                 }
-//                HousechoreList housechoreAdapter = new HousechoreList(AddHouseChore.this, housechores);
-//                listViewHousechores.setAdapter(housechoreAdapter);
             }
 
             @Override
@@ -109,55 +107,6 @@ public class AddHouseChore extends AppCompatActivity {
         });
     }
 
-//    private void showUpdateDeleteDialog(final String housechoreId, String housechoreName) {
-//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-//        LayoutInflater inflater = getLayoutInflater();
-//        final View dialogView = inflater.inflate(R.layout.update_housechore, null);
-//        dialogBuilder.setView(dialogView);
-//        //TODO ensure the following ids exist in the update_housechore.xml
-//        final EditText editChoreName = (EditText) dialogView.findViewById(R.id.enter_chore_name);
-//        final EditText editChoreAssignedTo = (EditText) dialogView.findViewById(R.id.enter_assignee);
-//        final EditText editChoreDueDate = (EditText) dialogView.findViewById(R.id.enter_dueDate);
-//        final EditText editChorePriority = (EditText) dialogView.findViewById(R.id.enter_priority);
-//        final EditText editChoreCategory = (EditText) dialogView.findViewById(R.id.enter_category);
-//        final EditText editChoreRewards = (EditText) dialogView.findViewById(R.id.enter_rewards);
-//
-//        dialogBuilder.setTitle(housechoreName);
-//        final AlertDialog b = dialogBuilder.create();
-//        b.show();
-//        //this shows the toaster
-//
-//    //        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-//    //            @Override
-//    //            public void onClick(View view) {
-//    //                String name = editChoreName.getText().toString().trim();
-//    //                String assignee = editChoreAssignedTo.getText().toString().trim();
-//    //                String dueDate =editChoreDueDate.getText().toString().trim();
-//    //                //TODO fix the date object
-//    //                String priority = editChorePriority.getText().toString().trim();
-//    //                String category = editChoreCategory.getText().toString().trim();
-//    //                String reward = editChoreRewards.getText().toString();
-//    //                //TODO fix the reward to an int type object
-//    //
-//    //                //TODO may have to change the Date object ?
-//    //                //TODO look at android date objects and how the UI can be made nicely
-//    //
-//    //                if (!TextUtils.isEmpty(name)) {
-//    //                    updateHousechore(housechoreId, name, assignee, dueDate, priority,category, reward);
-//    //                }
-//    //
-//    //            }
-//    //        });
-//
-//    }
-//    private void updateHousechore(String id, String housechoreName, String assignee, String dueDate, String priority, String category, String rewards) {
-//
-//        //TODO fix the String type reward and string type DueDate into int and Date objects
-//
-//    }
-//    private void addHousechore() {
-//
-//    }
 
     private void updateHousechore(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
@@ -209,7 +158,6 @@ public class AddHouseChore extends AppCompatActivity {
             String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
             String stringNote = editNote.getText().toString();
             int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-//            Log.i(TAG, String.valueOf(convertedDate.getTime()));
             Log.i(TAG, getDate(convertedDate.getTime(), "dd/MM/yyyy"));
             Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
             Log.i(TAG, housechore.getHousechoreName());

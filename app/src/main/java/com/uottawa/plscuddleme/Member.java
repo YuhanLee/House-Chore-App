@@ -4,18 +4,20 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/1/2017.
  */
 
-public class FamilyMemberObj {
-    private int id;
+public class Member {
+    private String id;
+    private String memberEmail;
     private String familyMemberName;
     private String userRole;
     private int numberOfAssignedTasks;
     private int rewards;
 
 
-    public FamilyMemberObj() {}
+    public Member() {}
 
-    public FamilyMemberObj(int id, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
+    public Member(String id, String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
         this.id = id;
+        this.memberEmail = memberEmail;
         this.familyMemberName = familyMemberName;
         this.userRole = userRole;
         this.numberOfAssignedTasks = numberOfAssignedTasks;
@@ -24,11 +26,11 @@ public class FamilyMemberObj {
 
 
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
@@ -40,6 +42,13 @@ public class FamilyMemberObj {
         this.familyMemberName = familyMemberName;
     }
 
+    public String getMemberEmail () {
+        return memberEmail;
+    }
+
+    public void setEmail (String email) {
+        this.memberEmail= email;
+    }
     public String getUserRole() {
         return userRole;
     }
