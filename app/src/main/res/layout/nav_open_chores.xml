@@ -92,6 +92,6 @@
             android:id="@+id/housechore_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/searchBar" />
+            android:layout_below="@id/filter_container" />
 
     </RelativeLayout>
