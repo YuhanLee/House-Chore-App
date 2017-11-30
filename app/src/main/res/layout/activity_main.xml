@@ -63,6 +63,13 @@
             android:layout_gravity="center"
             android:text="@string/register" />
 
+        <Button
+            android:id="@+id/buttontmp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="tmp" />
+
         <TextView
             android:id="@+id/textViewLogin"
             android:layout_width="wrap_content"
