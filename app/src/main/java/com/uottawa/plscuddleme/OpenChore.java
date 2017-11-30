@@ -148,6 +148,7 @@ public class OpenChore extends Fragment {
 
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
         final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
+        final Button buttonPostpone = (Button) dialogView.findViewById(R.id.postponeButton);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,8 +161,18 @@ public class OpenChore extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
-                dR.setValue(true);
+                dR.setValue("Completed");
                 Toast.makeText(getActivity(), "Marked as Complete", Toast.LENGTH_LONG).show();
+                b.dismiss();
+            }
+        });
+
+        buttonPostpone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
+                dR.setValue("Postponed");
+                Toast.makeText(getActivity(), "Marked as Postponed", Toast.LENGTH_LONG).show();
                 b.dismiss();
             }
         });

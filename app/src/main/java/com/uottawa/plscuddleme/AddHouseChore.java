@@ -110,6 +110,7 @@ public class AddHouseChore extends AppCompatActivity {
 
     private void updateHousechore(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
+        DatabaseReference statusReference = dR.child("completedStatus");
         String dateString = editChoredueDate.getText().toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date convertedDate = new Date();
@@ -124,7 +125,8 @@ public class AddHouseChore extends AppCompatActivity {
         String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
         String stringNote = editNote.getText().toString();
         int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-        Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
+        //TODO MAKE SURE UPDATE DATA RETAINS THE VALUE OF STATUS
+        Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote);
         dR.setValue(housechore);
         Toast.makeText(getApplicationContext(), "Housechore Updated", Toast.LENGTH_LONG).show();
     }
@@ -159,7 +161,7 @@ public class AddHouseChore extends AppCompatActivity {
             String stringNote = editNote.getText().toString();
             int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
             Log.i(TAG, getDate(convertedDate.getTime(), "dd/MM/yyyy"));
-            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
+            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote);
             Log.i(TAG, housechore.getHousechoreName());
             Log.i(TAG, housechore.getNote());
             Log.i(TAG, housechore.getCategory());
@@ -167,6 +169,8 @@ public class AddHouseChore extends AppCompatActivity {
             databaseProducts.child(id).setValue(housechore);
             editHousechoreName.setText("");
             editChoreAssignedTo.setText("");
+            editChoredueDate.setText("");
+            editNote.setText("");
             Toast.makeText(this, "Housechore Added", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a Housechore name", Toast.LENGTH_LONG).show();

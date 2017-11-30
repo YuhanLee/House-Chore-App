@@ -25,7 +25,8 @@
             android:id="@+id/family_member_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5pt"
+            android:layout_marginLeft="5dp"
+            android:paddingTop="2pt"
             android:text="@string/family_member_name"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -34,9 +35,10 @@
             android:id="@+id/family_member_role"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15pt"
-            android:textStyle="italic"
-            android:text="@string/family_member_user_role" />
+            android:layout_marginLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="@string/family_member_user_role"
+            android:textStyle="italic" />
     </LinearLayout>
 </LinearLayout>
 

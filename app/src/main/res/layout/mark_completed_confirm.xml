@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text='This chore will be marked as completed. Do you wish to proceed?'
+        android:text='Would you liek to postpone or confirm this chore?'
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:textSize="18sp" />
@@ -27,6 +27,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancel" />
+
+        <Button
+            android:id="@+id/postponeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Postpone" />
 
         <Button
             android:id="@+id/confirmButton"

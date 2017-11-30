@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //attaching listener to button
         buttonRegister.setOnClickListener(this);
         textViewLogin.setOnClickListener(this);
+        tmp.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
