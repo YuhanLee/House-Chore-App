@@ -89,7 +89,7 @@ public class Housechore {
         return category;
     }
 
-    public void setCompletionStatus(String completed) {
+    public void setCompletedStatus(String completed) {
         this.statusCompleted = completed;
     }
 

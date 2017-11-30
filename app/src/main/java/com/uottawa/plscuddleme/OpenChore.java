@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -38,27 +39,11 @@ public class OpenChore extends Fragment {
     private static final String TAG = "OpenChore";
     ListView listViewHousechores;
     private long numberOfChores;
-    RelativeLayout tv;
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Chores");
-        tv = (RelativeLayout)getView().findViewById(R.id.filter_container);
         listViewHousechores = (ListView)getView().findViewById(R.id.housechore_list);
-        setLayoutInvisible();
-        Button filterButton = (Button)getView().findViewById(R.id.filterChore);
-        filterButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                setLayoutVisible();
-            }
-        });
-
-        Button closeFilter = (Button)getView().findViewById(R.id.hideFilter);
-        closeFilter.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View v) {
-                setLayoutInvisible();
-            }
-        });
 
         DatabaseReference databaseProducts;
         databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -79,11 +64,37 @@ public class OpenChore extends Fragment {
                 ListView listView = (ListView)getView().findViewById(R.id.housechore_list);
                 ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
                 listView.setAdapter(adapter);
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        DatabaseReference databaseMembers;
+        databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<String> users = new ArrayList<String>();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Member member = snapshot.getValue(Member.class);
+                    String userName = member.getfamilyMemberName();
+                    users.add(userName);
+
+                }
+
+                Spinner userSpinner = (Spinner)getView().findViewById(R.id.user_filter);
+                ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, users);
+                usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                userSpinner.setAdapter(usersAdapter);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
 
 
 
@@ -125,17 +136,6 @@ public class OpenChore extends Fragment {
         return inflater.inflate(R.layout.nav_open_chores, container, false);
     }
 
-    public void setLayoutInvisible() {
-        if (tv.getVisibility() == View.VISIBLE) {
-            tv.setVisibility(View.GONE);
-        }
-    }
-    public void setLayoutVisible() {
-        if (tv.getVisibility() == View.GONE) {
-            tv.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void showConfirmCompleteDialog(final String id) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -171,6 +171,7 @@ public class OpenChore extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
+                //TODO Update housechore value setter
                 dR.setValue("Postponed");
                 Toast.makeText(getActivity(), "Marked as Postponed", Toast.LENGTH_LONG).show();
                 b.dismiss();
