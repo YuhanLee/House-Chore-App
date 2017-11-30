@@ -25,7 +25,8 @@
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5pt"
+            android:layout_marginLeft="5dp"
+            android:paddingTop="2pt"
             android:text="TextView"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -34,9 +35,10 @@
             android:id="@+id/itemDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="15pt"
-            android:textStyle="italic"
-            android:text="TextView" />
+            android:layout_marginLeft="5dp"
+            android:paddingTop="5pt"
+            android:text="TextView"
+            android:textStyle="italic" />
     </LinearLayout>
 </LinearLayout>
 

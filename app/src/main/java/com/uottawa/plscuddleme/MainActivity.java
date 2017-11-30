@@ -33,6 +33,27 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+// MANDATORY
+//TODO [x] Can add a chore with name and description
+//TODO [x] Delete chore must update Chore List Page
+//TODO [] Can edit a chore
+//TODO [] Can delete a chore
+//TODO [] Completing a chore gives points to user who completed
+//TODO [] Can see the points obtained based on the completion of a chore
+//TODO [] Can list all chores assigned to a user
+//TODO [] Can list all chores belonging to a group
+//TODO [] Can change the status of a chore
+//TODO [] Can assign a chore
+//TODO [] Can deallocate a chore from a user
+//TODO [] Can allocate resources to a chore
+//TODO [] Can deallocate resources from a chore
+//TODO [] Can see the list of all resources needed for all chores belonging to a group
+
+// OPTIONAL
+//TODO [] Handle adding a duplicate chore
+//TODO [] Handle date must be after today when editting and adding
+//TODO []
+
 
 public class MainActivity extends Activity {
     private static final String TAG = "Main Activity";

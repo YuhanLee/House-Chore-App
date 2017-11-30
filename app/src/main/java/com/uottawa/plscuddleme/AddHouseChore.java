@@ -212,6 +212,10 @@ public class AddHouseChore extends AppCompatActivity {
 //            Log.i(TAG, String.valueOf(convertedDate.getTime()));
             Log.i(TAG, getDate(convertedDate.getTime(), "dd/MM/yyyy"));
             Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, false, intRewards, stringNote);
+            Log.i(TAG, housechore.getHousechoreName());
+            Log.i(TAG, housechore.getNote());
+            Log.i(TAG, housechore.getCategory());
+
             databaseProducts.child(id).setValue(housechore);
             editHousechoreName.setText("");
             editChoreAssignedTo.setText("");

@@ -82,7 +82,7 @@ public class Housechore {
     }
 
     public void setCategory(String category) {
-        category = category;
+        this.category = category;
     }
 
     public String getCategory() {
@@ -90,7 +90,7 @@ public class Housechore {
     }
 
     public void setCompletionStatus(boolean completed) {
-        statusCompleted = completed;
+        this.statusCompleted = completed;
     }
 
     public boolean getCompletedStatus() {
@@ -98,14 +98,14 @@ public class Housechore {
     }
 
     public void setReward(int reward) {
-        reward = reward;
+        this.reward = reward;
     }
     public int getReward() {
         return reward;
     }
 
     public void setNote(String note) {
-        note = note;
+        this.note = note;
     }
     public String getNote() {
         return note;

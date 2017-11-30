@@ -16,8 +16,8 @@ import android.widget.TextView;
 
 public class ChoreCustomAdapter extends ArrayAdapter {
     private final Context context;
-    private final String[] myChores;
-    public ChoreCustomAdapter(Context context, String[] choreList) {
+    private final String[][] myChores;
+    public ChoreCustomAdapter(Context context, String[][] choreList) {
         super(context, R.layout.chore_item_layout, choreList);
         this.context = context;
         this.myChores = choreList;
@@ -29,8 +29,9 @@ public class ChoreCustomAdapter extends ArrayAdapter {
         TextView choreNameTextField = (TextView) rowView.findViewById(R.id.itemName);
         TextView choreDescriptionTextField = (TextView) rowView.findViewById(R.id.itemDescription);
         ImageView choreImage = (ImageView) rowView.findViewById(R.id.icon);
-        choreNameTextField.setText(myChores[position]);
-        choreDescriptionTextField.setText(myChores[position] + " is a chore!");
+        choreNameTextField.setText(myChores[position][0]);
+        choreDescriptionTextField.setText("Note: " + myChores[position][1]);
+
         return rowView;
     }
 }
