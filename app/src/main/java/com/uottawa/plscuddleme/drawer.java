@@ -20,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,10 +56,6 @@ public class drawer extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
-
-//        final LayoutInflater inflater = getLayoutInflater();
-//        final View textEntryView = inflater.inflate(R.layout.logout_confirm, null);
-//        logoutText = (TextView) textEntryView.findViewById(R.id.confirmLogout);
 
         setSupportActionBar(toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
@@ -212,19 +209,19 @@ public class drawer extends AppCompatActivity
         switch (navId) {
             case R.id.nav_chores:
                 fragment = new OpenChore();
-                Log.i(TAG, "*openChore");
+                setDrawerLayoutGone();
                 break;
             case R.id.nav_shoppingList:
                 fragment = new ShoppingList();
-                Log.i(TAG, "*shoppingList");
+                setDrawerLayoutGone();
                 break;
             case R.id.nav_schedule:
                 fragment = new Schedule();
-                Log.i(TAG, "*Schedule");
+                setDrawerLayoutGone();
                 break;
             case R.id.nav_people:
                 fragment = new FamilyMembers();
-                Log.i(TAG, "*People");
+                setDrawerLayoutGone();
                 break;
             case R.id.nav_logout:
                 showLogoutDialog();
@@ -240,6 +237,11 @@ public class drawer extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+    }
+
+    private void setDrawerLayoutGone() {
+        RelativeLayout drawerLayout = (RelativeLayout) findViewById(R.id.drawerInner);
+        drawerLayout.setVisibility(View.GONE);
     }
 
 
