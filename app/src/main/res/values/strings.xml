@@ -85,7 +85,7 @@
         <item> Low </item>
     </string-array>
 
-    <string-array name="category_array" >
+    <string-array name="category_array">
         <item> Groceries </item>
         <item> Kitchen </item>
         <item> Washing </item>

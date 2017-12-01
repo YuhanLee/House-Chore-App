@@ -82,7 +82,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
             return;
         }
-        //if both note empty
+        //if both not empty
         progressDialog.setMessage("Signing in. Please wait...");
         progressDialog.show();
 
@@ -94,7 +94,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             //start add profile
                             finish();
-                            startActivity(new Intent(getApplicationContext(),AddFamilyMember.class));
+                            startActivity(new Intent(getApplicationContext(),drawer.class));
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Sign in unsuccessful: "+task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }

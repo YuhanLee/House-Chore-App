@@ -39,11 +39,12 @@ public class OpenChore extends Fragment {
     private static final String TAG = "OpenChore";
     ListView listViewHousechores;
     private long numberOfChores;
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Chores");
-        listViewHousechores = (ListView)getView().findViewById(R.id.housechore_list);
+        listViewHousechores = (ListView) getView().findViewById(R.id.housechore_list);
 
         DatabaseReference databaseProducts;
         databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -51,7 +52,7 @@ public class OpenChore extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
-                String[][] choreList = new String[(int)dataSnapshot.getChildrenCount()][];
+                String[][] choreList = new String[(int) dataSnapshot.getChildrenCount()][];
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Housechore housechore = snapshot.getValue(Housechore.class);
                     String[] itemPair = new String[2];
@@ -61,11 +62,12 @@ public class OpenChore extends Fragment {
                     i = i + 1;
 
                 }
-                ListView listView = (ListView)getView().findViewById(R.id.housechore_list);
+                ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
                 ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
                 listView.setAdapter(adapter);
 
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -84,18 +86,16 @@ public class OpenChore extends Fragment {
 
                 }
 
-                Spinner userSpinner = (Spinner)getView().findViewById(R.id.user_filter);
+                Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-
-
 
 
         listViewHousechores.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -119,6 +119,7 @@ public class OpenChore extends Fragment {
                             counter = counter + 1;
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
@@ -127,9 +128,51 @@ public class OpenChore extends Fragment {
             }
         });
 
+
+        listViewHousechores.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final int selectedRow = i;
+                DatabaseReference databaseProducts;
+                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Housechore housechore = (Housechore) snapshot.getValue(Housechore.class);
+                            Log.i(TAG, "Selected row = " + selectedRow);
+                            openChore(selectedRow,housechore.getID());
+                            break;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+//
+//                Object choreItem = listViewHousechores.getItemAtPosition(i);
+//                Log.i(TAG, "value of the position is = "+i + "and the value of choreItem is " +choreItem);
+//                Housechore selectedHousechore = (Housechore) choreItem();
+            }
+        });
+
     }
 
 
+    private void openChore(int selectedRow, String id) {
+        Intent intent = new Intent(getContext(), UpdateChoreActivity.class);
+        String ROW_NUM = "ROW_CLICKED";
+        String CHORE_ID = "CHORE_ID";
+        Bundle extras = new Bundle();
+        String position = String.valueOf(selectedRow);
+        extras.putString(ROW_NUM, position);
+        extras.putString(CHORE_ID, id);
+        intent.putExtras(extras);
+        startActivity(intent);
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

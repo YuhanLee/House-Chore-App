@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,10 +29,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.firebase.database.*;
+
 import android.util.Log;
 
 
-public class AddHouseChore extends AppCompatActivity {
+public class AddHouseChore extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "AddHouseChore";
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
@@ -41,6 +43,7 @@ public class AddHouseChore extends AppCompatActivity {
     Spinner editChoreCategory;
     Spinner editChoreRewards;
     EditText editNote;
+    ImageView imageChore;
 
     Button buttonAddChore;
 //    ListView listViewHousechores;
@@ -63,27 +66,13 @@ public class AddHouseChore extends AppCompatActivity {
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
         editChoreRewards = (Spinner) findViewById(R.id.enter_rewards);
         editNote = (EditText) findViewById(R.id.enter_note);
+        imageChore = (ImageView) findViewById(R.id.imageViewChore);
 
         buttonAddChore = (Button) findViewById(R.id.addButton);
 
         housechores = new ArrayList<>();
 
-        //adding an OnClickListener to button
-        buttonAddChore.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                addHousechore();
-            }
-        });
-
-//        listViewHousechores.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Housechore housechore = housechores.get(i);
-//                showUpdateDeleteDialog(housechore.getID(), housechore.getHousechoreName());
-//                return true;
-//            }
-//        });
+        buttonAddChore.setOnClickListener(this);
 
     }
 
@@ -186,4 +175,15 @@ public class AddHouseChore extends AppCompatActivity {
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
     }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.addButton:
+                addHousechore();
+                break;
+        }
+    }
+
 }
+

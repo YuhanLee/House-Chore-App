@@ -8,6 +8,17 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <ImageView
+        android:id="@+id/imageViewDrawer"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/beautiful_simon" />
+
+    <TextView
+        android:id="@+id/textViewWelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
     <include
         layout="@layout/app_bar_drawer"
         android:layout_width="match_parent"
