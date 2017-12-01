@@ -1,12 +1,15 @@
 package com.uottawa.plscuddleme;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Arrays;
 
 /**
  * Created by Psymon on 2017-11-21.
@@ -15,22 +18,37 @@ import android.widget.TextView;
 
 
 public class ChoreCustomAdapter extends ArrayAdapter {
+    private static final String TAG = "ChoreCustomAdapter";
     private final Context context;
     private final String[][] myChores;
+    private String choreName;
     public ChoreCustomAdapter(Context context, String[][] choreList) {
         super(context, R.layout.chore_item_layout, choreList);
         this.context = context;
         this.myChores = choreList;
     }
 
+    public String getChoreName() {
+        return choreName;
+    }
+
+    public void setChoreName(String choreName) {
+        this.choreName = choreName;
+    }
+
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.i(TAG, String.valueOf(position));
+        Log.d("this is my deep array", "deep arr: " + Arrays.deepToString(myChores));
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.chore_item_layout, parent, false);
         TextView choreNameTextField = (TextView) rowView.findViewById(R.id.itemName);
         TextView choreDescriptionTextField = (TextView) rowView.findViewById(R.id.itemDescription);
         ImageView choreImage = (ImageView) rowView.findViewById(R.id.icon);
-        choreNameTextField.setText(myChores[position][0]);
-        choreDescriptionTextField.setText("Note: " + myChores[position][1]);
+        if (myChores[position]!=null && myChores[position].length>0) {
+            choreNameTextField.setText(myChores[position][0]);
+            setChoreName(myChores[position][0]);
+            choreDescriptionTextField.setText("Note: " + myChores[position][1]);
+        }
 
         return rowView;
     }

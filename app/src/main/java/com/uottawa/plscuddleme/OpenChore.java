@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * Created by Yuhan on 11/19/2017.
@@ -38,7 +39,8 @@ import java.util.List;
 public class OpenChore extends Fragment {
     private static final String TAG = "OpenChore";
     ListView listViewHousechores;
-    private long numberOfChores;
+    ListView listView;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -46,32 +48,7 @@ public class OpenChore extends Fragment {
         getActivity().setTitle("Chores");
         listViewHousechores = (ListView) getView().findViewById(R.id.housechore_list);
 
-        DatabaseReference databaseProducts;
-        databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-        databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int i = 0;
-                String[][] choreList = new String[(int) dataSnapshot.getChildrenCount()][];
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Housechore housechore = snapshot.getValue(Housechore.class);
-                    String[] itemPair = new String[2];
-                    itemPair[0] = housechore.getHousechoreName();
-                    itemPair[1] = housechore.getNote();
-                    choreList[i] = itemPair;
-                    i = i + 1;
-
-                }
-                ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
-                ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
-                listView.setAdapter(adapter);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        displayAllChores();
 
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
@@ -79,6 +56,7 @@ public class OpenChore extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> users = new ArrayList<String>();
+                users.add("Display All");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
                     String userName = member.getfamilyMemberName();
@@ -101,7 +79,7 @@ public class OpenChore extends Fragment {
         listViewHousechores.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
-            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
                 final int selectedRow = i;
                 DatabaseReference databaseProducts;
                 databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -111,10 +89,8 @@ public class OpenChore extends Fragment {
                         int counter = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = snapshot.getValue(Housechore.class);
-                            Log.i(TAG, String.valueOf(selectedRow));
-                            Log.i(TAG, String.valueOf(counter));
                             if (counter == selectedRow) {
-                                showConfirmCompleteDialog(housechore.getID());
+                                showConfirmCompleteDialog(housechore.getID(), housechore.getReward(), housechore.getAssignedTo());
                             }
                             counter = counter + 1;
                         }
@@ -126,6 +102,59 @@ public class OpenChore extends Fragment {
                 });
                 return true;
             }
+        });
+
+        Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
+        userSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                final String selectedSpinner = parentView.getItemAtPosition(position).toString();
+                DatabaseReference databaseProducts;
+                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int i = 0;
+                        int arraySize = 0;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Housechore housechore = snapshot.getValue(Housechore.class);
+                            if (housechore.getAssignedTo().equals(selectedSpinner)) {
+                                arraySize = arraySize + 1;
+                            }
+                        }
+                        String[][] choreList = new String[arraySize][];
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Housechore housechore = snapshot.getValue(Housechore.class);
+                            String[] itemPair = new String[2];
+                            if (housechore.getAssignedTo().equals(selectedSpinner)) {
+                                itemPair[0] = housechore.getHousechoreName();
+                                itemPair[1] = housechore.getNote();
+                                choreList[i] = itemPair;
+                                i = i + 1;
+                            }
+                        }
+                        if (choreList!=null && choreList.length>0) {
+                            ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
+                            ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
+                            listView.setAdapter(adapter);
+                        } else if (selectedSpinner.equals("Display All")) {
+                            displayAllChores();
+                        } else {
+                            Toast.makeText(getActivity(), "There are no chores assigned to " + selectedSpinner, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
         });
 
 
@@ -141,7 +170,6 @@ public class OpenChore extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = (Housechore) snapshot.getValue(Housechore.class);
-                            Log.i(TAG, "Selected row = " + selectedRow);
                             openChore(selectedRow,housechore.getID());
                             break;
                         }
@@ -179,7 +207,38 @@ public class OpenChore extends Fragment {
         return inflater.inflate(R.layout.nav_open_chores, container, false);
     }
 
-    private void showConfirmCompleteDialog(final String id) {
+    public void displayAllChores() {
+        DatabaseReference databaseProducts;
+        databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
+        databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                String[][] choreList = new String[(int) dataSnapshot.getChildrenCount()][];
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Housechore housechore = snapshot.getValue(Housechore.class);
+                    String[] itemPair = new String[2];
+                    itemPair[0] = housechore.getHousechoreName();
+                    itemPair[1] = housechore.getNote();
+                    choreList[i] = itemPair;
+                    i = i + 1;
+
+                }
+                if (choreList!=null && choreList.length>0) {
+                    ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
+                    ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
+                    listView.setAdapter(adapter);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
+
+    private void showConfirmCompleteDialog(final String id, final int reward, final String assignedTo) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.mark_completed_confirm, null);
@@ -205,7 +264,27 @@ public class OpenChore extends Fragment {
             public void onClick(View view) {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
                 dR.setValue("Completed");
-                Toast.makeText(getActivity(), "Marked as Complete", Toast.LENGTH_LONG).show();
+                DatabaseReference databaseProducts;
+                databaseProducts = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Member member = snapshot.getValue(Member.class);
+                            if (member.getfamilyMemberName().equals(assignedTo)) {
+                                int currentRewards = member.getRewards();
+                                int newRewards = currentRewards + reward;
+                                DatabaseReference dRewards = FirebaseDatabase.getInstance().getReference("familyMembers").child(snapshot.getKey()).child("rewards");
+                                dRewards.setValue(newRewards);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+                Toast.makeText(getActivity(), "Marked as completed. Rewarded " + reward + " points " + "to " + assignedTo, Toast.LENGTH_LONG).show();
                 b.dismiss();
             }
         });
@@ -214,7 +293,6 @@ public class OpenChore extends Fragment {
             @Override
             public void onClick(View view) {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
-                //TODO Update housechore value setter
                 dR.setValue("Postponed");
                 Toast.makeText(getActivity(), "Marked as Postponed", Toast.LENGTH_LONG).show();
                 b.dismiss();

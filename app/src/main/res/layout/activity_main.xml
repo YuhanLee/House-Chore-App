@@ -66,7 +66,7 @@
         <Button
             android:id="@+id/buttontmp"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="38dp"
             android:text="tmp" />
 
         <TextView

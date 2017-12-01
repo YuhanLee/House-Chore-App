@@ -32,9 +32,9 @@ import com.google.firebase.database.ValueEventListener;
 //TODO [] Can delete a chore
 //TODO [] Completing a chore gives points to user who completed
 //TODO [] Can see the points obtained based on the completion of a chore
-//TODO [] Can list all chores assigned to a user
-//TODO [] Can list all chores belonging to a group
-//TODO [] Can change the status of a chore
+//TODO [x] Can list all chores assigned to a user
+//TODO [x] Can list all chores belonging to a group
+//TODO [x] Can change the status of a chore
 //TODO [] Can assign a chore
 //TODO [] Can deallocate a chore from a user
 //TODO [] Can allocate resources to a chore
