@@ -77,6 +77,7 @@
     <string name="priority_high">Priority (High)</string>
     <string name="register">Register</string>
     <string name="save_information">Save Information</string>
+    <string name="welcome_back">Welcome back!</string>
 
 
     <string-array name="priority_array">

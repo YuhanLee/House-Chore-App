@@ -78,4 +78,17 @@ public class Member {
     public void setRewards(int rewards) {
         this.rewards = rewards;
     }
+
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", memberEmail='" + memberEmail + '\'' +
+                ", familyMemberName='" + familyMemberName + '\'' +
+                ", userRole='" + userRole + '\'' +
+                ", numberOfAssignedTasks=" + numberOfAssignedTasks +
+                ", rewards=" + rewards +
+                '}';
+    }
 }

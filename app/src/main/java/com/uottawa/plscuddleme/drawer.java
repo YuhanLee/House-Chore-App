@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,7 +24,11 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
@@ -31,11 +36,18 @@ import org.w3c.dom.Text;
 public class drawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView textViewWelcome;
-    private static final String TAG = "Drawer.java";
+    TextView logoutText;
+    private static final String TAG = "Drawer";
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    private DatabaseReference databaseReference;
     String userId;
     String userName;
+    String memberEmail;
+    int numberOfAssignedTasks;
+    int rewards;
+    String userRole;
+    String memberInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,19 +56,40 @@ public class drawer extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
 
-        setSupportActionBar(toolbar);
+//        final LayoutInflater inflater = getLayoutInflater();
+//        final View textEntryView = inflater.inflate(R.layout.logout_confirm, null);
+//        logoutText = (TextView) textEntryView.findViewById(R.id.confirmLogout);
 
+        setSupportActionBar(toolbar);
         firebaseAuth = FirebaseAuth.getInstance();
-        if (firebaseAuth.getCurrentUser() != null) {
-            firebaseUser = firebaseAuth.getCurrentUser();
-            userId = firebaseUser.getUid();
-            userName = firebaseUser.getDisplayName();
-        } else {
+        if (firebaseAuth.getCurrentUser() == null) {
             finish();
             startActivity(new Intent(this, SignInActivity.class));
+        } else {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            userId = firebaseUser.getUid();
+            Log.i(TAG, "&&&&&&userId = " + userId);
         }
 
-        textViewWelcome.setText("Welcome" +userName);
+        DatabaseReference databaseMembers;
+        databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot familyMembers : dataSnapshot.getChildren()) {
+                    Member member = familyMembers.getValue(Member.class);
+                    getMember(member);
+                    break;
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +111,32 @@ public class drawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 //        displaySelectedScreen(R.id.nav_openChores);
-        Log.i(TAG, "oncreate after called display nav_openChores");
+}
+
+
+    private void getMember(Member member) {
+        userName = member.getfamilyMemberName();
+        memberEmail = member.getMemberEmail();
+        numberOfAssignedTasks = member.getNumberOfAssignedTasks();
+        userRole = member.getUserRole();
+        rewards = member.getRewards();
+        memberInfo = member.toString();
+
+        Log.v(TAG,"************************************************");
+        Log.v(TAG, "userName = " + userName);
+        Log.v(TAG, "memberEmail = " + memberEmail);
+        Log.v(TAG, "numberOfAssignedTasks = " + numberOfAssignedTasks);
+        Log.v(TAG, "userRole = " + userRole);
+        Log.v(TAG, "rewards = " + rewards);
+        Log.v(TAG, "memberInfo = " + memberInfo);
+
+        setView();
+
+    }
+
+
+    private void setView() {
+        textViewWelcome.setText("Welcome "+userName);
     }
 
     @Override
@@ -120,7 +178,11 @@ public class drawer extends AppCompatActivity
         final View dialogView = inflater.inflate(R.layout.logout_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Logout?");
+        String tmp = userName+ " will be logged out. Do you wish to log out?";
+        TextView logoutText = (TextView)dialogView.findViewById(R.id.confirmLogout);
+        logoutText.setText(tmp);
+
+        dialogBuilder.setTitle("Done for the day?");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -137,15 +199,15 @@ public class drawer extends AppCompatActivity
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toy = new Intent(drawer.this, MainActivity.class);
-                startActivity(toy);
+                firebaseAuth.signOut();
                 b.dismiss();
+                finish();
+                startActivity(new Intent (getApplicationContext(), SignInActivity.class));
             }
         });
     }
 
     private void displaySelectedScreen(int navId) {
-        Log.i(TAG, "called displaySelectedScreen!");
         Fragment fragment = null;
         switch (navId) {
             case R.id.nav_chores:
@@ -181,7 +243,6 @@ public class drawer extends AppCompatActivity
     }
 
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -191,3 +252,4 @@ public class drawer extends AppCompatActivity
         return true;
     }
 }
+
