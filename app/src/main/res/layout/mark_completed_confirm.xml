@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:layout_marginTop="10dp"
-        android:text='Would you liek to postpone or confirm this chore?'
+        android:text='Would you like to postpone or confirm this chore?'
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
         android:textSize="18sp" />

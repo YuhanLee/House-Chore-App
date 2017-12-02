@@ -210,7 +210,7 @@ public class drawer extends AppCompatActivity
     private void displaySelectedScreen(int navId) {
         Fragment fragment = null;
         switch (navId) {
-            case R.id.nav_account:
+            case R.id.nav_profile:
                 fragment = new Profile();
                 setDrawerLayoutGone();
                 break;
