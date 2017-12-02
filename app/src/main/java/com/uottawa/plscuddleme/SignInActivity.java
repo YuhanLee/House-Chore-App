@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         if (firebaseAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent (this, AddFamilyMember.class));
+            startActivity(new Intent(this, AddFamilyMember.class));
         }
     }
 
@@ -73,13 +73,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String password = enterPassword.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
 
-            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             //stop function execution
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             return;
         }
         //if both not empty
@@ -94,9 +94,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         if (task.isSuccessful()) {
                             //start add profile
                             finish();
-                            startActivity(new Intent(getApplicationContext(),drawer.class));
+                            startActivity(new Intent(getApplicationContext(), drawer.class));
                         } else {
-                            Toast.makeText(getApplicationContext(), "Sign in unsuccessful: "+task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Sign in unsuccessful: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
 
                     }

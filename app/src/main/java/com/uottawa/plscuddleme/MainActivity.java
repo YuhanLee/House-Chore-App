@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth firebaseAuth;
 
     //UI Ref
-    private Button tmp;
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
-        tmp = (Button) findViewById(R.id.buttontmp);
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
         progressDialog = new ProgressDialog(this);
@@ -81,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //attaching listener to button
         buttonRegister.setOnClickListener(this);
         textViewLogin.setOnClickListener(this);
-        tmp.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
@@ -100,10 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.textViewLogin:
                 startActivity(new Intent(this, SignInActivity.class));
-                break;
-
-            case R.id.buttontmp:
-                startActivity(new Intent(this, drawer.class));
                 break;
         }
     }

@@ -111,5 +111,20 @@ public class Housechore {
         return note;
     }
 
+    @Override
+    public String toString() {
+        return "Housechore{" +
+                "id='" + id + '\'' +
+                ", housechoreName='" + housechoreName + '\'' +
+                ", assignedBy='" + assignedBy + '\'' +
+                ", assignedTo='" + assignedTo + '\'' +
+                ", dueDate=" + dueDate +
+                ", priority='" + priority + '\'' +
+                ", category='" + category + '\'' +
+                ", statusCompleted='" + statusCompleted + '\'' +
+                ", reward=" + reward +
+                ", note='" + note + '\'' +
+                '}';
+    }
 }
 

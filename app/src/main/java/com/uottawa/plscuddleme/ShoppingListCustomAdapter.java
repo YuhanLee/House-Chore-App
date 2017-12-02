@@ -15,6 +15,7 @@ import android.widget.TextView;
 public class ShoppingListCustomAdapter extends ArrayAdapter {
     private final Context context;
     private final String[] myList;
+
     public ShoppingListCustomAdapter(Context context, String[] shoppingList) {
         super(context, R.layout.shopping_item_layout, shoppingList);
         this.context = context;

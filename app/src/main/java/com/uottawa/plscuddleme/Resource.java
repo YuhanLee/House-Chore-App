@@ -20,6 +20,7 @@ public class Resource {
         this.note = note;
 
     }
+
     public void setID(int id) {
         this.id = id;
     }
@@ -28,7 +29,7 @@ public class Resource {
         return id;
     }
 
-    public void setDueDate (long dueDate) {
+    public void setDueDate(long dueDate) {
         this.dueDate = dueDate;
     }
 
@@ -36,7 +37,7 @@ public class Resource {
         return dueDate;
     }
 
-    public void setNote (String note) {
+    public void setNote(String note) {
         this.note = note;
     }
 

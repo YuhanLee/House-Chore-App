@@ -56,8 +56,8 @@ public class drawer extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
-
         setSupportActionBar(toolbar);
+
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
@@ -73,10 +73,14 @@ public class drawer extends AppCompatActivity
         databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                String id;
                 for (DataSnapshot familyMembers : dataSnapshot.getChildren()) {
                     Member member = familyMembers.getValue(Member.class);
-                    getMember(member);
-                    break;
+                    id = familyMembers.getKey();
+                    if (userId.equals(id)) {
+                        getMember(member);
+                        break;
+                    }
                 }
             }
 
@@ -85,7 +89,6 @@ public class drawer extends AppCompatActivity
 
             }
         });
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -111,7 +114,7 @@ public class drawer extends AppCompatActivity
 }
 
 
-    private void getMember(Member member) {
+    public void getMember(Member member) {
         userName = member.getfamilyMemberName();
         memberEmail = member.getMemberEmail();
         numberOfAssignedTasks = member.getNumberOfAssignedTasks();
@@ -175,11 +178,11 @@ public class drawer extends AppCompatActivity
         final View dialogView = inflater.inflate(R.layout.logout_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        String tmp = userName+ " will be logged out. Do you wish to log out?";
+        String tmp = "Do you wish to log out?";
         TextView logoutText = (TextView)dialogView.findViewById(R.id.confirmLogout);
         logoutText.setText(tmp);
 
-        dialogBuilder.setTitle("Done for the day?");
+        dialogBuilder.setTitle("Bye Bye "+userName+" :'(");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -207,6 +210,10 @@ public class drawer extends AppCompatActivity
     private void displaySelectedScreen(int navId) {
         Fragment fragment = null;
         switch (navId) {
+            case R.id.nav_account:
+                fragment = new Profile();
+                setDrawerLayoutGone();
+                break;
             case R.id.nav_chores:
                 fragment = new OpenChore();
                 setDrawerLayoutGone();
@@ -228,8 +235,6 @@ public class drawer extends AppCompatActivity
                 break;
         }
         if (fragment != null) {
-            Log.i(TAG, "*is not null");
-
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.content_frame, fragment);
             ft.commit();

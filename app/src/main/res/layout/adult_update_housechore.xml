@@ -6,220 +6,261 @@
     android:layout_height="match_parent"
     android:background="@color/grayLight"
     android:orientation="vertical">
-        <!--kid view high priority-->
-        <!--TODO: fix view to be able to handle both-->
-        o<RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-                <LinearLayout
-                    android:background="@drawable/high_priority_background"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:orientation="vertical">
-                        <ImageView
-                            android:layout_marginTop="5dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="150dp"
-                            android:layout_height="150dp"
-                            android:src="@drawable/wash_dog"/>
-                        <TextView
-                            android:layout_marginTop="0dp"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wash_coco"
-                            android:textColor="#fff"
-                            android:textStyle="bold"
-                            android:textSize="21sp"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/choreTitle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/high_priority_background"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/wash_dog" />
+
+            <TextView
+                android:id="@+id/textViewChoreName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:text="@string/wash_coco"
+                android:textColor="#fff"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/chore_info"
+            android:layout_width="400dp"
+            android:layout_height="90dp"
+            android:layout_below="@+id/choreTitle"
+            android:layout_centerHorizontal="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/assignee"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/textViewAssignee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="@string/yuhan"
+                        android:textColor="@color/card_text"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/textViewCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="@string/pet"
+                        android:textColor="@color/card_text"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
-                <android.support.v7.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="400dp"
-                    android:layout_height="90dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="190dp">
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/assignee"
-                                            android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                                        <TextView
-                                            android:id="@id/textViewAssignee"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/yuhan"
-                                            android:textStyle="bold"
-                                            android:textSize="15sp"
-                                            android:paddingTop="10dp"
-                                            android:textColor="@color/card_text"/>
-                                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/due_date"
+                        android:textSize="15sp" />
 
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/category"
-                                            android:textSize="15sp" />
-                                        <TextView
-                                            android:id="@+id/textViewCategory"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/pet"
-                                            android:textStyle="bold"
-                                            android:textSize="15sp"
-                                            android:paddingTop="10dp"
-                                            android:textColor="@color/card_text"/>
+                    <TextView
+                        android:id="@+id/textViewDueDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="2017/11/20"
+                        android:textColor="@color/card_text"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/due_date"
-                                            android:textSize="15sp"
-                                            />
-                                        <TextView
-                                            android:id="@+id/textViewDueDate"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="2017/11/20"
-                                            android:textStyle="bold"
-                                            android:textSize="15sp"
-                                            android:paddingTop="10dp"
-                                            android:textColor="@color/card_text"/>
+                </LinearLayout>
 
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:gravity="center"
-                                    android:orientation="vertical"
-                                    android:layout_width="0dp"
-                                    android:layout_weight="1"
-                                    android:layout_height="match_parent">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Status"
-                                            android:textSize="15sp" />
-                                        <TextView
-                                            android:id="@+id/textViewStatus"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Completed"
-                                            android:textStyle="bold"
-                                            android:textSize="15sp"
-                                            android:paddingTop="10dp"
-                                            android:textColor="@color/card_text"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-                                </LinearLayout>
-                        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/textViewStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:text="Completed"
+                        android:textColor="@color/card_text"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+            </LinearLayout>
 
 
-                </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+
+        <LinearLayout
+            android:id="@+id/otherInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/chore_info"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageViewPriority"
-                    android:layout_below="@id/cardView"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="50dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/schedule_icon"/>
-
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/schedule_icon" />
 
                 <TextView
                     android:id="@+id/textViewPriority"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cardView"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="25dp"
-                    android:textSize="20sp"
-                    android:text="High Priority" />
+                    android:layout_alignBaseline="@id/imageViewPriority"
+                    android:text="High Priority"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/imageViewReward"
-                    android:layout_below="@id/imageViewPriority"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/reward_icon"/>
-                <TextView
-                    android:id="@+id/textViewNotes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/cardView"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="75dp"
-                    android:textSize="20sp"
-                    android:text="5 Points" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp" >
 
-                <ImageView
-                    android:id="@+id/imageViewNotes"
-                    android:layout_below="@id/textViewNotes"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/note_icon"/>
+            <ImageView
+            android:id="@+id/imageViewReward"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/reward_icon" />
 
+        <TextView
+            android:id="@+id/textViewReward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/imageViewPriority"
+            android:text="5 Points"
+            android:textSize="20sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/note_text"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/cardView"
-                    android:layout_marginLeft="100dp"
-                    android:layout_marginTop="120dp"
-                    android:textSize="20sp"
-                    android:text="Dry Coco too!" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_marginBottom="10dp" >
 
-                <Button
-                    android:id="@+id/buttonAssignTo"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
-                    android:text="Assign To"
-                    android:layout_below="@id/note_text"/>
-                <Button
-                    android:id="@+id/buttonDelete"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/buttonAssignTo"
-                    android:text="Delete"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/note_text"/>
-
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/imageViewNotes"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/note_icon" />
 
 
+        <TextView
+            android:id="@+id/textViewNotes"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/imageViewPriority"
+            android:text="Dry Coco too!"
+            android:textSize="20sp" />
+        </LinearLayout>
 
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/otherInfo"
+        android:layout_centerHorizontal="true"
+        android:weightSum="3">
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Edit" />
+    <Button
+        android:id="@+id/buttonAssignTo"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Assign To" />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Delete" />
 </LinearLayout>
+
+    </RelativeLayout>
+
+
+    </LinearLayout>

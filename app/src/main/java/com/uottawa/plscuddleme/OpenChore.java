@@ -30,6 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
@@ -133,7 +134,7 @@ public class OpenChore extends Fragment {
                                 i = i + 1;
                             }
                         }
-                        if (choreList!=null && choreList.length>0) {
+                        if (choreList != null && choreList.length > 0) {
                             ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
                             ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
                             listView.setAdapter(adapter);
@@ -168,10 +169,15 @@ public class OpenChore extends Fragment {
                 databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        int counter = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = (Housechore) snapshot.getValue(Housechore.class);
-                            openChore(selectedRow,housechore.getID());
-                            break;
+                            if (counter == selectedRow) {
+                                openChore(selectedRow, housechore.getID());
+                                break;
+                            }
+                            counter = counter + 1;
+
                         }
                     }
 
@@ -180,10 +186,7 @@ public class OpenChore extends Fragment {
 
                     }
                 });
-//
-//                Object choreItem = listViewHousechores.getItemAtPosition(i);
-//                Log.i(TAG, "value of the position is = "+i + "and the value of choreItem is " +choreItem);
-//                Housechore selectedHousechore = (Housechore) choreItem();
+
             }
         });
 
@@ -195,12 +198,15 @@ public class OpenChore extends Fragment {
         String ROW_NUM = "ROW_CLICKED";
         String CHORE_ID = "CHORE_ID";
         Bundle extras = new Bundle();
+
+        Log.v(TAG, "The ID of the openChore that was clicked on was = " + id);
         String position = String.valueOf(selectedRow);
         extras.putString(ROW_NUM, position);
         extras.putString(CHORE_ID, id);
         intent.putExtras(extras);
         startActivity(intent);
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -224,12 +230,11 @@ public class OpenChore extends Fragment {
                     i = i + 1;
 
                 }
-                if (choreList!=null && choreList.length>0) {
+                if (choreList != null && choreList.length > 0) {
                     ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
                     ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
                     listView.setAdapter(adapter);
                 }
-
             }
 
             @Override
