@@ -30,8 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 //TODO [x] Delete chore must update Chore List Page
 //TODO [] Can edit a chore
 //TODO [] Can delete a chore
-//TODO [] Completing a chore gives points to user who completed
-//TODO [] Can see the points obtained based on the completion of a chore
+//TODO [x] Completing a chore gives points to user who completed
+//TODO [x] Can see the points obtained based on the completion of a chore
 //TODO [x] Can list all chores assigned to a user
 //TODO [x] Can list all chores belonging to a group
 //TODO [x] Can change the status of a chore
