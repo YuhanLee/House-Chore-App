@@ -14,14 +14,7 @@ public class Member {
 
 
     public Member() {}
-
-    public Member(String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
-        this.memberEmail = memberEmail;
-        this.familyMemberName = familyMemberName;
-        this.userRole = userRole;
-        this.numberOfAssignedTasks = numberOfAssignedTasks;
-        this.rewards = rewards;
-    }
+    
     public Member(String id, String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
         this.id = id;
         this.memberEmail = memberEmail;

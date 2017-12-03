@@ -1,6 +1,7 @@
 package com.uottawa.plscuddleme;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Yuhan on 10/31/2017.
@@ -17,6 +18,7 @@ public class Housechore {
     private String statusCompleted;
     private int reward;
     private String note;
+    private List resources;
 
 
     public Housechore() {
@@ -34,6 +36,19 @@ public class Housechore {
         this.statusCompleted = statusCompleted;
         this.reward = reward;
         this.note = note;
+    }
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, long dueDate, String priority, String category, String statusCompleted, int reward, String note, List resources) {
+        this.id = id;
+        this.housechoreName = housechoreName;
+        this.assignedTo = assignedTo;
+        this.assignedBy = assignedBy;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.category = category;
+        this.statusCompleted = statusCompleted;
+        this.reward = reward;
+        this.note = note;
+        this.resources = resources;
     }
 
     public void setID(String id) {

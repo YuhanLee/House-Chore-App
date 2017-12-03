@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final static String TAG = "MainActivity";
     //firebase Ref
     private FirebaseAuth firebaseAuth;
-
     //UI Ref
     private Button buttonRegister;
     private EditText editTextEmail;
@@ -81,6 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewLogin.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
         if (firebaseAuth.getCurrentUser() != null) {
             finish();
             startActivity(new Intent (this, drawer.class));
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void registerUser() {
-        String email = editTextEmail.getText().toString().trim();
+        final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Enter password ",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -127,7 +127,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             finish();
-                            startActivity(new Intent (getApplicationContext(),AddFamilyMember.class));
+                            Intent intent = new Intent(getApplicationContext(), AddFamilyMember.class);
+                            intent.putExtra("RegisteredEmail",email);
+                            Log.v(TAG, email);
+                            startActivity(intent);
                         } else {
                             Toast.makeText(MainActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }

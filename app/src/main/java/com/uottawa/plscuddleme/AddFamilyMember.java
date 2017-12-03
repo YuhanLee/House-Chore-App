@@ -29,18 +29,20 @@ public class AddFamilyMember extends AppCompatActivity implements View.OnClickLi
     private DatabaseReference databaseFamilyMembers;
 
     private EditText editTextNickName;
-    private EditText editTextEmail;
     private Spinner userRole;
     private TextView textViewUserEmail;
     private Button buttonSave;
-    private Button buttonLogOut;
-
+    private String emailFromRegister;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_family_member);
+
+        Bundle extras = getIntent().getExtras();
+        emailFromRegister = extras.getString("RegisteredEmail");
+        Log.v(TAG,emailFromRegister);
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
@@ -49,59 +51,52 @@ public class AddFamilyMember extends AppCompatActivity implements View.OnClickLi
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
-        editTextEmail = (EditText) findViewById(R.id.userEmail);
         editTextNickName = (EditText) findViewById(R.id.userNickName);
         buttonSave = (Button) findViewById(R.id.buttonSave);
-        buttonLogOut = (Button) findViewById(R.id.buttonLogOut);
         userRole = (Spinner) findViewById(R.id.memberRole);
 
         FirebaseUser user = firebaseAuth.getCurrentUser();
 
- //       textViewUserEmail.setText("Welcome " +user.getEmail());
 
-        buttonLogOut.setOnClickListener(this);
         buttonSave.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buttonLogOut:
-                logOut();
-                break;
+
             case R.id.buttonSave:
-                saveFamilyMember();
-                openDrawer();
+                buttonSave();
                 break;
         }
     }
 
-    private void logOut () {
-        firebaseAuth.signOut();
-        finish();
-        startActivity(new Intent (this, SignInActivity.class));
 
-    }
-
-    private void saveFamilyMember() {
-
-
+    public void buttonSave() {
         Log.i(TAG,"Inside addFamilyMember");
         String name = editTextNickName.getText().toString().trim();
-        String email = editTextEmail.getText().toString().trim();
         String memberRole = userRole.getSelectedItem().toString();
 
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Please enter a nick name", Toast.LENGTH_LONG).show();
-        } else if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please enter an email", Toast.LENGTH_LONG).show();
+            return;
         }
-     databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        addFamilyMemberInDb(name, emailFromRegister, memberRole);
+        openDrawer();
+    }
+
+    private void addFamilyMemberInDb(String name, String email, String memberRole) {
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         databaseFamilyMembers = FirebaseDatabase.getInstance().getReference("familyMembers");
-        Member member = new Member(email, name, memberRole,0,0);
         FirebaseUser user = firebaseAuth.getCurrentUser();
+        String id = user.getUid();
+        Member member = new Member(id,email, name, memberRole,0,0);
         databaseFamilyMembers.child(user.getUid()).setValue(member);
         Toast.makeText(this, "Family Member Added", Toast.LENGTH_LONG).show();
+
+        editTextNickName.setText("");
+        finish();
     }
 
     private void openDrawer() {

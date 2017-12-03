@@ -76,7 +76,7 @@ public class drawer extends AppCompatActivity
                 String id;
                 for (DataSnapshot familyMembers : dataSnapshot.getChildren()) {
                     Member member = familyMembers.getValue(Member.class);
-                    id = familyMembers.getKey();
+                    id = member.getID();
                     if (userId.equals(id)) {
                         getMember(member);
                         break;

@@ -165,13 +165,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:layout_marginLeft="110dp"
+                android:layout_marginLeft="90dp"
                 android:layout_marginBottom="10dp">
 
                 <ImageView
                     android:id="@+id/imageViewPriority"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_marginLeft="50dp"
                     android:layout_marginEnd="8dp"
                     android:src="@drawable/schedule_icon" />
@@ -182,19 +182,20 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@id/imageViewPriority"
                     android:text="High Priority"
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
             </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:layout_marginLeft="90dp"
             android:layout_marginBottom="10dp" >
 
             <ImageView
             android:id="@+id/imageViewReward"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="50dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/reward_icon" />
@@ -205,19 +206,20 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/imageViewPriority"
             android:text="5 Points"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
+            android:layout_marginLeft="90dp"
             android:layout_marginBottom="10dp" >
 
         <ImageView
             android:id="@+id/imageViewNotes"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/note_icon" />
 
@@ -228,15 +230,39 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@id/imageViewPriority"
             android:text="Dry Coco too!"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
         </LinearLayout>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/choreResources"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="3dp"
+            android:orientation="vertical"
+            android:layout_below="@id/otherInfo">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
+                android:text="Resources" />
+
+            <ListView
+                android:id="@+id/listViewResources"
+                android:layout_width="350dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center" />
+
+        </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/otherInfo"
+        android:layout_marginTop="3dp"
+        android:layout_below="@id/choreResources"
         android:layout_centerHorizontal="true"
         android:weightSum="3">
 
