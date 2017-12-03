@@ -11,37 +11,36 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
+        android:text='@string/assignTo_options'
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/notesConfirm"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/assignto_spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/descriptionConfirm"
-        android:layout_marginTop="10dp"
-        android:paddingLeft="25dp"
-        android:paddingRight="25dp"
-        android:textSize="18sp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/notesConfirm"
+        android:layout_below="@id/assignto_spinner"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/childCancel"
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cancel" />
 
         <Button
-            android:id="@+id/childAccept"
+            android:id="@+id/assignButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/accept" />
+            android:text="@string/assign" />
     </LinearLayout>
 
 </RelativeLayout>

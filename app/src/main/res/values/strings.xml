@@ -30,6 +30,9 @@
     <string name="number_of_open_chores">Number of Open Chores:</string>
     <string name="enter_chore_name">Enter Chore Name</string>
     <string name="enter_note">Enter Note</string>
+    <string name="edit_chore_name">Edit Chore Name</string>
+    <string name="edit_note">Edit Note</string>
+    <string name="edit_due_date">Edit Due Date</string>
     <string name="enter_assignee">Enter Assignee</string>
     <string name="housechore">Housechore</string>
     <string name="enter_due_date">Enter Due Date</string>
@@ -62,8 +65,12 @@
     <string name="select_a_new_avatar">Select a new avatar!</string>
     <string name="update_your_info">Update your info!</string>
     <string name="verify_password">* Verify Password</string>
+    <string name="confirm_delete">The Chore %1$s will be deleted. Please confirm.</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="assign">Assign</string>
 
-
+    <string name="assignTo_options">Who would you like to assign this chore to?</string>
     <string name="error_user_exists">Users already exist</string>
     <string name="new_member_sign_up_here">New Member? Sign up here</string>
     <string name="gimme_an_email">Gimme an email</string>
@@ -78,6 +85,8 @@
     <string name="register">Register</string>
     <string name="save_information">Save Information</string>
     <string name="welcome_back">Welcome back!</string>
+    <string name="accept_description">The Chore %1$s will be assigned to you.</string>
+    <string name="note_description">Note: %1$s.</string>
 
 
     <string-array name="priority_array">

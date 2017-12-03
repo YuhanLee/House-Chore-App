@@ -47,8 +47,15 @@ public class OpenChore extends Fragment {
     ListView listView;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
+    ChoreCustomAdapter adapter;
     String userId;
     String currentUserName;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        displayAllChores();
+    }
 
 
     @Override
@@ -265,7 +272,7 @@ public class OpenChore extends Fragment {
                 }
                 if (choreList != null && choreList.length > 0) {
                     ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
-                    ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
+                    adapter = new ChoreCustomAdapter(getContext(), choreList);
                     listView.setAdapter(adapter);
                 }
             }

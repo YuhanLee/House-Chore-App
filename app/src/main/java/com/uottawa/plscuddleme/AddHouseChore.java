@@ -40,7 +40,6 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
     Spinner editChoreAssignedTo;
-//    EditText editChoreAssignedTo;
     EditText editChoredueDate;
     Spinner editChorePriority;
     Spinner editChoreCategory;
@@ -49,7 +48,6 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
     ImageView imageChore;
 
     Button buttonAddChore;
-//    ListView listViewHousechores;
 
     List<Housechore> housechores;
 
@@ -64,7 +62,6 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
         editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
         editChoreAssignedTo = (Spinner) findViewById(R.id.enter_assignee);
-//        editChoreAssignedTo = (EditText) findViewById(R.id.enter_assignee);
         editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
         editChorePriority = (Spinner) findViewById(R.id.enter_priority);
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
@@ -123,37 +120,6 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-    }
-
-
-    private void updateHousechore(String id) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
-        DatabaseReference statusReference = dR.child("completedStatus");
-        String dateString = editChoredueDate.getText().toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        Date convertedDate = new Date();
-        try {
-            convertedDate = dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        String stringHousechore = editHousechoreName.getText().toString();
-        String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
-        String stringPriority = editChorePriority.getSelectedItem().toString();
-        String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
-        String stringNote = editNote.getText().toString();
-        int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-        //TODO MAKE SURE UPDATE DATA RETAINS THE VALUE OF STATUS
-        Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote);
-        dR.setValue(housechore);
-        Toast.makeText(getApplicationContext(), "Housechore Updated", Toast.LENGTH_LONG).show();
-    }
-
-    private boolean deleteHousechore(String id) {
-        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
-        dR.removeValue();
-        Toast.makeText(getApplicationContext(), "Housechore Deleted", Toast.LENGTH_LONG).show();
-        return true;
     }
 
     private void addHousechore() {

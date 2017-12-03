@@ -14,42 +14,35 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:layout_marginTop="15dp"
         android:src="@drawable/face"/>
     <EditText
-        android:id="@+id/enter_chore_name"
+        android:id="@+id/edit_chore_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewChore"
         android:textAlignment="center"
-        android:hint="@string/enter_chore_name" />
-    <Spinner
-        android:id="@+id/enter_assignee"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/enter_chore_name"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:hint="@string/edit_chore_name" />
 
     <EditText
-        android:id="@+id/enter_dueDate"
+        android:id="@+id/edit_dueDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:layout_below="@id/enter_assignee"
+        android:layout_below="@id/edit_chore_name"
         android:inputType="date"
-        android:hint="@string/enter_due_date" />
+        android:hint="@string/edit_due_date" />
 
     <EditText
-        android:id="@+id/enter_note"
+        android:id="@+id/edit_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:layout_below="@id/enter_dueDate"
-        android:hint="@string/enter_note" />
+        android:layout_below="@id/edit_dueDate"
+        android:hint="@string/edit_note" />
 
     <Spinner
-        android:id="@+id/enter_priority"
+        android:id="@+id/edit_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/enter_note"
+        android:layout_below="@id/edit_note"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:entries="@array/priority_array"
@@ -57,42 +50,46 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:layout_marginBottom="10dp"/>
 
     <Spinner
-        android:id="@+id/enter_category"
+        android:id="@+id/edit_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:layout_below="@id/enter_priority"
+        android:layout_below="@id/edit_priority"
         android:entries="@array/category_array"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
     <Spinner
-        android:id="@+id/enter_rewards"
+        android:id="@+id/edit_rewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/enter_category"
+        android:layout_below="@id/edit_category"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
         android:entries="@array/reward_array"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"/>
 
-    <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/enter_rewards"
-        android:layout_centerInParent="true"
-        android:text="@string/add" />
+        android:layout_below="@id/edit_rewards"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/housechore_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addButton"
-        android:layout_centerHorizontal="true"
-        android:text="@string/housechore"
-        android:textAlignment="center" />
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel" />
+
+        <Button
+            android:id="@+id/updateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/update" />
+    </LinearLayout>
 
 </RelativeLayout>

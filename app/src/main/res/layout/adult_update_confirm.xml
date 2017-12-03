@@ -11,6 +11,7 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
+        android:text='The Chore "Wash Dishes" will be updated. Please confirm your changes.'
         android:textSize="18sp" />
 
     <TextView
@@ -21,6 +22,7 @@
         android:layout_marginTop="10dp"
         android:paddingLeft="25dp"
         android:paddingRight="25dp"
+        android:text="Notes: Do not use the dish washer. Must hand wash"
         android:textSize="18sp" />
 
     <LinearLayout
@@ -30,18 +32,18 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/childCancel"
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/cancel" />
 
         <Button
-            android:id="@+id/childAccept"
+            android:id="@+id/confirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/accept" />
+            android:text="@string/update" />
     </LinearLayout>
 
 </RelativeLayout>

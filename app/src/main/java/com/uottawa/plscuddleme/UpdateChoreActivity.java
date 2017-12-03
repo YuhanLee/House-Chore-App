@@ -1,13 +1,21 @@
 package com.uottawa.plscuddleme;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,8 +25,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class UpdateChoreActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "UpdateChoreActivity";
@@ -55,6 +67,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     TextView textViewNotes;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +88,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         Bundle extras = intent.getExtras();
         if (extras != null) {
             choreID = extras.getString("CHORE_ID");
-            Log.v(TAG,"choreID = " +choreID);
+            Log.v(TAG, "choreID = " + choreID);
         }
 
         //gets all instances of the chores based on the ID
@@ -88,8 +101,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 for (DataSnapshot chores : dataSnapshot.getChildren()) {
                     Housechore chore = chores.getValue(Housechore.class);
                     id = chores.getKey();
-                    Log.i(TAG, "The value of id before getchore is " + id);
-                    Log.i(TAG, "The value of choreId before getchore is " + choreID);
                     if (id.equals(choreID)) {
                         getChore(chore);
                         break;
@@ -112,8 +123,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 for (DataSnapshot familyMembers : dataSnapshot.getChildren()) {
                     Member member = familyMembers.getValue(Member.class);
                     id = member.getID();
-                    Log.i(TAG, "The value of id before getmember is " + id);
-                    Log.i(TAG, "The value of choreId before getmember is " + userId);
                     if (userId.equals(id)) {
                         getMember(member);
                         break;
@@ -131,12 +140,10 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     }
 
 
-
     private void getChore(Housechore chore) {
 
         //TODO get assignedBy
         //assignedBy = chore.getAssignedBy();
-        Log.i(TAG, "getchore is being called");
         housechoreName = chore.getHousechoreName();
         assignedTo = chore.getAssignedTo();
         dueDate = chore.getDueDate();
@@ -146,17 +153,17 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         reward = chore.getReward();
         note = chore.getNote();
         String debug = chore.toString();
-        Log.v(TAG, "*****************getChore called, chore val  = " +debug);
 
     }
 
     @Override
     public void onClick(View view) {
+        switch (view.getId()) {
+        }
 
     }
 
     private void getMember(Member member) {
-        Log.i(TAG, "getmember is being called");
         userName = member.getfamilyMemberName();
         userRole = member.getUserRole();
         setView();
@@ -165,13 +172,42 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     private void setView() {
         if (userRole.equals("Adult")) {
             setContentView(R.layout.adult_update_housechore);
+            Button buttonAssignTo = (Button) findViewById(R.id.buttonAssignTo);
+            Button buttonEdit = (Button) findViewById(R.id.buttonEdit);
+            Button buttonDelete = (Button) findViewById(R.id.buttonDelete);
+            buttonDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showAdultConfirmDeleteDialog();
+                }
+            });
+            buttonAssignTo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showAdultConfirmAssignToDialog();
+                }
+            });
+            buttonEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showAdultConfirmUpdateDialog();
+                }
+            });
         } else {
             setContentView(R.layout.child_update_housechore);
 
-            if (!(assignedTo.equals(""))) {
-                Log.v(TAG, "assignedTo = "+assignedTo);
+            if (!(assignedTo.equals("Unassigned"))) {
+                Log.v(TAG, "assignedTo = " + assignedTo);
                 LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
                 buttonLinearLayout.setVisibility(View.GONE);
+            } else {
+                Button buttonAssign = (Button) findViewById(R.id.buttonAssignToMe);
+                buttonAssign.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        showChildConfirmDialog(choreID, userName);
+                    }
+                });
             }
         }
 
@@ -187,7 +223,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         textViewChoreName.setText(housechoreName);
         textViewAssignee.setText(assignedTo);
         textViewCategory.setText(category);
-        textViewDueDate.setText(getDate(dueDate,"MM/dd/yyyy"));
+        textViewDueDate.setText(getDate(dueDate, "MM/dd/yyyy"));
         textViewStatus.setText(statusCompleted);
         textViewPriority.setText(priority);
         textViewReward.setText(String.valueOf(reward));
@@ -202,5 +238,206 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(milliSeconds);
         return formatter.format(calendar.getTime());
+    }
+
+    private void showChildConfirmDialog(final String id, final String assignTo) {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.child_confirm_chore, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Accept Chore");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+
+        TextView description = (TextView)dialogView.findViewById(R.id.descriptionConfirm);
+        TextView descriptionNote = (TextView)dialogView.findViewById(R.id.notesConfirm);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.childCancel);
+        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.childAccept);
+
+        description.setText(getString(R.string.accept_description, housechoreName));
+        descriptionNote.setText(getString(R.string.note_description, note));
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
+
+        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("assignedTo");
+                dR.setValue(assignTo);
+                Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned Chore to " + assignTo, Toast.LENGTH_LONG).show();
+                LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
+                buttonLinearLayout.setVisibility(View.GONE);
+                b.dismiss();
+            }
+        });
+    }
+
+    private void showAdultConfirmDeleteDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.adult_delete_confirm, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Delete Chore");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.deleteButton);
+        TextView description = (TextView)dialogView.findViewById(R.id.descriptionConfirm);
+
+        description.setText(getString(R.string.confirm_delete, housechoreName));
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
+
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteHousechore(choreID);
+                b.dismiss();
+                finish();
+            }
+        });
+    }
+
+    private void showAdultConfirmAssignToDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.adult_assignto_confirm, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Assign Chore");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonAssign = (Button) dialogView.findViewById(R.id.assignButton);
+
+        DatabaseReference databaseMembers;
+        databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<String> users = new ArrayList<String>();
+                users.add("Unassigned");
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Member member = snapshot.getValue(Member.class);
+                    String userName = member.getfamilyMemberName();
+                    users.add(userName);
+
+                }
+
+                Spinner userSpinner = (Spinner)dialogView.findViewById(R.id.assignto_spinner);
+                ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(UpdateChoreActivity.this, android.R.layout.simple_spinner_item, users);
+                usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                userSpinner.setAdapter(usersAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
+
+        buttonAssign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.assignto_spinner);
+                assignHousechore(choreID, userSpinner.getSelectedItem().toString());
+                b.dismiss();
+                finish();
+            }
+        });
+    }
+
+    private void showAdultConfirmUpdateDialog() {
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.update_housechore_confirm, null);
+        dialogBuilder.setView(dialogView);
+
+        dialogBuilder.setTitle("Update Chore");
+        final AlertDialog b = dialogBuilder.create();
+        b.show();
+
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.updateButton);
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b.dismiss();
+            }
+        });
+
+        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EditText editHousechoreName = (EditText) dialogView.findViewById(R.id.edit_chore_name);
+                EditText editChoredueDate = (EditText) dialogView.findViewById(R.id.edit_dueDate);
+                EditText editNote = (EditText) dialogView.findViewById(R.id.edit_note);
+                Spinner editChorePriority = (Spinner) dialogView.findViewById(R.id.edit_priority);
+                Spinner editChoreCategory = (Spinner) dialogView.findViewById(R.id.edit_category);
+                Spinner editChoreRewards = (Spinner) dialogView.findViewById(R.id.edit_rewards);
+                final String dateString = editChoredueDate.getText().toString();
+                final String stringHousechore = editHousechoreName.getText().toString();
+                final String stringPriority = editChorePriority.getSelectedItem().toString();
+                final String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
+                final String stringNote = editNote.getText().toString();
+                final int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
+
+
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                Date convertedDate = new Date();
+                try {
+                    convertedDate = dateFormat.parse(dateString);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                final long timestampDate = convertedDate.getTime();
+                updateHousechore(choreID, stringHousechore, timestampDate, stringPriority, stringChoreCategory, intRewards, stringNote);
+                b.dismiss();
+                finish();
+            }
+        });
+    }
+
+    private void updateHousechore(String id, String stringHousechore, Long timestampDate, String stringPriority, String stringChoreCategory, int intRewards, String stringNote) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
+        Housechore housechore = new Housechore(id, stringHousechore, assignedTo, "N/A", timestampDate, stringPriority, stringChoreCategory, statusCompleted, intRewards, stringNote);
+        dR.setValue(housechore);
+        Toast.makeText(getApplicationContext(), "Housechore Updated", Toast.LENGTH_LONG).show();
+    }
+
+    private boolean assignHousechore(String id, String assignTo) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("assignedTo");
+        dR.setValue(assignTo);
+        Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned Chore to " + assignTo, Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    private boolean deleteHousechore(String id) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
+        dR.removeValue();
+        Toast.makeText(getApplicationContext(), "Housechore Deleted", Toast.LENGTH_LONG).show();
+        return true;
     }
 }
