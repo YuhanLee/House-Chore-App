@@ -16,12 +16,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,15 +45,30 @@ public class OpenChore extends Fragment {
     private static final String TAG = "OpenChore";
     ListView listViewHousechores;
     ListView listView;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
+    String userId;
+    String currentUserName;
 
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Chores");
+        Switch onOffSwitch = (Switch)getView().findViewById(R.id.switch1);
         listViewHousechores = (ListView) getView().findViewById(R.id.housechore_list);
 
         displayAllChores();
+
+        //get User context
+        firebaseAuth = FirebaseAuth.getInstance();
+        if (firebaseAuth.getCurrentUser() == null) {
+            getActivity().finish();
+            startActivity(new Intent(getActivity(), SignInActivity.class));
+        } else {
+            firebaseUser = firebaseAuth.getCurrentUser();
+            userId = firebaseUser.getUid();
+        }
 
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
@@ -61,6 +80,9 @@ public class OpenChore extends Fragment {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
                     String userName = member.getfamilyMemberName();
+                    if (member.getID().equals(userId)) {
+                        currentUserName = member.getfamilyMemberName();
+                    }
                     users.add(userName);
 
                 }
@@ -190,6 +212,17 @@ public class OpenChore extends Fragment {
             }
         });
 
+        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
+                if (isChecked) {
+                    userSpinner.setSelection(getIndex(userSpinner, currentUserName));
+                } else {
+                    userSpinner.setSelection(0);
+                }
+            }
+        });
+
     }
 
 
@@ -303,5 +336,16 @@ public class OpenChore extends Fragment {
                 b.dismiss();
             }
         });
+    }
+
+    private int getIndex(Spinner spinner, String myString) {
+        int index = 0;
+        for (int i = 0; i < spinner.getCount() ; i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                index = i;
+                break;
+            }
+        }
+        return index;
     }
 }

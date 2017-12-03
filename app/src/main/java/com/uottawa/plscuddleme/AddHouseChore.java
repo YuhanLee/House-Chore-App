@@ -4,6 +4,7 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/19/2017.
  */
 
+import android.nfc.Tag;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,7 +39,8 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
     private static final String TAG = "AddHouseChore";
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
-    EditText editChoreAssignedTo;
+    Spinner editChoreAssignedTo;
+//    EditText editChoreAssignedTo;
     EditText editChoredueDate;
     Spinner editChorePriority;
     Spinner editChoreCategory;
@@ -60,7 +63,8 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
 
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
         editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
-        editChoreAssignedTo = (EditText) findViewById(R.id.enter_assignee);
+        editChoreAssignedTo = (Spinner) findViewById(R.id.enter_assignee);
+//        editChoreAssignedTo = (EditText) findViewById(R.id.enter_assignee);
         editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
         editChorePriority = (Spinner) findViewById(R.id.enter_priority);
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
@@ -73,6 +77,31 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
         housechores = new ArrayList<>();
 
         buttonAddChore.setOnClickListener(this);
+
+        DatabaseReference databaseMembers;
+        databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                final List<String> users = new ArrayList<String>();
+                users.add("Unassigned");
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Member member = snapshot.getValue(Member.class);
+                    String userName = member.getfamilyMemberName();
+                    Log.i(TAG, userName);
+                    users.add(userName);
+
+                }
+                Spinner userSpinner = (Spinner)findViewById(R.id.enter_assignee);
+                ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChore.this, android.R.layout.simple_spinner_item, users);
+                usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                userSpinner.setAdapter(usersAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
     }
 
@@ -109,7 +138,7 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
         String stringHousechore = editHousechoreName.getText().toString();
-        String stringAssignedTo = editChoreAssignedTo.getText().toString();
+        String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
         String stringPriority = editChorePriority.getSelectedItem().toString();
         String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
         String stringNote = editNote.getText().toString();
@@ -136,7 +165,7 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
             String id = databaseProducts.push().getKey();
             Log.i(TAG, id);
             String stringHousechore = editHousechoreName.getText().toString();
-            String stringAssignedTo = editChoreAssignedTo.getText().toString();
+            String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
             String dateString = editChoredueDate.getText().toString();
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             Date convertedDate = new Date();
@@ -157,9 +186,12 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
 
             databaseProducts.child(id).setValue(housechore);
             editHousechoreName.setText("");
-            editChoreAssignedTo.setText("");
+            editChoreAssignedTo.setSelection(0);
             editChoredueDate.setText("");
             editNote.setText("");
+            editChoreCategory.setSelection(0);
+            editChorePriority.setSelection(0);
+            editChoreRewards.setSelection(0);
             Toast.makeText(this, "Housechore Added", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(this, "Please enter a Housechore name", Toast.LENGTH_LONG).show();
