@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -165,6 +167,12 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
             setContentView(R.layout.adult_update_housechore);
         } else {
             setContentView(R.layout.child_update_housechore);
+
+            if (!(assignedTo.equals(""))) {
+                Log.v(TAG, "assignedTo = "+assignedTo);
+                LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
+                buttonLinearLayout.setVisibility(View.GONE);
+            }
         }
 
         textViewChoreName = (TextView) findViewById(R.id.textViewChoreName);

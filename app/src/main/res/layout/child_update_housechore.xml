@@ -14,14 +14,13 @@
         <LinearLayout
             android:id="@+id/choreTitle"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="100dp"
             android:background="@drawable/high_priority_background"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_height="80dp"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/wash_dog" />
 
@@ -29,8 +28,7 @@
                 android:id="@+id/textViewChoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/wash_coco"
                 android:textColor="#fff"
                 android:textSize="21sp"
@@ -120,7 +118,7 @@
                         android:paddingTop="10dp"
                         android:text="2017/11/20"
                         android:textColor="@color/card_text"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -154,99 +152,124 @@
 
         </android.support.v7.widget.CardView>
 
+
         <LinearLayout
             android:id="@+id/otherInfo"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/chore_info"
-            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/chore_info"
             android:orientation="vertical"
-            android:weightSum="3">
+            android:weightSum="3" >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp">
 
-                <ImageView
-                    android:id="@+id/imageViewPriority"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/schedule_icon" />
-
-                <TextView
-                    android:id="@+id/textViewPriority"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/imageViewPriority"
-                    android:text="High Priority"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginBottom="10dp"
+                    android:textAlignment="center">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp" >
+                    <ImageView
+                        android:id="@+id/imageViewPriority"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@drawable/schedule_icon" />
 
-                <ImageView
-                    android:id="@+id/imageViewReward"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/reward_icon" />
+                    <TextView
+                        android:id="@+id/textViewPriority"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High Priority"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/textViewReward"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/imageViewPriority"
-                    android:text="5 Points"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:layout_marginLeft="110dp"
+                    android:layout_marginBottom="10dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp" >
+                    <ImageView
+                        android:id="@+id/imageViewReward"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="50dp"
+                        android:src="@drawable/reward_icon" />
 
-                <ImageView
-                    android:id="@+id/imageViewNotes"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/note_icon" />
+                    <TextView
+                        android:id="@+id/textViewReward"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5 Points"
+                        android:textSize="15sp" />
+                </LinearLayout>
 
-
-                <TextView
-                    android:id="@+id/textViewNotes"
-                    android:layout_width="250dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignBaseline="@id/imageViewPriority"
-                    android:text="Dry Coco too!"
-                    android:textSize="20sp" />
-            </LinearLayout>
+                    android:layout_marginLeft="110dp" >
+
+                    <ImageView
+                        android:id="@+id/imageViewNotes"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginEnd="8dp"
+                        android:src="@drawable/note_icon" />
+
+
+                    <TextView
+                        android:id="@+id/textViewNotes"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:text="Dry Coco too!"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/choreResources"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:layout_below="@id/otherInfo">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Resources" />
+
+            <ListView
+                android:id="@+id/listViewResources"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" />
+
+        </LinearLayout>
+
+        <!--above end of otherinfo layout-->
+
+        <LinearLayout
+            android:id="@+id/layoutAssignToMe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/otherInfo"
+            android:layout_below="@+id/choreResources"
             android:layout_centerHorizontal="true"
             android:weightSum="1">
 
             <Button
-                android:id="@+id/buttonDelete"
+                android:id="@+id/buttonAssignToMe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Assign to me" />
+
         </LinearLayout>
 
     </RelativeLayout>
