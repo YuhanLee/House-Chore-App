@@ -13,9 +13,9 @@
             android:icon="@drawable/assignment_icon"
             android:title="Chores" />
         <item
-            android:id="@+id/nav_shoppingList"
+            android:id="@+id/nav_resources"
             android:icon="@drawable/shoppinglist_icon"
-            android:title="@string/shopping_list" />
+            android:title="@string/resources" />
         <item
             android:id="@+id/nav_schedule"
             android:icon="@drawable/schedule_icon"

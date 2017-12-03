@@ -4,22 +4,17 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/19/2017.
  */
 
-import android.nfc.Tag;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -32,11 +27,9 @@ import java.util.List;
 
 import com.google.firebase.database.*;
 
-import android.util.Log;
 
-
-public class AddHouseChore extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "AddHouseChore";
+public class AddHouseChoreActivity extends AppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "AddHouseChoreActivity";
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
     Spinner editChoreAssignedTo;
@@ -90,7 +83,7 @@ public class AddHouseChore extends AppCompatActivity implements View.OnClickList
 
                 }
                 Spinner userSpinner = (Spinner)findViewById(R.id.enter_assignee);
-                ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChore.this, android.R.layout.simple_spinner_item, users);
+                ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
             }

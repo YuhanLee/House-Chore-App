@@ -100,7 +100,7 @@ public class AddFamilyMember extends AppCompatActivity implements View.OnClickLi
     }
 
     private void openDrawer() {
-        Intent gotoDrawer = new Intent (this, drawer.class);
+        Intent gotoDrawer = new Intent (this, DrawerActivity.class);
         startActivity(gotoDrawer);
     }
 }

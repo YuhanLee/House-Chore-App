@@ -41,10 +41,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
  * Created by Yuhan on 11/19/2017.
  */
 
-public class OpenChore extends Fragment {
-    private static final String TAG = "OpenChore";
+public class Chore extends Fragment {
+    private static final String TAG = "Chore";
     ListView listViewHousechores;
-    ListView listView;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
     ChoreCustomAdapter adapter;

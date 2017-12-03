@@ -19,11 +19,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".drawer"
+            android:name=".DrawerActivity"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ItemList" />
-        <activity android:name=".AddHouseChore" />
+        <activity android:name=".AddHouseChoreActivity" />
         <activity android:name=".AddFamilyMember" />
         <activity android:name=".SignInActivity" />
         <activity android:name=".UpdateChoreActivity"></activity>

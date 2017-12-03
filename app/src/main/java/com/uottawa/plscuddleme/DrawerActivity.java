@@ -6,8 +6,6 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -31,10 +29,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
-
-public class drawer extends AppCompatActivity
+public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     TextView textViewWelcome;
     TextView logoutText;
@@ -95,7 +91,7 @@ public class drawer extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toy1 = new Intent(drawer.this, AddHouseChore.class);
+                Intent toy1 = new Intent(DrawerActivity.this, AddHouseChoreActivity.class);
                 startActivity(toy1);
             }
         });
@@ -215,11 +211,11 @@ public class drawer extends AppCompatActivity
                 setDrawerLayoutGone();
                 break;
             case R.id.nav_chores:
-                fragment = new OpenChore();
+                fragment = new Chore();
                 setDrawerLayoutGone();
                 break;
-            case R.id.nav_shoppingList:
-                fragment = new ShoppingList();
+            case R.id.nav_resources:
+                fragment = new Resources();
                 setDrawerLayoutGone();
                 break;
             case R.id.nav_schedule:
