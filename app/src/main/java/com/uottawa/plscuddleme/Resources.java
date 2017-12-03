@@ -49,9 +49,12 @@ public class Resources extends Fragment implements View.OnClickListener{
         switch (view.getId()) {
 
             case R.id.buttonAddResource:
-                buttonSave();
+                addResource();
                 break;
         }
+
+    }
+    private void addResource() {
 
     }
 }

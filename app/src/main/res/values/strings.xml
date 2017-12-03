@@ -98,7 +98,7 @@
     <string-array name="category_array">
         <item> Groceries </item>
         <item> Kitchen </item>
-        <item> Washing </item>
+        <item> Washing </item>1
         <item> Pet </item>
         <item> Others </item>
     </string-array>
