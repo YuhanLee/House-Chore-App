@@ -4,6 +4,7 @@ package com.uottawa.plscuddleme;
  * Created by Yuhan on 11/19/2017.
  */
 
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.google.firebase.database.*;
 
@@ -39,6 +42,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     Spinner editChoreRewards;
     EditText editNote;
     ImageView imageChore;
+    Calendar myCalendar;
 
     Button buttonAddChore;
 
@@ -90,6 +94,29 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+        myCalendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        editChoredueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AddHouseChoreActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+
             }
         });
 
@@ -174,6 +201,12 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
                 addHousechore();
                 break;
         }
+    }
+
+    private void updateLabel() {
+        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        editChoredueDate.setText(sdf.format(myCalendar.getTime()));
     }
 
 }

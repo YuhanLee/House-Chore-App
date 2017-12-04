@@ -27,6 +27,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_below="@id/edit_chore_name"
+        android:clickable="true"
         android:inputType="date"
         android:hint="@string/edit_due_date" />
 
