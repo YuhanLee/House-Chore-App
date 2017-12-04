@@ -49,8 +49,6 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     List<Housechore> housechores;
 
 
-    //TODO: assignedBy and statusCompleted values have to be set as user and false at the beginning
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
