@@ -82,8 +82,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
             userId = firebaseUser.getUid();
         }
 
-        //TODO find user.Role for setting view
-
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {

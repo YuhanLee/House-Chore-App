@@ -5,25 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_centerInParent="true"
-    android:paddingLeft="10dp"
+    android:paddingStart="10dp"
     android:paddingTop="10dp"
     tools:context="com.uottawa.plscuddleme.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:orientation="vertical">
 
 
         <ImageView
             android:id="@+id/avatarPic"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
             android:src="@drawable/coco_photogen" />
 
         <TextView
@@ -32,27 +31,26 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Welcome"
+            android:text="@string/Welcome"
             android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <EditText
             android:id="@+id/userNickName"
-            android:hint="@string/enter_nick_name"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:ems="10"
+            android:hint="@string/enter_nick_name"
             android:textAlignment="center" />
-
 
 
         <Spinner
             android:id="@+id/memberRole"
-            android:layout_height="wrap_content"
             android:layout_width="200dp"
-            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:entries="@array/userRole_array"
             android:textAlignment="center" />
 
@@ -60,16 +58,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Pick a role"/>
+            android:text="@string/pick_a_role" />
 
         <Button
             android:id="@+id/buttonSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:text="@string/save_information" />
-
 
 
     </LinearLayout>

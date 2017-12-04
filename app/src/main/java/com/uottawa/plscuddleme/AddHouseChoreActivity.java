@@ -58,7 +58,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
 
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
         editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
-        editChoreAssignedTo = (Spinner) findViewById(R.id.enter_assignee);
+        editChoreAssignedTo = (Spinner) findViewById(R.id.spinnerAssignee);
         editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
         editChorePriority = (Spinner) findViewById(R.id.enter_priority);
         editChoreCategory = (Spinner) findViewById(R.id.enter_category);
@@ -67,9 +67,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         imageChore = (ImageView) findViewById(R.id.imageViewChore);
 
         buttonAddChore = (Button) findViewById(R.id.addButton);
-
         housechores = new ArrayList<>();
-
         buttonAddChore.setOnClickListener(this);
 
         DatabaseReference databaseMembers;
@@ -86,7 +84,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
                     users.add(userName);
 
                 }
-                Spinner userSpinner = (Spinner)findViewById(R.id.enter_assignee);
+                Spinner userSpinner = (Spinner)findViewById(R.id.spinnerAssignee);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);

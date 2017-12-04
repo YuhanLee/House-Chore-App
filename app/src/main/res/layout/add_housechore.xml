@@ -21,7 +21,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:textAlignment="center"
         android:hint="@string/enter_chore_name" />
     <Spinner
-        android:id="@+id/enter_assignee"
+        android:id="@+id/spinnerAssignee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

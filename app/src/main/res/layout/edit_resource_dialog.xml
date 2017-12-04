@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="@string/title_add_resource"
+            android:text="@string/title_edit_resource"
             android:textAppearance="@style/TextAppearance.AppCompat" />
 
         <ImageView
@@ -23,17 +23,17 @@
             android:layout_height="90dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/minion_broom" />
+            android:src="@drawable/broom" />
 
         <EditText
             android:id="@+id/editTextResourceName"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_horizontal"
-            android:hint="@string/enter_resource_name" />
+            android:hint="@string/edit_resource_name" />
 
         <Spinner
-            android:id="@+id/spinnerAssignedChore"
+            android:id="@+id/spinnerNewAllocatedChore"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginBottom="10dp">
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:text="@string/assign_it_to_a_chore"
+            android:text="@string/allocate_to_another_chore"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/add" />
+            android:text="@string/confirm" />
     </LinearLayout>
 
 </RelativeLayout>

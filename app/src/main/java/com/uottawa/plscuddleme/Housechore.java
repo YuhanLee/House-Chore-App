@@ -18,7 +18,9 @@ public class Housechore {
     private String statusCompleted;
     private int reward;
     private String note;
-    private List resources;
+
+    //TODO List of resources
+    private List[] resources;
 
 
     public Housechore() {
@@ -125,6 +127,13 @@ public class Housechore {
     public String getNote() {
         return note;
     }
+
+
+    public List getListOfResources () {
+        return resources[];
+    }
+    
+
 
     @Override
     public String toString() {

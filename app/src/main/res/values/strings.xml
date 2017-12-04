@@ -119,6 +119,13 @@
     <string name="resources">Resources</string>
     <string name="Welcome">welcome</string>
     <string name="enter_resource_name">Enter Resource Name</string>
+    <string name="pick_a_role">Pick a role</string>
+    <string name="assign_it_to_a_chore">Assign it to a chore</string>
+    <string name="title_add_resource">I\'ve heard you wanted to add a resource?</string>
+    <string name="title_edit_resource">You wanted to edit this resource?</string>
+    <string name="edit_resource_name">Edit Resource Name</string>
+    <string name="allocate_to_another_chore">Allocate to another chore</string>
+    <string name="confirm">Confirm</string>
 
 
 </resources>

@@ -5,17 +5,15 @@ package com.uottawa.plscuddleme;
  */
 
 public class Resource {
-    private int id;
+    private String id;
     private String resourceName;
     private Housechore housechore;
-    private String note;
 
 
-    public Resource(int id, String name, Housechore housechore, String note) {
+    public Resource(String id, String name, Housechore housechore) {
         this.id = id;
         this.resourceName = name;
         this.housechore = housechore;
-        this.note = note;
     }
 
     public String getResourceName() {
@@ -27,11 +25,11 @@ public class Resource {
     }
 
 
-    public void setID(int id) {
+    public void setID(String id) {
         this.id = id;
     }
 
-    public int getID() {
+    public String getID() {
         return id;
     }
 
@@ -43,13 +41,6 @@ public class Resource {
         this.housechore = chore;
     }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
-
-    public String getNote() {
-        return note;
-    }
 
 
 }
