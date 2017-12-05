@@ -187,6 +187,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             editChorePriority.setSelection(0);
             editChoreRewards.setSelection(0);
             Toast.makeText(this, "Housechore Added", Toast.LENGTH_LONG).show();
+
         }
     }
 

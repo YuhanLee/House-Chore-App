@@ -49,7 +49,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
                     android:text="Name: "
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
 
                 <TextView
@@ -59,7 +59,7 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
                     android:text="User Role: "
-                    android:textSize="20sp" />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
