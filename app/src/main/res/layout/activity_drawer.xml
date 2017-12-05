@@ -33,20 +33,45 @@
             android:id="@+id/imageViewMinionWelcome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/textViewWelcome"
-            android:src="@drawable/uh"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/uh" />
 
         <TextView
+            android:id="@+id/textViewSaveTheWorld"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageViewMinionWelcome"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="Let's save the world"
+            android:text="@string/drawer_caption"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+
+        <TextView
+            android:id="@+id/textViewDrawerDescription"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewSaveTheWorld"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/drawer_intro_text" />
+
+
+        <TextView
+            android:id="@+id/textViewButtonExplanation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDrawerDescription"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:text="This button lets you add a chore anytime" />
+
+
     </RelativeLayout>
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"

@@ -62,10 +62,10 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         dialogView = inflater.inflate(R.layout.add_resource_dialog, null);
 
-        choreSpinner = (Spinner)getView().findViewById(R.id.spinnerAssignedChore);
+        choreSpinner = (Spinner) getView().findViewById(R.id.spinnerAssignedChore);
         buttonAddNewResource.setOnClickListener(this);
 
-        listViewResources.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+        listViewResources.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
                 final int selectedRow = i;
@@ -91,7 +91,6 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
             }
         });
     }
-
 
 
     @Nullable
@@ -172,7 +171,6 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
     }
 
     private void showEditResourceDialog(final String id) {
-        //TODO Update Resource
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

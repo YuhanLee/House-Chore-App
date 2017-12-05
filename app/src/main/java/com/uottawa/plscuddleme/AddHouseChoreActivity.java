@@ -7,11 +7,8 @@ package com.uottawa.plscuddleme;
 import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -32,7 +29,6 @@ import com.google.firebase.database.*;
 
 
 public class AddHouseChoreActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = "AddHouseChoreActivity";
     private DatabaseReference databaseHousechores;
     EditText editHousechoreName;
     Spinner editChoreAssignedTo;
@@ -43,12 +39,13 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     EditText editNote;
     ImageView imageChore;
     Calendar myCalendar;
-
     Button buttonAddChore;
-
     List<Housechore> housechores;
 
-
+    /**
+     * function gets all referencces from the view add_housechore
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +65,8 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         housechores = new ArrayList<>();
         buttonAddChore.setOnClickListener(this);
 
+
+        //Gets all the familyMembers in the database
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
         databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -78,11 +77,12 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
                     String userName = member.getfamilyMemberName();
-                    Log.i(TAG, userName);
                     users.add(userName);
 
                 }
-                Spinner userSpinner = (Spinner)findViewById(R.id.spinnerAssignee);
+
+                //This populates the assignee spinner of the layout with the current familyMembers
+                Spinner userSpinner = (Spinner) findViewById(R.id.spinnerAssignee);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
@@ -93,8 +93,9 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             }
         });
 
+        //Allows user to tap again the date field and pick a date from a calendar view
+        //This makes sure that the user does not pick a due date in the past
         myCalendar = Calendar.getInstance();
-
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -138,17 +139,32 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         });
     }
 
+    /**
+     * Method adds a housechore in the database directly after checking whether the required fields are entered
+     * If not, a toast will be displayed and the function execution is stopped
+     */
     private void addHousechore() {
-        Log.i(TAG, "addHousechore Called");
         DatabaseReference databaseChore;
         databaseChore = FirebaseDatabase.getInstance().getReference("housechores");
         String name = editHousechoreName.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "Chore Name cannot be empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(editChoredueDate.getText().toString())) {
+            Toast.makeText(this, "Chore has to have a due date", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if (!TextUtils.isEmpty(name)) {
             String id = databaseChore.push().getKey();
-            Log.i(TAG, id);
             String stringHousechore = editHousechoreName.getText().toString();
             String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
             String dateString = editChoredueDate.getText().toString();
+
+            //converting the date to a format
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             Date convertedDate = new Date();
             try {
@@ -160,11 +176,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
             String stringNote = editNote.getText().toString();
             int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-            Log.i(TAG, getDate(convertedDate.getTime(), "dd/MM/yyyy"));
             Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote);
-            Log.i(TAG, housechore.getHousechoreName());
-            Log.i(TAG, housechore.getNote());
-            Log.i(TAG, housechore.getCategory());
 
             databaseChore.child(id).setValue(housechore);
             editHousechoreName.setText("");
@@ -175,19 +187,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             editChorePriority.setSelection(0);
             editChoreRewards.setSelection(0);
             Toast.makeText(this, "Housechore Added", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Please enter a Housechore name", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public static String getDate(long milliSeconds, String dateFormat) {
-        // Create a DateFormatter object for displaying date in specified format.
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat);
-
-        // Create a calendar object that will convert the date and time value in milliseconds to date.
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        return formatter.format(calendar.getTime());
     }
 
     @Override
@@ -199,6 +199,9 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         }
     }
 
+    /**
+     * sets the editChoreDaate to a certain time after user selects a date
+     */
     private void updateLabel() {
         String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);

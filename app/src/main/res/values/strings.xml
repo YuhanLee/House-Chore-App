@@ -115,7 +115,6 @@
         <item> Child </item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="resources">Resources</string>
     <string name="Welcome">welcome</string>
@@ -127,6 +126,10 @@
     <string name="edit_resource_name">Edit Resource Name</string>
     <string name="allocate_to_another_chore">Allocate to another chore</string>
     <string name="confirm">Confirm</string>
+    <string name="drawer_intro_text">Open the drawer on your left allows you to navigate through different parts of the app</string>
+    <string name="drawer_caption">Let\'s save the world</string>
+    <string name="add_family_member_title">I heard you have a new member?</string>
+    <string name="add_new_member">Add New Member</string>
 
 
 </resources>

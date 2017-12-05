@@ -18,27 +18,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-// MANDATORY
-//TODO [x] Can add a chore with name and description
-//TODO [x] Delete chore must update Chore List Page
-//TODO [] Can edit a chore
-//TODO [] Can delete a chore
-//TODO [x] Completing a chore gives points to user who completed
-//TODO [x] Can see the points obtained based on the completion of a chore
-//TODO [x] Can list all chores assigned to a user
-//TODO [x] Can list all chores belonging to a group
-//TODO [x] Can change the status of a chore
-//TODO [] Can assign a chore
-//TODO [] Can deallocate a chore from a user
-//TODO [] Can allocate resources to a chore
-//TODO [] Can deallocate resources from a chore
-//TODO [] Can see the list of all resources needed for all chores belonging to a group
-
-// OPTIONAL
-//TODO [] Handle adding a duplicate chore
-//TODO [] Handle date must be after today when editting and adding
-//TODO []
-
 /**
  * Created by Yuhan on 11/29/2017.
  */
@@ -76,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (firebaseAuth.getCurrentUser() != null) {
             finish();
-            startActivity(new Intent (this, DrawerActivity.class));
+            startActivity(new Intent(this, DrawerActivity.class));
         }
     }
 
@@ -98,30 +77,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
+        //stop function execution if empty fields
         if (TextUtils.isEmpty(email)) {
-            Toast.makeText(this, "Please Enter an Email",Toast.LENGTH_LONG).show();
-            //stop function execution
+            Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Please Enter password ",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Please Enter password ", Toast.LENGTH_LONG).show();
             return;
         }
 
-        //if valid
         progressDialog.setMessage("Registering User. Please wait...");
         progressDialog.show();
 
-        firebaseAuth.createUserWithEmailAndPassword(email,password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                             finish();
                             Intent intent = new Intent(getApplicationContext(), AddFamilyMember.class);
-                            intent.putExtra("RegisteredEmail",email);
+                            intent.putExtra("RegisteredEmail", email);
                             Log.v(TAG, email);
                             startActivity(intent);
                         } else {

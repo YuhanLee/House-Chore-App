@@ -37,8 +37,6 @@ import java.util.Locale;
 
 public class UpdateChoreActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "UpdateChoreActivity";
-    private int row;
-    private String rowClick;
     private String choreID;
 
     //Firebase + User
@@ -72,7 +70,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     EditText editChoredueDate;
     ListView listViewResources;
     Calendar myCalendar;
-
 
 
     @Override
@@ -257,8 +254,8 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         b.show();
 
 
-        TextView description = (TextView)dialogView.findViewById(R.id.descriptionConfirm);
-        TextView descriptionNote = (TextView)dialogView.findViewById(R.id.notesConfirm);
+        TextView description = (TextView) dialogView.findViewById(R.id.descriptionConfirm);
+        TextView descriptionNote = (TextView) dialogView.findViewById(R.id.notesConfirm);
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.childCancel);
         final Button buttonConfirm = (Button) dialogView.findViewById(R.id.childAccept);
 
@@ -297,7 +294,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.deleteButton);
-        TextView description = (TextView)dialogView.findViewById(R.id.descriptionConfirm);
+        TextView description = (TextView) dialogView.findViewById(R.id.descriptionConfirm);
 
         description.setText(getString(R.string.confirm_delete, housechoreName));
         buttonCancel.setOnClickListener(new View.OnClickListener() {
@@ -344,7 +341,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
                 }
 
-                Spinner userSpinner = (Spinner)dialogView.findViewById(R.id.assignto_spinner);
+                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.assignto_spinner);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(UpdateChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
