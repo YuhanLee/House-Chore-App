@@ -17,6 +17,8 @@ public class Resource {
         this.housechore = housechoreId;
     }
 
+    // Getters and Setters
+
     public String getResourceName() {
         return resourceName;
     }
