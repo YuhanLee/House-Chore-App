@@ -63,7 +63,7 @@
             android:text="@string/cancel" />
 
         <Button
-            android:id="@+id/buttonAddResource"
+            android:id="@+id/buttonEditResource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

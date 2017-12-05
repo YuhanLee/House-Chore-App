@@ -18,8 +18,6 @@ public class Housechore {
     private String statusCompleted;
     private int reward;
     private String note;
-
-    //TODO List of resources
     private List[] resources;
 
 
@@ -39,7 +37,7 @@ public class Housechore {
         this.reward = reward;
         this.note = note;
     }
-    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, long dueDate, String priority, String category, String statusCompleted, int reward, String note, List resources) {
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, long dueDate, String priority, String category, String statusCompleted, int reward, String note, List[] resources) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;
@@ -129,8 +127,8 @@ public class Housechore {
     }
 
 
-    public List getListOfResources () {
-        return resources[];
+    public List[] getListOfResources () {
+        return resources;
     }
     
 

@@ -28,7 +28,6 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:textAlignment="center"
         android:layout_below="@id/edit_chore_name"
         android:clickable="true"
-        android:inputType="date"
         android:hint="@string/edit_due_date" />
 
     <EditText
@@ -73,6 +72,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:layout_marginBottom="10dp"/>
 
     <LinearLayout
+        android:id="@+id/buttonLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_rewards"
@@ -92,5 +92,15 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
             android:layout_weight="1"
             android:text="@string/update" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/housechore_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonLayout"
+        android:layout_centerHorizontal="true"
+        android:text="@string/updatehousechore_hint"
+        android:textAlignment="center" />
+
 
 </RelativeLayout>

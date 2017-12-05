@@ -147,7 +147,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
     private void getChore(Housechore chore) {
 
-        //TODO get assignedBy
         //assignedBy = chore.getAssignedBy();
         housechoreName = chore.getHousechoreName();
         assignedTo = chore.getAssignedTo();
@@ -385,6 +384,30 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
         final Button buttonUpdate = (Button) dialogView.findViewById(R.id.updateButton);
 
+        myCalendar = Calendar.getInstance();
+        editChoredueDate = (EditText) dialogView.findViewById(R.id.edit_dueDate);
+
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+        };
+        editChoredueDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateChoreActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH));
+                datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
+                datePickerDialog.show();
+
+            }
+        });
+
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -407,29 +430,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 final String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
                 final String stringNote = editNote.getText().toString();
                 final int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
-
-                myCalendar = Calendar.getInstance();
-
-                final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        myCalendar.set(Calendar.YEAR, year);
-                        myCalendar.set(Calendar.MONTH, monthOfYear);
-                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel();
-                    }
-                };
-                editChoredueDate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateChoreActivity.this, date, myCalendar
-                                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
-                                myCalendar.get(Calendar.DAY_OF_MONTH));
-                        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                        datePickerDialog.show();
-
-                    }
-                });
 
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
