@@ -1,7 +1,6 @@
 package com.uottawa.plscuddleme;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,10 @@ import android.widget.TextView;
  */
 
 
-
 public class FamilyMemberAdapter extends ArrayAdapter {
-
-    private static final String TAG = "Member Adapter";
     private final Context context;
     private final String[] members;
+
     public FamilyMemberAdapter(Context context, String[] famList) {
         super(context, R.layout.family_member_layout, famList);
         this.context = context;
@@ -32,7 +29,6 @@ public class FamilyMemberAdapter extends ArrayAdapter {
         TextView familyNameTextView = (TextView) rowView.findViewById(R.id.family_member_name);
         TextView familyMemberRole = (TextView) rowView.findViewById(R.id.family_member_role);
         ImageView famImage = (ImageView) rowView.findViewById(R.id.family_member_icon);
-        Log.i(TAG, "position = " +position);
         familyNameTextView.setText(members[position]);
         familyMemberRole.setText(members[position] + " is a member!");
         return rowView;

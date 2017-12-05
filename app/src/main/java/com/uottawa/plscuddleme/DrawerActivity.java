@@ -16,7 +16,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -32,12 +31,20 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    //drawer xml views
     TextView textViewWelcome;
-    TextView logoutText;
-    private static final String TAG = "Drawer";
+
+    //nav header textViews
+    TextView textViewUserName;
+    TextView textViewNumberOfChores;
+    TextView textViewRewardPoints;
+
+
+    //firebase references
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
-    private DatabaseReference databaseReference;
+
+    //User context referencess
     String userId;
     String userName;
     String memberEmail;
@@ -52,6 +59,7 @@ public class DrawerActivity extends AppCompatActivity
         setContentView(R.layout.activity_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
+
         setSupportActionBar(toolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -61,7 +69,6 @@ public class DrawerActivity extends AppCompatActivity
         } else {
             firebaseUser = firebaseAuth.getCurrentUser();
             userId = firebaseUser.getUid();
-            Log.i(TAG, "&&&&&&userId = " + userId);
         }
 
         DatabaseReference databaseMembers;
@@ -106,8 +113,14 @@ public class DrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-//        displaySelectedScreen(R.id.nav_openChores);
-}
+
+        View navHeaderView = navigationView.getHeaderView(0);
+        textViewUserName = (TextView) navHeaderView.findViewById(R.id.textViewUserName);
+        textViewNumberOfChores = (TextView) navHeaderView.findViewById(R.id.textViewNumberOfChores);
+        textViewRewardPoints = (TextView) navHeaderView.findViewById(R.id.textViewRewardPoints);
+
+
+    }
 
 
     public void getMember(Member member) {
@@ -117,22 +130,20 @@ public class DrawerActivity extends AppCompatActivity
         userRole = member.getUserRole();
         rewards = member.getRewards();
         memberInfo = member.toString();
-
-        Log.v(TAG,"************************************************");
-        Log.v(TAG, "userName = " + userName);
-        Log.v(TAG, "memberEmail = " + memberEmail);
-        Log.v(TAG, "numberOfAssignedTasks = " + numberOfAssignedTasks);
-        Log.v(TAG, "userRole = " + userRole);
-        Log.v(TAG, "rewards = " + rewards);
-        Log.v(TAG, "memberInfo = " + memberInfo);
-
         setView();
 
     }
 
 
     private void setView() {
-        textViewWelcome.setText("Welcome "+userName);
+        textViewWelcome.setText("Welcome " + userName);
+        textViewUserName.setText("Member Name: " + userName);
+        textViewNumberOfChores.setText("Number of Chores " + numberOfAssignedTasks);
+        textViewRewardPoints.setText("Current Reward Points" + rewards);
+
+        textViewUserName.setText(userName);
+        textViewNumberOfChores.setText("Number of Chores: " + numberOfAssignedTasks);
+        textViewRewardPoints.setText("Reward Points: " + rewards);
     }
 
     @Override
@@ -175,10 +186,10 @@ public class DrawerActivity extends AppCompatActivity
         dialogBuilder.setView(dialogView);
 
         String tmp = "Do you wish to log out?";
-        TextView logoutText = (TextView)dialogView.findViewById(R.id.confirmLogout);
+        TextView logoutText = (TextView) dialogView.findViewById(R.id.confirmLogout);
         logoutText.setText(tmp);
 
-        dialogBuilder.setTitle("Bye Bye "+userName+" :'(");
+        dialogBuilder.setTitle("Bye Bye " + userName + " :'(");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -198,7 +209,7 @@ public class DrawerActivity extends AppCompatActivity
                 firebaseAuth.signOut();
                 b.dismiss();
                 finish();
-                startActivity(new Intent (getApplicationContext(), SignInActivity.class));
+                startActivity(new Intent(getApplicationContext(), SignInActivity.class));
             }
         });
     }
@@ -240,6 +251,9 @@ public class DrawerActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
     }
 
+    /**
+     * function sets the drawer.xml image gone 
+     */
     private void setDrawerLayoutGone() {
         RelativeLayout drawerLayout = (RelativeLayout) findViewById(R.id.drawerInner);
         drawerLayout.setVisibility(View.GONE);

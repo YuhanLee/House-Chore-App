@@ -20,7 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MESSAGE = "com.uottawa.plscuddleme.EMAIL";
-    private static final String TAG = "SigninAct";
 
     private Button buttonSignIn;
     private EditText enterEmail;

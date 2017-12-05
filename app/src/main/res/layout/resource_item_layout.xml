@@ -35,7 +35,7 @@
         android:layout_alignParentEnd="true"
         android:layout_gravity="end"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/cute_pup" />
+        app:srcCompat="@drawable/resource_img" />
 
 </RelativeLayout>
 

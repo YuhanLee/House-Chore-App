@@ -3,13 +3,8 @@ package com.uottawa.plscuddleme;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -42,7 +35,6 @@ import android.widget.AdapterView.OnItemSelectedListener;
  */
 
 public class Chore extends Fragment {
-    private static final String TAG = "Chore";
     ListView listViewHousechores;
     private FirebaseAuth firebaseAuth;
     private FirebaseUser firebaseUser;
@@ -60,8 +52,8 @@ public class Chore extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("Chores");
-        Switch onOffSwitch = (Switch)getView().findViewById(R.id.switch1);
+        getActivity().setTitle("All Chores");
+        Switch onOffSwitch = (Switch) getView().findViewById(R.id.switch1);
         listViewHousechores = (ListView) getView().findViewById(R.id.housechore_list);
 
         displayAllChores();
@@ -76,6 +68,7 @@ public class Chore extends Fragment {
             userId = firebaseUser.getUid();
         }
 
+        //This gets the current user name
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
         databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -218,6 +211,7 @@ public class Chore extends Fragment {
             }
         });
 
+        //If the user select the switch (Show assigned to me) then the userSpinner will call setSelection
         onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
@@ -232,13 +226,17 @@ public class Chore extends Fragment {
     }
 
 
+    /**
+     * Function passes the selected row to Update chore.xml
+     * @param selectedRow the clicked row
+     * @param id id of the chore
+     */
     private void openChore(int selectedRow, String id) {
         Intent intent = new Intent(getContext(), UpdateChoreActivity.class);
         String ROW_NUM = "ROW_CLICKED";
         String CHORE_ID = "CHORE_ID";
         Bundle extras = new Bundle();
 
-        Log.v(TAG, "The ID of the openChore that was clicked on was = " + id);
         String position = String.valueOf(selectedRow);
         extras.putString(ROW_NUM, position);
         extras.putString(CHORE_ID, id);
@@ -252,6 +250,9 @@ public class Chore extends Fragment {
         return inflater.inflate(R.layout.nav_open_chores, container, false);
     }
 
+    /**
+     * Displays all the chrores in firebase. Loops through all the housechore entry.
+     */
     public void displayAllChores() {
         DatabaseReference databaseProducts;
         databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -282,6 +283,13 @@ public class Chore extends Fragment {
         });
     }
 
+    /**
+     * This function shows a confirmComplete dialog at a long item click to ask if the user
+     * wants to change the status of the chore
+     * @param id id of the chore
+     * @param reward reward points of the chore
+     * @param assignedTo Assignee of the chore
+     */
     private void showConfirmCompleteDialog(final String id, final int reward, final String assignedTo) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
@@ -346,8 +354,8 @@ public class Chore extends Fragment {
 
     private int getIndex(Spinner spinner, String myString) {
         int index = 0;
-        for (int i = 0; i < spinner.getCount() ; i++){
-            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)) {
                 index = i;
                 break;
             }

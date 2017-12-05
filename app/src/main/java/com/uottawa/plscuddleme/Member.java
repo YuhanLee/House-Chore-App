@@ -13,8 +13,9 @@ public class Member {
     public int rewards;
 
 
-    public Member() {}
-    
+    public Member() {
+    }
+
     public Member(String id, String memberEmail, String familyMemberName, String userRole, int numberOfAssignedTasks, int rewards) {
         this.id = id;
         this.memberEmail = memberEmail;
@@ -23,7 +24,6 @@ public class Member {
         this.numberOfAssignedTasks = numberOfAssignedTasks;
         this.rewards = rewards;
     }
-
 
 
     public String getID() {
@@ -42,13 +42,14 @@ public class Member {
         this.familyMemberName = familyMemberName;
     }
 
-    public String getMemberEmail () {
+    public String getMemberEmail() {
         return memberEmail;
     }
 
-    public void setEmail (String email) {
-        this.memberEmail= email;
+    public void setEmail(String email) {
+        this.memberEmail = email;
     }
+
     public String getUserRole() {
         return userRole;
     }
@@ -64,6 +65,7 @@ public class Member {
     public void setNumberOfAssignedTasks(int numberOfAssignedTasks) {
         this.numberOfAssignedTasks = numberOfAssignedTasks;
     }
+
     public int getRewards() {
         return rewards;
     }

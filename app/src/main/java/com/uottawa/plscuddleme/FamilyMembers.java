@@ -35,7 +35,7 @@ public class FamilyMembers extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
-                String[] famList = new String[(int)dataSnapshot.getChildrenCount()];
+                String[] famList = new String[(int) dataSnapshot.getChildrenCount()];
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
                     famList[i] = member.getfamilyMemberName();
@@ -43,9 +43,10 @@ public class FamilyMembers extends Fragment {
 
                 }
                 ListView famListView = (ListView) getView().findViewById(R.id.fam_listView);
-                FamilyMemberAdapter famAdapter = new FamilyMemberAdapter(getContext(),famList);
+                FamilyMemberAdapter famAdapter = new FamilyMemberAdapter(getContext(), famList);
                 famListView.setAdapter(famAdapter);
             }
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }

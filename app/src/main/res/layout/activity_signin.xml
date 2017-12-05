@@ -24,7 +24,7 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:src="@drawable/cute_pup" />
+            android:src="@drawable/sign_in_img" />
 
         <EditText
             android:id="@+id/enterEmail"
