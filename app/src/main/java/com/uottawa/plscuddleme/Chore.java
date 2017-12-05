@@ -110,9 +110,9 @@ public class Chore extends Fragment {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
                 final int selectedRow = i;
-                DatabaseReference databaseProducts;
-                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference databaseChores;
+                databaseChores = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
@@ -138,9 +138,9 @@ public class Chore extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 final String selectedSpinner = parentView.getItemAtPosition(position).toString();
-                DatabaseReference databaseProducts;
-                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference databaseChores;
+                databaseChores = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int i = 0;
@@ -192,9 +192,9 @@ public class Chore extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final int selectedRow = i;
-                DatabaseReference databaseProducts;
-                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference databaseChores;
+                databaseChores = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
@@ -253,9 +253,9 @@ public class Chore extends Fragment {
     }
 
     public void displayAllChores() {
-        DatabaseReference databaseProducts;
-        databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-        databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference databaseChores;
+        databaseChores = FirebaseDatabase.getInstance().getReference().child("housechores");
+        databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
@@ -308,9 +308,9 @@ public class Chore extends Fragment {
             public void onClick(View view) {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
                 dR.setValue("Completed");
-                DatabaseReference databaseProducts;
-                databaseProducts = FirebaseDatabase.getInstance().getReference().child("familyMembers");
-                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference databaseChores;
+                databaseChores = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+                databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {

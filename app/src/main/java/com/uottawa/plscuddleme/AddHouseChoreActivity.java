@@ -140,11 +140,11 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
 
     private void addHousechore() {
         Log.i(TAG, "addHousechore Called");
-        DatabaseReference databaseProducts;
-        databaseProducts = FirebaseDatabase.getInstance().getReference("housechores");
+        DatabaseReference databaseChore;
+        databaseChore = FirebaseDatabase.getInstance().getReference("housechores");
         String name = editHousechoreName.getText().toString().trim();
         if (!TextUtils.isEmpty(name)) {
-            String id = databaseProducts.push().getKey();
+            String id = databaseChore.push().getKey();
             Log.i(TAG, id);
             String stringHousechore = editHousechoreName.getText().toString();
             String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
@@ -166,7 +166,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             Log.i(TAG, housechore.getNote());
             Log.i(TAG, housechore.getCategory());
 
-            databaseProducts.child(id).setValue(housechore);
+            databaseChore.child(id).setValue(housechore);
             editHousechoreName.setText("");
             editChoreAssignedTo.setSelection(0);
             editChoredueDate.setText("");
