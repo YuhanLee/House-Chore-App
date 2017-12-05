@@ -38,21 +38,16 @@ import java.util.List;
 public class AddResourcesActivity extends Fragment implements View.OnClickListener {
     private static final String TAG = "AddResourcesActivity";
     ListView listViewResources;
-    private FirebaseAuth firebaseAuth;
-    private FirebaseUser firebaseUser;
     Button buttonAddNewResource;
     Button buttonCancel;
     View dialogView;
     Spinner choreSpinner;
     ArrayAdapter<String> resourcesAdapter;
 
-    EditText editResourceName;
-    Spinner editHousechoreName;
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getActivity().setTitle("AddResourcesActivity");
+        getActivity().setTitle("Resources List");
 
         displayAllResources();
         buttonAddNewResource = (Button) getView().findViewById(R.id.buttonAddResource);

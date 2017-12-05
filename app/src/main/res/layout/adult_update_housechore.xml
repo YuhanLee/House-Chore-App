@@ -15,7 +15,7 @@
             android:id="@+id/choreTitle"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:background="@drawable/high_priority_background"
+            android:background="@drawable/chore_background"
             android:orientation="horizontal">
 
             <ImageView

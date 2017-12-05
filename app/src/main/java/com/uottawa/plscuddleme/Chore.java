@@ -32,6 +32,9 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 /**
  * Created by Yuhan on 11/19/2017.
+ * This method is responsible for listing all the chores and its notes
+ * setting onclick item for update chore
+ *
  */
 
 public class Chore extends Fragment {
@@ -49,6 +52,11 @@ public class Chore extends Fragment {
     }
 
 
+    /**
+     * Method creates the view and displays all the chores in the db
+     * @param view
+     * @param savedInstanceState
+     */
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -85,7 +93,7 @@ public class Chore extends Fragment {
                     users.add(userName);
 
                 }
-
+                //Populates the spinner for filtering in terms of user with Family Members
                 Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

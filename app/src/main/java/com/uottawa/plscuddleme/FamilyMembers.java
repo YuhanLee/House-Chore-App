@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class FamilyMembers extends Fragment {
+    FamilyMemberAdapter adapter;
 
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -29,29 +30,39 @@ public class FamilyMembers extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Family Members");
 
-        DatabaseReference databaseProducts;
-        databaseProducts = FirebaseDatabase.getInstance().getReference().child("familyMembers");
-        databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+        displayAllMembers();
+    }
+
+
+
+    public void displayAllMembers() {
+        DatabaseReference databaseFamilyMembers;
+        databaseFamilyMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        databaseFamilyMembers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
-                String[] famList = new String[(int) dataSnapshot.getChildrenCount()];
+                String[][] familyMemberList = new String[(int) dataSnapshot.getChildrenCount()][];
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
-                    famList[i] = member.getfamilyMemberName();
+                    String[] itemPair = new String[2];
+                    itemPair[0] = member.getfamilyMemberName();
+                    itemPair[1] = member.getUserRole();
+                    familyMemberList[i] = itemPair;
                     i = i + 1;
 
                 }
-                ListView famListView = (ListView) getView().findViewById(R.id.fam_listView);
-                FamilyMemberAdapter famAdapter = new FamilyMemberAdapter(getContext(), famList);
-                famListView.setAdapter(famAdapter);
+                if (familyMemberList != null && familyMemberList.length > 0) {
+                    ListView listView = (ListView) getView().findViewById(R.id.fam_listView);
+                    adapter = new FamilyMemberAdapter(getContext(), familyMemberList);
+                    listView.setAdapter(adapter);
+                }
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
     }
 
 

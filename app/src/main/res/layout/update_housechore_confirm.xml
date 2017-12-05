@@ -12,7 +12,7 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginTop="15dp"
-        android:src="@drawable/face"/>
+        android:src="@drawable/add_chore_img"/>
     <EditText
         android:id="@+id/edit_chore_name"
         android:layout_width="match_parent"

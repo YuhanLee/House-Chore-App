@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:adjustViewBounds="true"
-        app:srcCompat="@drawable/headache" />
+        app:srcCompat="@drawable/family_member_icon" />
 
     <LinearLayout
         android:layout_width="match_parent"

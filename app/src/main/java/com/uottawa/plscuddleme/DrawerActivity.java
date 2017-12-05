@@ -57,6 +57,7 @@ public class DrawerActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer);
+        setTitle("Welcome");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         textViewWelcome = (TextView) findViewById(R.id.textViewWelcome);
 
@@ -214,6 +215,10 @@ public class DrawerActivity extends AppCompatActivity
         });
     }
 
+    /**
+     * This function gets the onClick navID and gets the fragment, sets the drawer view gone
+     * @param navId
+     */
     private void displaySelectedScreen(int navId) {
         Fragment fragment = null;
         switch (navId) {
@@ -252,7 +257,7 @@ public class DrawerActivity extends AppCompatActivity
     }
 
     /**
-     * function sets the drawer.xml image gone 
+     * function sets the drawer.xml image gone
      */
     private void setDrawerLayoutGone() {
         RelativeLayout drawerLayout = (RelativeLayout) findViewById(R.id.drawerInner);
