@@ -70,7 +70,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     TextView textViewNotes;
 
     EditText editChoredueDate;
-
+    ListView listViewResources;
     Calendar myCalendar;
 
 
@@ -140,6 +140,8 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
+
+        displayAllResources();
 
 
     }
@@ -473,5 +475,66 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         String myFormat = "MM/dd/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         editChoredueDate.setText(sdf.format(myCalendar.getTime()));
+    }
+
+    public void displayAllResources() {
+        DatabaseReference databaseResources;
+        databaseResources = FirebaseDatabase.getInstance().getReference().child("resources");
+        databaseResources.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                int arraySize = 0;
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Resource resource = snapshot.getValue(Resource.class);
+                    if (resource.getHousechore().equals(housechoreName)) {
+                        arraySize = arraySize + 1;
+                    }
+                }
+                String[] resourcesList = new String[arraySize];
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Resource resource = snapshot.getValue(Resource.class);
+                    if (resource.getHousechore().equals(housechoreName)) {
+                        resourcesList[i] = resource.getResourceName();
+                        i = i + 1;
+                    }
+
+                }
+                ListView listView = (ListView) findViewById(R.id.listViewResources);
+                ResourceCustomAdapter adapter = new ResourceCustomAdapter(UpdateChoreActivity.this, resourcesList);
+                listView.setAdapter(adapter);
+                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+                    @Override
+                    public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
+
+                        DatabaseReference databaseResources;
+                        databaseResources = FirebaseDatabase.getInstance().getReference().child("resources");
+                        databaseResources.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                    Resource resource = snapshot.getValue(Resource.class);
+                                    if (resource.getHousechore().equals(housechoreName)) {
+                                        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("resources").child(resource.getID());
+                                        dR.removeValue();
+                                        Toast.makeText(UpdateChoreActivity.this, "Resource Deleted", Toast.LENGTH_LONG).show();
+                                        displayAllResources();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                        return true;
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }
