@@ -36,8 +36,6 @@ public class DrawerActivity extends AppCompatActivity
 
     //nav header textViews
     TextView textViewUserName;
-    TextView textViewNumberOfChores;
-    TextView textViewRewardPoints;
 
 
     //firebase references
@@ -115,12 +113,9 @@ public class DrawerActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+        //Sets the drawer header view on the left
         View navHeaderView = navigationView.getHeaderView(0);
         textViewUserName = (TextView) navHeaderView.findViewById(R.id.textViewUserName);
-        textViewNumberOfChores = (TextView) navHeaderView.findViewById(R.id.textViewNumberOfChores);
-        textViewRewardPoints = (TextView) navHeaderView.findViewById(R.id.textViewRewardPoints);
-
-
     }
 
 
@@ -139,12 +134,7 @@ public class DrawerActivity extends AppCompatActivity
     private void setView() {
         textViewWelcome.setText("Welcome " + userName);
         textViewUserName.setText("Member Name: " + userName);
-        textViewNumberOfChores.setText("Number of Chores " + numberOfAssignedTasks);
-        textViewRewardPoints.setText("Current Reward Points" + rewards);
-
         textViewUserName.setText(userName);
-        textViewNumberOfChores.setText("Number of Chores: " + numberOfAssignedTasks);
-        textViewRewardPoints.setText("Reward Points: " + rewards);
     }
 
     @Override

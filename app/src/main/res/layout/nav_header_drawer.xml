@@ -27,15 +27,5 @@
         android:text="@string/user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <TextView
-        android:id="@+id/textViewNumberOfChores"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/number_of_open_chores" />
-    <TextView
-        android:id="@+id/textViewRewardPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Reward Points ="/>
 
 </LinearLayout>
