@@ -130,6 +130,11 @@
     <string name="drawer_caption">Let\'s save the world</string>
     <string name="add_family_member_title">I heard you have a new member?</string>
     <string name="add_new_member">Add New Member</string>
+    <string name="profile_disp_userName">User Name:</string>
+    <string name="profile_disp_userRole">Role:</string>
+    <string name="profile_disp_userEmail">Email:</string>
+    <string name="profile_disp_userChores">Number of Chores:</string>
+    <string name="profile_disp_userRewardPoints">Current reward points:</string>
 
 
 </resources>

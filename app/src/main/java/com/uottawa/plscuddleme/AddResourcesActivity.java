@@ -35,6 +35,9 @@ import java.util.List;
  * Created by Yuhan on 11/19/2017.
  */
 
+/**
+ * This activity displays all the list view of resources
+ */
 public class AddResourcesActivity extends Fragment implements View.OnClickListener {
     private static final String TAG = "AddResourcesActivity";
     ListView listViewResources;
@@ -54,12 +57,15 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         buttonCancel = (Button) getView().findViewById(R.id.buttonCancel);
         listViewResources = (ListView) getView().findViewById(R.id.list_resources);
 
+        //Inflater needed to get an id that does not belong to the current view and populates the
+        //spinner of chores
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         dialogView = inflater.inflate(R.layout.add_resource_dialog, null);
 
         choreSpinner = (Spinner) getView().findViewById(R.id.spinnerAssignedChore);
         buttonAddNewResource.setOnClickListener(this);
 
+        //if long click on the chore item, an update resource dialog will show up
         listViewResources.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
@@ -78,6 +84,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                             counter = counter + 1;
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
@@ -101,11 +108,16 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                 showAddResourceDialog();
                 break;
             case R.id.buttonCancel:
-                openDrawer();
+               displayAllResources();
+               //TODO check if this will break
         }
 
     }
 
+    /**
+     * Function shows add resource dialog and sets its views and gets all references from it with an inflater
+     * Populates the spinner of allocated housechore with what's in the current db
+     */
     private void showAddResourceDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
@@ -127,6 +139,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
             }
         });
 
+        //sets the onclick when adding a resource and calls method addResource to add in db
         buttonAddResource.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +153,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         });
 
 
+        //Populates the spinner with all the housechores in the db
         DatabaseReference databaseHousechores;
         databaseHousechores = FirebaseDatabase.getInstance().getReference().child("housechores");
         databaseHousechores.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -152,6 +166,8 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                     String choreName = chore.getHousechoreName();
                     chores.add(choreName);
                 }
+
+                //Set spinner possible fields
                 Spinner choreSpinner = (Spinner) dialogView.findViewById(R.id.spinnerAssignedChore);
                 resourcesAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, chores);
                 resourcesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -165,9 +181,15 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
 
     }
 
+    /**
+     * This function displays a editResource dialog and gets buttons from the dialog view
+     * When the mandatory fields are entered, it will update the chore value in the db
+     * @param id = id of the resource in the db
+     */
     private void showEditResourceDialog(final String id) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
+        //gets the layout id with inflater and set it to view
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View dialogView = inflater.inflate(R.layout.edit_resource_dialog, null);
         dialogBuilder.setView(dialogView);
@@ -176,10 +198,13 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
+        //Get all UI references from the dialogVIew
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.buttonCancel);
         final Button buttonEditResource = (Button) dialogView.findViewById(R.id.buttonEditResource);
         final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
 
+        //This gets all the current chores in the database and populates the spinner in the
+        //allocated chore spinner in the dialogView
         DatabaseReference databaseHousechores;
         databaseHousechores = FirebaseDatabase.getInstance().getReference().child("housechores");
         databaseHousechores.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -192,12 +217,13 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                     String choreName = chore.getHousechoreName();
                     chores.add(choreName);
                 }
+
+                //here gets the dialogView and sets the list of chores in the choreAdapter
                 Spinner choreSpinner = (Spinner) dialogView.findViewById(R.id.spinnerNewAllocatedChore);
                 ArrayAdapter<String> choresAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, chores);
                 choresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 choreSpinner.setAdapter(choresAdapter);
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -235,6 +261,12 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
 
     }
 
+    /**
+     * This function removes a resource based on the passed ID in the db
+     * and makes a toast
+     * @param id = ID of the reference in the db
+     * @return
+     */
     private boolean deleteResource(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("resources").child(id);
         dR.removeValue();
@@ -242,6 +274,11 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         return true;
     }
 
+    /**
+     * @param id = id of the chore
+     * @param newHousechore = the new allocated housechore (name in string)
+     * @param newResource = the new resource object (containing different values)
+     */
     private void updateResource(String id, String newHousechore, String newResource) {
         DatabaseReference dRHousechore = FirebaseDatabase.getInstance().getReference("resources").child(id).child("housechore");
         DatabaseReference dRResource = FirebaseDatabase.getInstance().getReference("resources").child(id).child("resourceName");
@@ -250,9 +287,20 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         Toast.makeText(getActivity(), "Resource Updated", Toast.LENGTH_LONG).show();
     }
 
+    /**
+     *This function adds the resource with attributes in the dialog view if all fields are entered
+     * @param resourceName = name of the resource
+     * @param allocatedChore = The choreName assigning to
+     */
     private void addResource(final String resourceName, final String allocatedChore) {
         final DatabaseReference databaseResources;
         databaseResources = FirebaseDatabase.getInstance().getReference("resources");
+
+        if (TextUtils.isEmpty(resourceName)) {
+            Toast.makeText(getActivity(),"Resource name cannot be empty", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         if (!TextUtils.isEmpty(resourceName)) {
             final String id = databaseResources.push().getKey();
             DatabaseReference databaseHousechores;
@@ -262,6 +310,10 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                         Housechore housechore = postSnapshot.getValue(Housechore.class);
+
+                        //This checks whether the allocatedChore is = to the housechore object in the db
+                        //The spinner is already populated with the housechores currently in the db
+                        //but checks again just to make sure
                         if (housechore.getHousechoreName().equals(allocatedChore)) {
                             String housechoreName = housechore.getHousechoreName();
                             Resource resource = new Resource(id, resourceName, housechoreName);
@@ -270,7 +322,6 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                         }
                     }
                 }
-
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
