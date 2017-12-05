@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,18 +44,20 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
     Button buttonCancel;
     View dialogView;
     Spinner choreSpinner;
+    ArrayAdapter<String> resourcesAdapter;
+
+    EditText editResourceName;
+    Spinner editHousechoreName;
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("AddResourcesActivity");
+
+        displayAllResources();
         buttonAddNewResource = (Button) getView().findViewById(R.id.buttonAddResource);
         buttonCancel = (Button) getView().findViewById(R.id.buttonCancel);
-        String[] shoppingList = {"Pencil", "Eraser", "Rocket League", "Rocket League Controller", "Dog Food", "Dog"};
-        listViewResources = (ListView) getView().findViewById(R.id.list_shopping);
-
-        ResourceCustomAdapter adapter = new ResourceCustomAdapter(getContext(), shoppingList);
-        listViewResources.setAdapter(adapter);
+        listViewResources = (ListView) getView().findViewById(R.id.list_resources);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         dialogView = inflater.inflate(R.layout.add_resource_dialog, null);
@@ -66,21 +69,20 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapterView, View view, final int i, long l) {
                 final int selectedRow = i;
-                DatabaseReference databaseProducts;
-                databaseProducts = FirebaseDatabase.getInstance().getReference().child("housechores");
-                databaseProducts.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference databaseResources;
+                databaseResources = FirebaseDatabase.getInstance().getReference().child("resources");
+                databaseResources.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Housechore housechore = snapshot.getValue(Housechore.class);
+                            Resource resource = snapshot.getValue(Resource.class);
                             if (counter == selectedRow) {
-                                showEditResourceDialog(housechore.getID());
+                                showEditResourceDialog(resource.getID());
                             }
                             counter = counter + 1;
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
@@ -134,11 +136,12 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         buttonAddResource.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                b.dismiss();
                 Spinner choreSpinner = (Spinner) dialogView.findViewById(R.id.spinnerAssignedChore);
                 EditText editTextResourceName = (EditText) dialogView.findViewById(R.id.editTextResourceName);
                 String resourceName = editTextResourceName.getText().toString().trim();
                 addResource(resourceName, choreSpinner.getSelectedItem().toString());
+                b.dismiss();
+                displayAllResources();
             }
         });
 
@@ -156,9 +159,9 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
                     chores.add(choreName);
                 }
                 Spinner choreSpinner = (Spinner) dialogView.findViewById(R.id.spinnerAssignedChore);
-                ArrayAdapter<String> choresAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, chores);
-                choresAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                choreSpinner.setAdapter(choresAdapter);
+                resourcesAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, chores);
+                resourcesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                choreSpinner.setAdapter(resourcesAdapter);
             }
 
             @Override
@@ -182,6 +185,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
 
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.buttonCancel);
         final Button buttonEditResource = (Button) dialogView.findViewById(R.id.buttonEditResource);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
 
         DatabaseReference databaseHousechores;
         databaseHousechores = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -206,6 +210,9 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
             }
         });
 
+        final Spinner choreSpinner = (Spinner) dialogView.findViewById(R.id.spinnerNewAllocatedChore);
+        final EditText editTextResourceName = (EditText) dialogView.findViewById(R.id.editTextResourceName);
+
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -213,37 +220,97 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
             }
         });
 
+        buttonDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteResource(id);
+                b.dismiss();
+                displayAllResources();
+            }
+        });
+
         buttonEditResource.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateResource("", "", "");
+                final String resourceName = editTextResourceName.getText().toString().trim();
+                final String assignedChoreName = choreSpinner.getSelectedItem().toString();
+                updateResource(id, assignedChoreName, resourceName);
                 b.dismiss();
+                displayAllResources();
             }
         });
 
     }
 
-    private void updateResource(String id, String previousResource, String newResource) {
-//        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("resources");
-//        dR.setValue(newResource);
+    private boolean deleteResource(String id) {
+        DatabaseReference dR = FirebaseDatabase.getInstance().getReference("resources").child(id);
+        dR.removeValue();
+        Toast.makeText(getActivity(), "Resource Deleted", Toast.LENGTH_LONG).show();
+        return true;
+    }
+
+    private void updateResource(String id, String newHousechore, String newResource) {
+        DatabaseReference dRHousechore = FirebaseDatabase.getInstance().getReference("resources").child(id).child("housechore");
+        DatabaseReference dRResource = FirebaseDatabase.getInstance().getReference("resources").child(id).child("resourceName");
+        dRHousechore.setValue(newHousechore);
+        dRResource.setValue(newResource);
         Toast.makeText(getActivity(), "Resource Updated", Toast.LENGTH_LONG).show();
     }
 
+    private void addResource(final String resourceName, final String allocatedChore) {
+        final DatabaseReference databaseResources;
+        databaseResources = FirebaseDatabase.getInstance().getReference("resources");
+        if (!TextUtils.isEmpty(resourceName)) {
+            final String id = databaseResources.push().getKey();
+            DatabaseReference databaseHousechores;
+            databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
+            databaseHousechores.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        Housechore housechore = postSnapshot.getValue(Housechore.class);
+                        if (housechore.getHousechoreName().equals(allocatedChore)) {
+                            String housechoreName = housechore.getHousechoreName();
+                            Resource resource = new Resource(id, resourceName, housechoreName);
+                            databaseResources.child(id).setValue(resource);
+                            Toast.makeText(getActivity(), "Resource Added", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
 
-    //TODO 1 add resource to DB when clicked on add button. Two more things to do when adding to db
-    //TODO 2 make sure that there is a list of resources in the housechore (I have already added the list item to the Housechore.class)
-    //TODO 3 make sure the new resource is being appended there
-
-    private void addResource(String resourceName, String allocatedChore) {
-        //add in db
-        Log.v(TAG,"**************");
-        Log.v(TAG,"resourceName" +resourceName);
-        Log.v(TAG,"allocatedChore" + allocatedChore);
-        Log.v(TAG,"**************");
-
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
     }
 
     private void openDrawer() {
         startActivity(new Intent(getContext(), DrawerActivity.class));
+    }
+
+    public void displayAllResources() {
+        DatabaseReference databaseResources;
+        databaseResources = FirebaseDatabase.getInstance().getReference().child("resources");
+        databaseResources.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int i = 0;
+                String[] resourcesList = new String[(int) dataSnapshot.getChildrenCount()];
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    Resource resource = snapshot.getValue(Resource.class);
+                    resourcesList[i] = resource.getResourceName();
+                    i = i + 1;
+
+                }
+                ListView listView = (ListView) getView().findViewById(R.id.list_resources);
+                ResourceCustomAdapter adapter = new ResourceCustomAdapter(getActivity(), resourcesList);
+                listView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 }

@@ -7,13 +7,14 @@ package com.uottawa.plscuddleme;
 public class Resource {
     private String id;
     private String resourceName;
-    private Housechore housechore;
+    private String housechore;
 
+    public Resource() {}
 
-    public Resource(String id, String name, Housechore housechore) {
+    public Resource(String id, String name, String housechoreId) {
         this.id = id;
         this.resourceName = name;
-        this.housechore = housechore;
+        this.housechore = housechoreId;
     }
 
     public String getResourceName() {
@@ -33,12 +34,12 @@ public class Resource {
         return id;
     }
 
-    public Housechore getHousechore() {
+    public String getHousechore() {
         return housechore;
     }
 
-    public void setHousechore(Housechore chore) {
-        this.housechore = chore;
+    public void setHousechore(String housechoreId) {
+        this.housechore = housechoreId;
     }
 
 

@@ -14,11 +14,11 @@
             android:id="@+id/buttonAddResource"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add new Resources"/>
+            android:text="Add new Resource"/>
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/list_shopping"
+        android:id="@+id/list_resources"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"

@@ -24,8 +24,6 @@
             android:id="@+id/textViewChoreBelonging"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="5pt"
-            android:text="tmp chore belonging"
             android:textStyle="italic" />
 
     </LinearLayout>
