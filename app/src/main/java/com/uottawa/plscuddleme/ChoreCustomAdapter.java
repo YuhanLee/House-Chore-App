@@ -27,7 +27,7 @@ public class ChoreCustomAdapter extends ArrayAdapter {
     public void setChoreName(String choreName) {
         this.choreName = choreName;
     }
-
+    // set values to contents of chore_item_layout and return
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.chore_item_layout, parent, false);
@@ -36,8 +36,10 @@ public class ChoreCustomAdapter extends ArrayAdapter {
         ImageView choreImage = (ImageView) rowView.findViewById(R.id.icon);
 
         if (myChores[position] != null && myChores[position].length > 0) {
+            // Chore name located in index 0 of inner array
             choreNameTextField.setText(myChores[position][0]);
             setChoreName(myChores[position][0]);
+            // Chore note located at index 1 of inner array
             choreDescriptionTextField.setText("Note: " + myChores[position][1]);
         }
 

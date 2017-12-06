@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+    // set on click listeners
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

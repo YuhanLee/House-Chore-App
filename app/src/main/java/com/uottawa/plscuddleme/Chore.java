@@ -46,6 +46,7 @@ public class Chore extends Fragment {
     String currentUserName;
 
     @Override
+    // When returned to this activity from another activity's finish(), refresh list of chores
     public void onResume() {
         super.onResume();
         displayAllChores();
@@ -64,6 +65,7 @@ public class Chore extends Fragment {
         Switch onOffSwitch = (Switch) getView().findViewById(R.id.switch1);
         listViewHousechores = (ListView) getView().findViewById(R.id.housechore_list);
 
+        // Display all chores on page load
         displayAllChores();
 
         //get User context
@@ -105,7 +107,7 @@ public class Chore extends Fragment {
             }
         });
 
-
+        // Implements on long click to display a dialog that allows user to change status of chore
         listViewHousechores.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 
             @Override
@@ -117,9 +119,11 @@ public class Chore extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
+                        // find corresponding database entry based of row selected
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = snapshot.getValue(Housechore.class);
                             if (counter == selectedRow) {
+                                // database entry found, call function that displays dialog
                                 showConfirmCompleteDialog(housechore.getID(), housechore.getReward(), housechore.getAssignedTo());
                             }
                             counter = counter + 1;
@@ -134,10 +138,12 @@ public class Chore extends Fragment {
             }
         });
 
+        // Add on click listener to spinner
         Spinner userSpinner = (Spinner) getView().findViewById(R.id.user_filter);
         userSpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // Get selected value in spinner of users
                 final String selectedSpinner = parentView.getItemAtPosition(position).toString();
                 DatabaseReference databaseChores;
                 databaseChores = FirebaseDatabase.getInstance().getReference().child("housechores");
@@ -146,6 +152,7 @@ public class Chore extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int i = 0;
                         int arraySize = 0;
+                        // Get amount of database entries of housechores that is assigned to the selected user and create an array of its size
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = snapshot.getValue(Housechore.class);
                             if (housechore.getAssignedTo().equals(selectedSpinner)) {
@@ -153,6 +160,7 @@ public class Chore extends Fragment {
                             }
                         }
                         String[][] choreList = new String[arraySize][];
+                        // Create an array of arrays that includes the housechore name and the housechore note
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = snapshot.getValue(Housechore.class);
                             String[] itemPair = new String[2];
@@ -163,13 +171,16 @@ public class Chore extends Fragment {
                                 i = i + 1;
                             }
                         }
+                        // If the list is not null or empty, create custom adapter
                         if (choreList != null && choreList.length > 0) {
                             ListView listView = (ListView) getView().findViewById(R.id.housechore_list);
                             ChoreCustomAdapter adapter = new ChoreCustomAdapter(getContext(), choreList);
                             listView.setAdapter(adapter);
                         } else if (selectedSpinner.equals("Display All")) {
+                            // Display all chores if selected value is display all
                             displayAllChores();
                         } else {
+                            // otherwise, toast that the user selected has no chores
                             Toast.makeText(getActivity(), "There are no chores assigned to " + selectedSpinner, Toast.LENGTH_LONG).show();
                         }
                     }
@@ -187,7 +198,7 @@ public class Chore extends Fragment {
 
         });
 
-
+        // Add on click listener to row items that will redirect to a chore profile page
         listViewHousechores.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
 
             @Override
@@ -199,9 +210,11 @@ public class Chore extends Fragment {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         int counter = 0;
+                        // find chore in database corresponding to row selected
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Housechore housechore = (Housechore) snapshot.getValue(Housechore.class);
                             if (counter == selectedRow) {
+                                // chore found in database, call function that opens the chore profile page
                                 openChore(selectedRow, housechore.getID());
                                 break;
                             }
@@ -260,6 +273,7 @@ public class Chore extends Fragment {
 
     /**
      * Displays all the chrores in firebase. Loops through all the housechore entry.
+     * This function behaves very similarly as the block of code in line 164
      */
     public void displayAllChores() {
         DatabaseReference databaseChores;
@@ -299,6 +313,7 @@ public class Chore extends Fragment {
      * @param assignedTo Assignee of the chore
      */
     private void showConfirmCompleteDialog(final String id, final int reward, final String assignedTo) {
+        // Build and show dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.mark_completed_confirm, null);
@@ -312,6 +327,7 @@ public class Chore extends Fragment {
         final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
         final Button buttonPostpone = (Button) dialogView.findViewById(R.id.postponeButton);
 
+        // Close dialog on cancel
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -319,9 +335,11 @@ public class Chore extends Fragment {
             }
         });
 
+        // When confirm is clicked
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Set value in database to completed
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
                 dR.setValue("Completed");
                 DatabaseReference databaseChores;
@@ -329,9 +347,11 @@ public class Chore extends Fragment {
                 databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Find family member the chore was assigned to
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Member member = snapshot.getValue(Member.class);
                             if (member.getfamilyMemberName().equals(assignedTo)) {
+                                // Family member found, update member rewards points in database
                                 int currentRewards = member.getRewards();
                                 int newRewards = currentRewards + reward;
                                 DatabaseReference dRewards = FirebaseDatabase.getInstance().getReference("familyMembers").child(snapshot.getKey()).child("rewards");
@@ -352,6 +372,7 @@ public class Chore extends Fragment {
         buttonPostpone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // On click postpone, update database value to postponed.
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
                 dR.setValue("Postponed");
                 Toast.makeText(getActivity(), "Marked as Postponed", Toast.LENGTH_LONG).show();
@@ -360,6 +381,9 @@ public class Chore extends Fragment {
         });
     }
 
+    /*
+     * Get index of a value in a spinner
+     */
     private int getIndex(Spinner spinner, String myString) {
         int index = 0;
         for (int i = 0; i < spinner.getCount(); i++) {

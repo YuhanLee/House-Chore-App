@@ -26,6 +26,7 @@ public class Member {
     }
 
 
+    // Getters and Setters
     public String getID() {
         return id;
     }

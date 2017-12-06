@@ -61,6 +61,7 @@ public class DrawerActivity extends AppCompatActivity
 
         setSupportActionBar(toolbar);
 
+        // Get user context
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
@@ -70,6 +71,8 @@ public class DrawerActivity extends AppCompatActivity
             userId = firebaseUser.getUid();
         }
 
+
+        // Get the logged in user information
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
         databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -80,6 +83,7 @@ public class DrawerActivity extends AppCompatActivity
                     Member member = familyMembers.getValue(Member.class);
                     id = member.getID();
                     if (userId.equals(id)) {
+                        // call function that logged in user information to instance variables
                         getMember(member);
                         break;
                     }
@@ -92,7 +96,7 @@ public class DrawerActivity extends AppCompatActivity
             }
         });
 
-
+        // Set on click listener to floating action button which starts activity which adds housechores
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,7 +106,7 @@ public class DrawerActivity extends AppCompatActivity
             }
         });
 
-
+        // Set toggles to opening and closing navigation drawer
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -118,7 +122,9 @@ public class DrawerActivity extends AppCompatActivity
         textViewUserName = (TextView) navHeaderView.findViewById(R.id.textViewUserName);
     }
 
-
+    /*
+     * This function sets logged in user information to instance variables
+     */
     public void getMember(Member member) {
         userName = member.getfamilyMemberName();
         memberEmail = member.getMemberEmail();
@@ -130,13 +136,18 @@ public class DrawerActivity extends AppCompatActivity
 
     }
 
-
+    /*
+     * This function sets values to the textview according to logged in user
+     */
     private void setView() {
         textViewWelcome.setText("Welcome " + userName);
         textViewUserName.setText("Member Name: " + userName);
         textViewUserName.setText(userName);
     }
 
+    /*
+     * This function makes it so if back is pressed while drawer is open, it closes the drawer
+     */
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -169,8 +180,12 @@ public class DrawerActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /*
+     * This function is called when the logout nav is clicked and prompts a dialog that asks user
+     * to confirm intentions to log out of the current user
+     */
     private void showLogoutDialog() {
-
+        // Build and show dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.logout_confirm, null);
@@ -184,9 +199,11 @@ public class DrawerActivity extends AppCompatActivity
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
+        // Set variables
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
         final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
 
+        // Close dialog on cancel click
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,6 +211,7 @@ public class DrawerActivity extends AppCompatActivity
             }
         });
 
+        // When click confirm, sign out, exit smoothly and return to sign in page
         buttonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -24,6 +24,7 @@ public class FamilyMemberAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        // set values to contents of family_member_layout and return
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.family_member_layout, parent, false);
         TextView familyNameTextView = (TextView) rowView.findViewById(R.id.family_member_name);

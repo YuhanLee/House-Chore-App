@@ -34,6 +34,7 @@ public class Housechore {
         this.note = note;
     }
 
+    // Getters and Setters
     public void setID(String id) {
         this.id = id;
     }

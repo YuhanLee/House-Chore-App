@@ -24,7 +24,7 @@ public class ResourceCustomAdapter extends ArrayAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        // set contents to resource_item_layout and return
+        // set values to contents of resource_item_layout and return
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.resource_item_layout, parent, false);
         TextView textViewResourceName = (TextView) rowView.findViewById(R.id.textViewResourceName);

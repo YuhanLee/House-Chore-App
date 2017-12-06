@@ -34,7 +34,9 @@ public class FamilyMembers extends Fragment {
     }
 
 
-
+    /**
+     * This function reads all familyMembers from the database, and creates an array adapter containing all members
+     */
     public void displayAllMembers() {
         DatabaseReference databaseFamilyMembers;
         databaseFamilyMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
@@ -42,16 +44,21 @@ public class FamilyMembers extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 int i = 0;
+                // Create array of size = amount of familymembers in the datebase
                 String[][] familyMemberList = new String[(int) dataSnapshot.getChildrenCount()][];
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
+                    // Create an array
                     String[] itemPair = new String[2];
+                    // Append family member name and user role
                     itemPair[0] = member.getfamilyMemberName();
                     itemPair[1] = member.getUserRole();
+                    // append array to parent array
                     familyMemberList[i] = itemPair;
                     i = i + 1;
 
                 }
+                // Create custom array adapter with array of family members
                 if (familyMemberList != null && familyMemberList.length > 0) {
                     ListView listView = (ListView) getView().findViewById(R.id.fam_listView);
                     adapter = new FamilyMemberAdapter(getContext(), familyMemberList);

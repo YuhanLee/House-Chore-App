@@ -104,7 +104,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                     Housechore chore = chores.getValue(Housechore.class);
                     id = chores.getKey();
                     if (id.equals(choreID)) {
-                        // call function that will assign local variables to the current page's chore information
+                        // call function that will assign instance variables to the current page's chore information
                         getChore(chore);
                         break;
                     }
@@ -127,7 +127,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                     Member member = familyMembers.getValue(Member.class);
                     id = member.getID();
                     if (userId.equals(id)) {
-                        // call function that will assign local variables to the current logged in user information
+                        // call function that will assign instance variables to the current logged in user information
                         getMember(member);
                         break;
                     }
