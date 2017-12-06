@@ -25,9 +25,10 @@ import com.google.firebase.auth.FirebaseAuth;
 //first activity, when user opens app, will come to this page automatically
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final static String TAG = "MainActivity";
-    //firebase Ref
+    //firebase References
     private FirebaseAuth firebaseAuth;
-    //UI Ref
+
+    //UI References of the sign in fields
     private Button buttonRegister;
     private EditText editTextEmail;
     private EditText editTextPassword;
@@ -39,20 +40,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //initialize views
+        //initialize UI references
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
+        //Initializes progress dialog to display registering message
         progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
         buttonRegister.setOnClickListener(this);
         textViewLogin.setOnClickListener(this);
 
+        //checks if there is a current user context. If there is one, will directly go to the drawer activity
         firebaseAuth = FirebaseAuth.getInstance();
-
         if (firebaseAuth.getCurrentUser() != null) {
             finish();
             startActivity(new Intent(this, DrawerActivity.class));
@@ -60,7 +62,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    // set on click listeners
+
+    /**
+     * implements the onclick for the buttonRegister and textView for signin (if the user
+     * already have a log in email and password and wants to sign in with their existing credentials
+     * @param v
+     */
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -74,11 +82,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * This methods registers a user for authentication. And returns whether registration is
+     * successful or not. If registration unsucessful, the dialog will show the error messages
+     * for registration
+     */
     private void registerUser() {
         final String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
 
-        //stop function execution if empty fields
+        //stop function execution if empty fields. The email and password must be entered
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             return;
@@ -89,9 +102,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
+        //if both fields are entered, a progressDialog pops up and shows the registration progress of the user
         progressDialog.setMessage("Registering User. Please wait...");
         progressDialog.show();
 
+        //This directly creates a user in the authentication in firebase
         firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -99,17 +114,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
                             finish();
+                            //This sends the registeredEmail to the AddFamilyMember class which attaches the email
+                            //to the memberEmail attribute of the Member class
                             Intent intent = new Intent(getApplicationContext(), AddFamilyMember.class);
                             intent.putExtra("RegisteredEmail", email);
                             Log.v(TAG, email);
                             startActivity(intent);
                         } else {
+                            //if there is a registration error, the error message will be displayed
+                            //possible erros may include weak passwords, or preexisting members with the same email as the current registration
                             Toast.makeText(MainActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
         progressDialog.dismiss();
     }
-
-
 }
