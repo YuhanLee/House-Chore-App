@@ -34,7 +34,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
 
-        //initialize views
         enterEmail = (EditText) findViewById(R.id.enterEmail);
         enterPassword = (EditText) findViewById(R.id.enterPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
@@ -70,7 +69,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         if (TextUtils.isEmpty(email)) {
 
             Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
-            //stop function execution
             return;
         }
 
@@ -78,7 +76,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             return;
         }
-        //if both not empty
+
         progressDialog.setMessage("Signing in. Please wait...");
         progressDialog.show();
 

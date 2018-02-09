@@ -106,11 +106,11 @@ public class Profile extends Fragment {
      * This function sets all the textViews in the profile page to the user info
      */
     private void setView() {
-        textViewUserNickName.setText(getString(R.string.profile_disp_userName) + userName);
-        textViewUserRole.setText(getString(R.string.profile_disp_userRole) + userRole);
-        textViewUserEmail.setText(getString(R.string.profile_disp_userEmail) + memberEmail);
-        textViewNumberOfChores.setText(getString(R.string.profile_disp_userChores) + numberOfAssignedTasks);
-        textViewRewardPoints.setText(getString(R.string.profile_disp_userRewardPoints) + rewards);
+        textViewUserNickName.setText(getString(R.string.profile_disp_userName) + " " + userName);
+        textViewUserRole.setText(getString(R.string.profile_disp_userRole) + " " + userRole);
+        textViewUserEmail.setText(getString(R.string.profile_disp_userEmail) + " " + memberEmail);
+        textViewNumberOfChores.setText(getString(R.string.profile_disp_userChores) + " " + numberOfAssignedTasks);
+        textViewRewardPoints.setText(getString(R.string.profile_disp_userRewardPoints) + " " + rewards);
 
     }
 

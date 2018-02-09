@@ -28,7 +28,7 @@
                 android:id="@+id/textViewChoreName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="35dp"
                 android:text="@string/wash_coco"
                 android:textColor="#fff"
                 android:textSize="21sp"
@@ -238,7 +238,7 @@
         <LinearLayout
             android:id="@+id/choreResources"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="100dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="3dp"
             android:orientation="vertical"
@@ -249,7 +249,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:textAppearance="@android:style/TextAppearance.StatusBar.Title"
-                android:text="Resources" />
+                android:text="@string/resources" />
 
             <ListView
                 android:id="@+id/listViewResources"

@@ -238,10 +238,10 @@
         <LinearLayout
             android:id="@+id/choreResources"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:layout_below="@id/otherInfo">
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/otherInfo"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"

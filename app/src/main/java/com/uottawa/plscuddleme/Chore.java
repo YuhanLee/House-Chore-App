@@ -44,6 +44,7 @@ public class Chore extends Fragment {
     ChoreCustomAdapter adapter;
     String userId;
     String currentUserName;
+    private AlertDialog alertDialog;
 
     @Override
     // When returned to this activity from another activity's finish(), refresh list of chores
@@ -320,54 +321,53 @@ public class Chore extends Fragment {
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Mark as Completed?");
-        final AlertDialog b = dialogBuilder.create();
-        b.show();
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
 
         final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
+        final Button buttonConfirmComplete = (Button) dialogView.findViewById(R.id.confirmButton);
         final Button buttonPostpone = (Button) dialogView.findViewById(R.id.postponeButton);
 
-        // Close dialog on cancel
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                b.dismiss();
+                dismissDialog();
             }
         });
 
-        // When confirm is clicked
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+        buttonConfirmComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Set value in database to completed
-                DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
-                dR.setValue("Completed");
-                DatabaseReference databaseChores;
-                databaseChores = FirebaseDatabase.getInstance().getReference().child("familyMembers");
-                databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
+                DatabaseReference dRChoreCompletedStatus = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
+                final DatabaseReference dRChoreRewardedStatus = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("rewarded");
+                dRChoreCompletedStatus.setValue("Completed");
+
+
+                DatabaseReference databaseHousechores = FirebaseDatabase.getInstance().getReference().child("housechores");
+                databaseHousechores.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        // Find family member the chore was assigned to
-                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Member member = snapshot.getValue(Member.class);
-                            if (member.getfamilyMemberName().equals(assignedTo)) {
-                                // Family member found, update member rewards points in database
-                                int currentRewards = member.getRewards();
-                                int newRewards = currentRewards + reward;
-                                DatabaseReference dRewards = FirebaseDatabase.getInstance().getReference("familyMembers").child(snapshot.getKey()).child("rewards");
-                                dRewards.setValue(newRewards);
+                        String loopedID;
+                        for (DataSnapshot chores : dataSnapshot.getChildren()) {
+                            Housechore chore = chores.getValue(Housechore.class);
+                            loopedID = chores.getKey();
+                            if (loopedID.equals(id)) {
+                                rewardFamilyMember(assignedTo, chore.getRewarded(), chore.getReward());
+                                dRChoreRewardedStatus.setValue(true);
+                                dismissDialog();
+                                break;
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
+
                     }
                 });
-                Toast.makeText(getActivity(), "Marked as completed. Rewarded " + reward + " points " + "to " + assignedTo, Toast.LENGTH_LONG).show();
-                b.dismiss();
+
             }
         });
+
 
         buttonPostpone.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -376,14 +376,47 @@ public class Chore extends Fragment {
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("completedStatus");
                 dR.setValue("Postponed");
                 Toast.makeText(getActivity(), "Marked as Postponed", Toast.LENGTH_LONG).show();
-                b.dismiss();
+                dismissDialog();
             }
         });
+
     }
 
-    /*
-     * Get index of a value in a spinner
-     */
+
+    private void rewardFamilyMember (String assignedTo, boolean rewarded, int rewardPoints) {
+        DatabaseReference databaseChores = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        if (!rewarded) {
+            final int points = rewardPoints;
+            final String assignedFamilyMember = assignedTo;
+            databaseChores.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    // Find family member the chore was assigned to
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        Member member = snapshot.getValue(Member.class);
+                        if (member.getfamilyMemberName().equals(assignedFamilyMember)) {
+                            int currentRewards = member.getRewards();
+                            int newRewards = currentRewards + points;
+                            FirebaseDatabase.getInstance().getReference("familyMembers").child(snapshot.getKey()).child("rewards").setValue(newRewards);
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+            Toast.makeText(getActivity(), "Marked as completed. Rewarded " + points + " points " + "to " + assignedTo, Toast.LENGTH_LONG).show();
+            dismissDialog();
+        } else {
+            Toast.makeText(getActivity(), "The points have already been rewarded", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void dismissDialog() {
+        alertDialog.dismiss();
+    }
+    
     private int getIndex(Spinner spinner, String myString) {
         int index = 0;
         for (int i = 0; i < spinner.getCount(); i++) {

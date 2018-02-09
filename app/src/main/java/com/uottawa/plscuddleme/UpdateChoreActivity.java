@@ -48,7 +48,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
     //Housechore
     String housechoreName;
-    String assignedBy;
     String assignedTo;
     String priority;
     String category;
@@ -164,13 +163,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-        }
-
-    }
-
     /**
      * Assign local values to current logged in user's information
      */
@@ -185,51 +177,23 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
      */
     private void setView() {
         if (userRole.equals("Adult")) {
-            // Set on click listeners to buttons, and set content view if logged in user is Adult
             setContentView(R.layout.adult_update_housechore);
             Button buttonAssignTo = (Button) findViewById(R.id.buttonAssignTo);
             Button buttonEdit = (Button) findViewById(R.id.buttonEdit);
             Button buttonDelete = (Button) findViewById(R.id.buttonDelete);
-            buttonDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showAdultConfirmDeleteDialog();
-                }
-            });
-            buttonAssignTo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showAdultConfirmAssignToDialog();
-                }
-            });
-            buttonEdit.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showAdultConfirmUpdateDialog();
-                }
-            });
+            buttonDelete.setOnClickListener(this);
+            buttonAssignTo.setOnClickListener(this);
+            buttonEdit.setOnClickListener(this);
         } else {
             setContentView(R.layout.child_update_housechore);
-            // Set on click listeners to buttons, and set content view if logged in user is Child
             if (!(assignedTo.equals("Unassigned"))) {
-                // If the chore is unassigned, remove the "assignToMe" button
                 LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
                 buttonLinearLayout.setVisibility(View.GONE);
             } else {
-                // Otherwise, set on click listener to "assignToMe" button
-                Button buttonAssign = (Button) findViewById(R.id.buttonAssignToMe);
-                buttonAssign.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Open dialog that allows users to confirm assigning chore to himself
-                        showChildConfirmDialog(choreID, userName);
-                    }
-                });
+                Button buttonAssignToMe = (Button) findViewById(R.id.buttonAssignToMe);
+                buttonAssignToMe.setOnClickListener(this);
             }
         }
-
-
-        // Update the textviews in the chore page with new data
         textViewChoreName = (TextView) findViewById(R.id.textViewChoreName);
         textViewAssignee = (TextView) findViewById(R.id.textViewAssignee);
         textViewCategory = (TextView) findViewById(R.id.textViewCategory);
@@ -281,23 +245,22 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         // Set variables
         TextView description = (TextView) dialogView.findViewById(R.id.descriptionConfirm);
         TextView descriptionNote = (TextView) dialogView.findViewById(R.id.notesConfirm);
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.childCancel);
-        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.childAccept);
+        final Button buttonCancelChild = (Button) dialogView.findViewById(R.id.childCancel);
+        final Button buttonConfirmChild = (Button) dialogView.findViewById(R.id.childAccept);
 
         // Set text corresponding to chore name and note
         description.setText(getString(R.string.accept_description, housechoreName));
         descriptionNote.setText(getString(R.string.note_description, note));
 
         // Close dialog if click cancel
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
+        buttonCancelChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 b.dismiss();
             }
         });
 
-        // Update assignedTo value in database, remove button, and return to previous activity
-        buttonConfirm.setOnClickListener(new View.OnClickListener() {
+        buttonConfirmChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Update Value
@@ -372,9 +335,8 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        // Set variables
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonAssign = (Button) dialogView.findViewById(R.id.assignButton);
+        final Button buttonCancelAdult = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonAssignAdult = (Button) dialogView.findViewById(R.id.assignButton);
 
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
@@ -405,7 +367,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         });
 
         // Close dialog on click cancel
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
+        buttonCancelAdult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 b.dismiss();
@@ -413,7 +375,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         });
 
         // Call function that assigns housechore, and exit activity smoothly
-        buttonAssign.setOnClickListener(new View.OnClickListener() {
+        buttonAssignAdult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.assignto_spinner);
@@ -428,7 +390,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
      * This function displays a dialog that allows Adult to confirm changes to a chore
      */
     private void showAdultConfirmUpdateDialog() {
-        // Build and show dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.update_housechore_confirm, null);
@@ -438,11 +399,9 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        // Set variables
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonUpdate = (Button) dialogView.findViewById(R.id.updateButton);
+        final Button buttonCancelChore = (Button) dialogView.findViewById(R.id.cancelButton);
+        final Button buttonUpdateChore = (Button) dialogView.findViewById(R.id.updateButton);
 
-        // Create a calender dialog for user to choose a date in edit due date field
         myCalendar = Calendar.getInstance();
         editChoredueDate = (EditText) dialogView.findViewById(R.id.edit_dueDate);
 
@@ -461,24 +420,22 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 DatePickerDialog datePickerDialog = new DatePickerDialog(UpdateChoreActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-                // Set minimum date to today
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                // Show calendar
                 datePickerDialog.show();
 
             }
         });
 
-        // Close dialog on click
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
+        buttonCancelChore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 b.dismiss();
             }
         });
 
-        // Call function that updates database with new entered data and exit activity smoothly
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+
+
+        buttonUpdateChore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 EditText editHousechoreName = (EditText) dialogView.findViewById(R.id.edit_chore_name);
@@ -487,12 +444,20 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 Spinner editChorePriority = (Spinner) dialogView.findViewById(R.id.edit_priority);
                 Spinner editChoreCategory = (Spinner) dialogView.findViewById(R.id.edit_category);
                 Spinner editChoreRewards = (Spinner) dialogView.findViewById(R.id.edit_rewards);
+
+
                 final String dateString = editChoredueDate.getText().toString();
                 final String stringHousechore = editHousechoreName.getText().toString();
                 final String stringPriority = editChorePriority.getSelectedItem().toString();
                 final String stringChoreCategory = editChoreCategory.getSelectedItem().toString();
                 final String stringNote = editNote.getText().toString();
                 final int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
+
+                if (dateString.isEmpty() || stringHousechore.isEmpty() || stringPriority.isEmpty() ||
+                        stringChoreCategory.isEmpty() || intRewards == 0) {
+                    Toast.makeText(getApplicationContext(),"The chore name and due date are mandatory fields", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
 
                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
@@ -511,16 +476,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         });
     }
 
-    /**
-     * This function updates the database with new housechore values
-     * @param id id of chore that will be changed
-     * @param intRewards new reward value
-     * @param stringChoreCategory new category value
-     * @param stringHousechore new housechore name value
-     * @param stringNote new note value
-     * @param stringPriority new priority value
-     * @param timestampDate new date value
-     */
+
     private void updateHousechore(String id, String stringHousechore, Long timestampDate, String stringPriority, String stringChoreCategory, int intRewards, String stringNote) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
         Housechore housechore = new Housechore(id, stringHousechore, assignedTo, "N/A", timestampDate, stringPriority, stringChoreCategory, statusCompleted, intRewards, stringNote);
@@ -528,11 +484,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         Toast.makeText(getApplicationContext(), "Housechore Updated", Toast.LENGTH_LONG).show();
     }
 
-    /**
-     * This function updates the assignto value of a chore to a new member
-     * @param id id of the chore being editted
-     * @param assignTo assign chore to this member name
-     */
     private boolean assignHousechore(String id, String assignTo) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("assignedTo");
         dR.setValue(assignTo);
@@ -540,10 +491,6 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    /**
-     * This function deletes a chore from the database
-     * @param id id of the chore being deleted
-     */
     private boolean deleteHousechore(String id) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id);
         dR.removeValue();
@@ -551,18 +498,14 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         return true;
     }
 
-    /**
-     * sets editChoredueDate to a certain date after user selects from calendar
-     */
+
     private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         editChoredueDate.setText(sdf.format(myCalendar.getTime()));
     }
 
-    /**
-     * This function reads the database and displays rows each containing data from resources
-     */
+
     public void displayAllResources() {
         DatabaseReference databaseResources;
         databaseResources = FirebaseDatabase.getInstance().getReference().child("resources");
@@ -628,5 +571,28 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+
+            case R.id.buttonDelete:
+                showAdultConfirmDeleteDialog();
+                break;
+
+            case R.id.buttonAssignTo:
+                showAdultConfirmAssignToDialog();
+                break;
+
+
+            case R.id.buttonEdit:
+                showAdultConfirmUpdateDialog();
+                break;
+
+            case R.id.buttonAssignToMe:
+                showChildConfirmDialog(choreID, userName);
+        }
+
     }
 }

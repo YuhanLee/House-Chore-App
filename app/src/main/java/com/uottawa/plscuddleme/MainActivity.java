@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.textViewLogin:
                 startActivity(new Intent(this, SignInActivity.class));
+                finish();
                 break;
         }
     }

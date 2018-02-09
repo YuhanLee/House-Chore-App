@@ -42,16 +42,11 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     Button buttonAddChore;
     List<Housechore> housechores;
 
-    /**
-     * function gets all references from the view add_housechore
-     * @param savedInstanceState
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_housechore);
 
-        // Set variables assigned to corresponding xml elements
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
         editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
         editChoreAssignedTo = (Spinner) findViewById(R.id.spinnerAssignee);
@@ -67,24 +62,19 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         buttonAddChore.setOnClickListener(this);
 
 
-        //Gets all the familyMembers in the database
-        DatabaseReference databaseMembers;
-        databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
+        DatabaseReference databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
         databaseMembers.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 final List<String> users = new ArrayList<String>();
-                // Add an unassigned default option to spinner
                 users.add("Unassigned");
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Member member = snapshot.getValue(Member.class);
-                    // Get name of family member and add it to the array
                     String userName = member.getfamilyMemberName();
                     users.add(userName);
 
                 }
 
-                // This populates the assignee spinner of the layout with the currently existing familyMembers
                 Spinner userSpinner = (Spinner) findViewById(R.id.spinnerAssignee);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -96,7 +86,6 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             }
         });
 
-        // Allows user to tap again the date field and pick a date from a calendar view
         myCalendar = Calendar.getInstance();
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -107,16 +96,13 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
                 updateLabel();
             }
         };
-        // Create onclick listening for edittext field
         editChoredueDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AddHouseChoreActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH));
-                // This makes sure that the user does not pick a due date in the past
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
-                // Show Calendar
                 datePickerDialog.show();
 
             }
@@ -127,7 +113,6 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onStart() {
         super.onStart();
-        // Read and add elements to array consisting of Housechore objects
         databaseHousechores.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -144,18 +129,11 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         });
     }
 
-    /**
-     * Method adds a housechore in the database directly after checking whether the required fields are entered
-     * If not, a toast will be displayed and the function execution is stopped
-     */
     private void addHousechore() {
-        // Reference the database
         DatabaseReference databaseChore;
         databaseChore = FirebaseDatabase.getInstance().getReference("housechores");
-        // Get value of the housechore name that the user entered
         String name = editHousechoreName.getText().toString().trim();
 
-        // Handle empty fields
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "Chore Name cannot be empty", Toast.LENGTH_LONG).show();
             return;
@@ -166,14 +144,12 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             return;
         }
 
-        // If fields are not empty, proceed with adding chore
         if (!TextUtils.isEmpty(name)) {
             String id = databaseChore.push().getKey();
             String stringHousechore = editHousechoreName.getText().toString();
             String stringAssignedTo = editChoreAssignedTo.getSelectedItem().toString();
             String dateString = editChoredueDate.getText().toString();
 
-            // converting the date to a MM/dd/yyyy format
             SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
             Date convertedDate = new Date();
             try {
@@ -187,13 +163,10 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             String stringNote = editNote.getText().toString();
             int intRewards = Integer.parseInt(editChoreRewards.getSelectedItem().toString());
 
-            // Create new housechore object with data populated in fields
-            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote);
+            Housechore housechore = new Housechore(id, stringHousechore, stringAssignedTo, "N/A", convertedDate.getTime(), stringPriority, stringChoreCategory, "Incomplete", intRewards, stringNote, false);
 
-            // Add the housechore and its data into the firebase
             databaseChore.child(id).setValue(housechore);
 
-            // Clear/Reset fields
             editHousechoreName.setText("");
             editChoreAssignedTo.setSelection(0);
             editChoredueDate.setText("");
@@ -202,15 +175,11 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
             editChorePriority.setSelection(0);
             editChoreRewards.setSelection(0);
             Toast.makeText(this, "Housechore Added", Toast.LENGTH_LONG).show();
-            // End activity, return to previous activity
             finish();
         }
     }
 
     @Override
-    /**
-     * Add onclick to addButton to call the addhousechore function
-     */
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.addButton:
@@ -219,11 +188,8 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         }
     }
 
-    /**
-     * sets the editChoreDate to a certain time after user selects a date
-     */
     private void updateLabel() {
-        String myFormat = "MM/dd/yyyy"; //In which you need put here
+        String myFormat = "MM/dd/yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         editChoredueDate.setText(sdf.format(myCalendar.getTime()));
     }

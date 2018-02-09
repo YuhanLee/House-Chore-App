@@ -14,6 +14,7 @@ public class Housechore {
     private String category;
     private String statusCompleted;
     private int reward;
+    private boolean rewarded;
     private String note;
 
 
@@ -21,7 +22,8 @@ public class Housechore {
 
     }
 
-    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy, long dueDate, String priority, String category, String statusCompleted, int reward, String note) {
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy,
+                      long dueDate, String priority, String category, String statusCompleted, int reward, String note) {
         this.id = id;
         this.housechoreName = housechoreName;
         this.assignedTo = assignedTo;
@@ -32,6 +34,22 @@ public class Housechore {
         this.statusCompleted = statusCompleted;
         this.reward = reward;
         this.note = note;
+    }
+
+    public Housechore(String id, String housechoreName, String assignedTo, String assignedBy,
+                      long dueDate, String priority, String category, String statusCompleted, int reward, String note,
+                      Boolean rewarded) {
+        this.id = id;
+        this.housechoreName = housechoreName;
+        this.assignedTo = assignedTo;
+        this.assignedBy = assignedBy;
+        this.dueDate = dueDate;
+        this.priority = priority;
+        this.category = category;
+        this.statusCompleted = statusCompleted;
+        this.reward = reward;
+        this.note = note;
+        this.rewarded = rewarded;
     }
 
     // Getters and Setters
@@ -115,7 +133,13 @@ public class Housechore {
         return note;
     }
 
+    public void setRewarded(boolean rewarded) {
+        this.rewarded = rewarded;
+    }
 
+    public boolean getRewarded() {
+        return rewarded;
+    }
     @Override
     public String toString() {
         return "Housechore{" +
