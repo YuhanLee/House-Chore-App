@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -28,10 +29,12 @@ public class Profile extends Fragment {
 
     //UI references in the view
     TextView textViewUserNickName;
+    TextView textViewProfileWelcome;
     TextView textViewUserRole;
     TextView textViewUserEmail;
     TextView textViewNumberOfChores;
     TextView textViewRewardPoints;
+    ImageView imageViewProfile;
 
     //firebase references
     FirebaseAuth firebaseAuth;
@@ -51,10 +54,12 @@ public class Profile extends Fragment {
 
         getActivity().setTitle("My Profile");
         textViewUserNickName = (TextView) getView().findViewById(R.id.textViewUserNickName);
+        textViewProfileWelcome = (TextView) getView().findViewById(R.id.textViewProfileWelcome);
         textViewUserRole = (TextView) getView().findViewById(R.id.textViewUserRole);
         textViewUserEmail = (TextView) getView().findViewById(R.id.textViewUserEmail);
         textViewNumberOfChores = (TextView) getView().findViewById(R.id.textViewNumberOfChores);
         textViewRewardPoints = (TextView) getView().findViewById(R.id.textViewRewardPoints);
+        imageViewProfile = (ImageView) getView().findViewById(R.id.imageViewProfile);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -107,11 +112,18 @@ public class Profile extends Fragment {
      */
     private void setView() {
         textViewUserNickName.setText(getString(R.string.profile_disp_userName) + " " + userName);
+        textViewProfileWelcome.setText("Welcome "+userName+ "!");
         textViewUserRole.setText(getString(R.string.profile_disp_userRole) + " " + userRole);
         textViewUserEmail.setText(getString(R.string.profile_disp_userEmail) + " " + memberEmail);
         textViewNumberOfChores.setText(getString(R.string.profile_disp_userChores) + " " + numberOfAssignedTasks);
         textViewRewardPoints.setText(getString(R.string.profile_disp_userRewardPoints) + " " + rewards);
 
+
+        if (userRole.equals("Adult")) {
+            imageViewProfile.setImageResource(R.drawable.profile_img_adult);
+        } else {
+            imageViewProfile.setImageResource(R.drawable.profile_img_child);
+        }
     }
 
     @Nullable

@@ -317,7 +317,7 @@ public class Chore extends Fragment {
         // Build and show dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.mark_completed_confirm, null);
+        final View dialogView = inflater.inflate(R.layout.chore_confirm_completion, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Mark as Completed?");

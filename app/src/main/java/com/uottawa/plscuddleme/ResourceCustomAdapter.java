@@ -28,7 +28,7 @@ public class ResourceCustomAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.resource_item_layout, parent, false);
         TextView textViewResourceName = (TextView) rowView.findViewById(R.id.textViewResourceName);
-        TextView textViewChoreBelonging = (TextView) rowView.findViewById(R.id.textViewChoreBelonging);
+//        TextView textViewChoreBelonging = (TextView) rowView.findViewById(R.id.textViewChoreBelonging);
         ImageView imageViewResource = (ImageView) rowView.findViewById(R.id.imageViewResource);
         textViewResourceName.setText(myResource[position]);
         return rowView;
