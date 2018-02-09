@@ -26,7 +26,6 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="100dp"
-            android:text="@string/Welcome"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
 
         <ImageView

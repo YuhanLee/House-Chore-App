@@ -177,7 +177,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
      */
     private void setView() {
         if (userRole.equals("Adult")) {
-            setContentView(R.layout.adult_update_housechore);
+            setContentView(R.layout.chore_page_adult);
             Button buttonAssignTo = (Button) findViewById(R.id.buttonAssignTo);
             Button buttonEdit = (Button) findViewById(R.id.buttonEdit);
             Button buttonDelete = (Button) findViewById(R.id.buttonDelete);
@@ -185,7 +185,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
             buttonAssignTo.setOnClickListener(this);
             buttonEdit.setOnClickListener(this);
         } else {
-            setContentView(R.layout.child_update_housechore);
+            setContentView(R.layout.chore_page_child);
             if (!(assignedTo.equals("Unassigned"))) {
                 LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
                 buttonLinearLayout.setVisibility(View.GONE);
@@ -392,7 +392,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     private void showAdultConfirmUpdateDialog() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.update_housechore_confirm, null);
+        final View dialogView = inflater.inflate(R.layout.chore_update_confirm, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Update Chore");

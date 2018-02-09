@@ -2,13 +2,10 @@ package com.uottawa.plscuddleme;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +17,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -56,7 +51,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         listViewResources = (ListView) getView().findViewById(R.id.list_resources);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        dialogView = inflater.inflate(R.layout.add_resource_dialog, null);
+        dialogView = inflater.inflate(R.layout.resource_add_dialog, null);
 
         choreSpinner = (Spinner) getView().findViewById(R.id.spinnerAssignedChore);
         buttonAddNewResource.setOnClickListener(this);
@@ -93,7 +88,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.nav_resources, container, false);
+        return inflater.inflate(R.layout.resource_list, container, false);
     }
 
     @Override
@@ -112,7 +107,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View dialogView = inflater.inflate(R.layout.add_resource_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.resource_add_dialog, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Add a Resource");
@@ -172,7 +167,7 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(getContext());
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View dialogView = inflater.inflate(R.layout.edit_resource_dialog, null);
+        final View dialogView = inflater.inflate(R.layout.resource_edit_dialog, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Edit a Resource");
