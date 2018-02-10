@@ -17,6 +17,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/account',
+                            'src/main/res/layout/chore',
+                            'src/main/res/layout/dialog',
+                            'src/main/res/layout/drawer',
+                            'src/main/res/layout/member',
+                            'src/main/res/layout/nav',
+                            'src/main/res/layout/resource',
+                            'src/main/res/layout',
+                            'src/main/res'
+                    ]
+        }
+    }
 }
 
 dependencies {
