@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/drawer_background"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
@@ -26,16 +27,18 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="100dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/imageViewMinionWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:layout_below="@id/textViewWelcome"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/drawer_img" />
+            android:src="@drawable/minion_of_steel" />
 
         <TextView
             android:id="@+id/textViewSaveTheWorld"
@@ -45,32 +48,10 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
             android:text="@string/drawer_caption"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button" />
-
-        <TextView
-            android:id="@+id/textViewDrawerDescription"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewSaveTheWorld"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="@string/drawer_intro_text" />
-
-
-        <TextView
-            android:id="@+id/textViewButtonExplanation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textViewDrawerDescription"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:text="This button lets you add a chore anytime" />
-
-
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
+            android:textColor="@color/card_text"
+            android:textSize="18sp" />
     </RelativeLayout>
-
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
