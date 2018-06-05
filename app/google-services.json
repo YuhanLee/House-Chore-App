@@ -15,12 +15,24 @@
       },
       "oauth_client": [
         {
+          "client_id": "109140320736-o7b9epa2ipekcg202vrfm92ndaftv57o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.uottawa.plscuddleme",
+            "certificate_hash": "032c8fb707a78e24ad8c4e41cd09eb684aee9529"
+          }
+        },
+        {
           "client_id": "109140320736-3s81t053n3m8m7aob25u0nk4kb6v4rsr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.uottawa.plscuddleme",
             "certificate_hash": "fdbe18030f2ba74adc07ed0bcf715e067bff9023"
           }
+        },
+        {
+          "client_id": "109140320736-b421p4c2irqrlhme095j3njo9bepaijb.apps.googleusercontent.com",
+          "client_type": 3
         },
         {
           "client_id": "109140320736-b421p4c2irqrlhme095j3njo9bepaijb.apps.googleusercontent.com",

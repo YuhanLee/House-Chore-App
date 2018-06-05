@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
         //Initializes progress dialog to display registering message
-        progressDialog = new ProgressDialog(this);
+//        progressDialog = new ProgressDialog(this);
 
         //attaching listener to button
         buttonRegister.setOnClickListener(this);
@@ -104,8 +104,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         //if both fields are entered, a progressDialog pops up and shows the registration progress of the user
-        progressDialog.setMessage("Registering User. Please wait...");
-        progressDialog.show();
+//        progressDialog.setMessage("Registering User. Please wait...");
+//        progressDialog.show();
 
         //This directly creates a user in the authentication in firebase
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -128,6 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     }
                 });
-        progressDialog.dismiss();
+//        progressDialog.dismiss();
     }
 }
