@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/layoutAllMatch"
     android:background="@drawable/drawer_background"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
@@ -12,20 +11,16 @@
 
     <include
         layout="@layout/app_bar_drawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        style="@style/layoutAllMatch" />
 
     <RelativeLayout
         android:id="@+id/drawerInner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        style="@style/layoutAllWrap">
 
         <TextView
             android:id="@+id/textViewWelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/textViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="100dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textSize="20sp" />
@@ -42,10 +37,8 @@
 
         <TextView
             android:id="@+id/textViewSaveTheWorld"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_below="@+id/imageViewMinionWelcome"
-            android:layout_centerHorizontal="true"
+            style="@style/textViewPrimary"
             android:layout_marginTop="20dp"
             android:text="@string/drawer_caption"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"

@@ -23,23 +23,17 @@
 
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPrimary"
             android:text="Cancel" />
 
         <Button
             android:id="@+id/postponeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPrimary"
             android:text="Postpone" />
 
         <Button
             android:id="@+id/confirmButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPrimary"
             android:text="Confirm" />
     </LinearLayout>
 

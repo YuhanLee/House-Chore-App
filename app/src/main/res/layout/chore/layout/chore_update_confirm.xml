@@ -1,75 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/fragment_housechoreList"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_housechoreList"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
 
     <ImageView
         android:id="@+id/imageViewChore"
-        android:layout_centerHorizontal="true"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:src="@drawable/add_chore_img"/>
+        android:src="@drawable/add_chore_img" />
+
     <EditText
         android:id="@+id/edit_chore_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/editTextPrimary"
         android:layout_below="@+id/imageViewChore"
-        android:textAlignment="center"
         android:hint="@string/edit_chore_name" />
 
     <EditText
         android:id="@+id/edit_dueDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        style="@style/editTextPrimary"
         android:layout_below="@id/edit_chore_name"
         android:clickable="true"
         android:hint="@string/edit_due_date" />
 
     <EditText
         android:id="@+id/edit_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
+        style="@style/editTextPrimary"
         android:layout_below="@id/edit_dueDate"
         android:hint="@string/edit_note" />
 
     <Spinner
         android:id="@+id/edit_priority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/spinnerPrimary"
         android:layout_below="@id/edit_note"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:entries="@array/priority_array"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:entries="@array/priority_array" />
 
     <Spinner
         android:id="@+id/edit_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
+        style="@style/spinnerPrimary"
         android:layout_below="@id/edit_priority"
         android:entries="@array/category_array"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+
+        />
 
     <Spinner
         android:id="@+id/edit_rewards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/spinnerPrimary"
         android:layout_below="@id/edit_category"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:entries="@array/reward_array"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:entries="@array/reward_array" />
 
     <LinearLayout
         android:id="@+id/buttonLayout"
@@ -80,27 +62,19 @@ tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
 
         <Button
             android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPrimary"
             android:text="@string/cancel" />
 
         <Button
             android:id="@+id/updateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            style="@style/buttonPrimary"
             android:text="@string/update" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/housechore_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/textViewPrimary"
         android:layout_below="@id/buttonLayout"
-        android:layout_centerHorizontal="true"
-        android:text="@string/updatehousechore_hint"
-        android:textAlignment="center" />
-
-
+        android:text="@string/updatehousechore_hint" />
+    
 </RelativeLayout>

@@ -15,18 +15,12 @@
 
         <ImageView
             android:id="@+id/avatarPic"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="50dp"
-            android:cropToPadding="false"
-            android:scaleType="centerCrop"
+            style="@style/signin_img"
             android:src="@drawable/signin_img" />
 
         <EditText
             android:id="@+id/enterEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:ems="10"
@@ -36,8 +30,7 @@
 
         <EditText
             android:id="@+id/enterPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:ems="10"
             android:gravity="center"
@@ -53,8 +46,7 @@
 
         <TextView
             android:id="@+id/textViewSignUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:clickable="true"
