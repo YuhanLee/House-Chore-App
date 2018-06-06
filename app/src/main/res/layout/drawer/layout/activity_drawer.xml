@@ -8,7 +8,6 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-
     <include
         layout="@layout/app_bar_drawer"
         style="@style/layoutAllMatch" />
@@ -27,13 +26,13 @@
 
         <ImageView
             android:id="@+id/imageViewMinionWelcome"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_below="@id/textViewWelcome"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:src="@drawable/minion_of_steel" />
+            android:layout_below="@id/textViewWelcome"
+            android:src="@drawable/drawer_img" />
 
         <TextView
             android:id="@+id/textViewSaveTheWorld"

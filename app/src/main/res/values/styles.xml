@@ -13,36 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="buttonPrimary">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-    </style>
-
-
-
-    <style name="spinnerPrimary">
-        <item name="android:layout_width"> wrap_content</item>
-        <item name="android:layout_height"> wrap_content</item>
-        <item name="android:layout_centerHorizontal"> true</item>
-        <item name="android:textAlignment"> center</item>
-        <item name="android:layout_marginTop"> 10dp</item>
-        <item name="android:layout_marginBottom"> 10dp</item>
-    </style>
-
-    <style name="textViewPrimary">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textAlignment">center</item>
-    </style>
-
-    <style name="editTextPrimary">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAlignment">center</item>
-    </style>
-
+    <!--Layouts-->
     <style name="layoutAllMatch">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
@@ -53,6 +24,50 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+
+    <!--Buttons-->
+    <style name="buttonPrimary" parent="layoutAllWrap">
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="spinnerPrimary">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+
+    <!--TextViews-->
+    <style name="textViewPrimary" parent="layoutAllWrap">
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="textViewToggleAccount" parent="layoutAllWrap">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+    </style>
+
+
+    <!--EditText-->
+    <style name="editTextPrimary">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="editTextSignInUp" parent="layoutAllWrap">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
+
+    <!--Image-->
     <style name="signin_img">
         <item name="android:layout_width">250dp</item>
         <item name="android:layout_height">250dp</item>
@@ -61,7 +76,7 @@
         <item name="android:cropToPadding">false</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
-
+    
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

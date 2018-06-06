@@ -17,10 +17,6 @@
             android:icon="@drawable/shoppinglist_icon"
             android:title="@string/resources" />
         <item
-            android:id="@+id/nav_schedule"
-            android:icon="@drawable/schedule_icon"
-            android:title="@string/schedule" />
-        <item
             android:id="@+id/nav_people"
             android:icon="@drawable/family_icon"
             android:title="@string/family_members" />

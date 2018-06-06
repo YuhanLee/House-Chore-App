@@ -20,20 +20,13 @@
 
         <EditText
             android:id="@+id/enterEmail"
-            style="@style/layoutAllWrap"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/editTextSignInUp"
             android:hint="@string/enter_email"
-            android:inputType="textEmailAddress"
-            android:textAlignment="center" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/enterPassword"
-            style="@style/layoutAllWrap"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
+            style="@style/editTextSignInUp"
             android:hint="@string/enter_password"
             android:inputType="textPassword" />
 
@@ -46,11 +39,7 @@
 
         <TextView
             android:id="@+id/textViewSignUp"
-            style="@style/layoutAllWrap"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:focusable="true"
+            style="@style/textViewToggleAccount"
             android:onClick="onClick"
             android:text="@string/new_member_sign_up_here"
             android:textColor="@color/card_text" />

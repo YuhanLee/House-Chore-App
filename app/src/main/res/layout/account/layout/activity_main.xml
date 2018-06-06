@@ -21,22 +21,13 @@
 
         <EditText
             android:id="@+id/editTextEmail"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:ems="10"
+            style="@style/editTextSignInUp"
             android:hint="@string/enter_email"
-            android:inputType="textEmailAddress"
-            android:textAlignment="center" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/editTextPassword"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:gravity="center"
+            style="@style/editTextSignInUp"
             android:hint="@string/enter_password"
             android:inputType="textPassword" />
 
@@ -50,12 +41,7 @@
 
         <TextView
             android:id="@+id/textViewLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:focusable="true"
+            style="@style/textViewToggleAccount"
             android:onClick="onClick"
             android:text="@string/existing_member_signin"
             android:textColor="@color/card_text" />

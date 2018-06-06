@@ -242,10 +242,6 @@ public class DrawerActivity extends AppCompatActivity
                 fragment = new AddResourcesActivity();
                 setDrawerLayoutGone();
                 break;
-            case R.id.nav_schedule:
-                fragment = new Schedule();
-                setDrawerLayoutGone();
-                break;
             case R.id.nav_people:
                 fragment = new FamilyMembers();
                 setDrawerLayoutGone();
