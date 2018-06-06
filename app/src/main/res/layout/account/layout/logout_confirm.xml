@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/layoutAllMatch"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layoutAllMatch">
 
     <TextView
         android:id="@+id/confirmLogout"

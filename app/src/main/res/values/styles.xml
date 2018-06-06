@@ -24,7 +24,6 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
-
     <!--Buttons-->
     <style name="buttonPrimary" parent="layoutAllWrap">
         <item name="android:layout_weight">1</item>
@@ -36,7 +35,6 @@
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">10dp</item>
     </style>
-
 
     <!--TextViews-->
     <style name="textViewPrimary" parent="layoutAllWrap">
@@ -50,7 +48,6 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
     </style>
-
 
     <!--EditText-->
     <style name="editTextPrimary">
@@ -76,7 +73,7 @@
         <item name="android:cropToPadding">false</item>
         <item name="android:scaleType">centerCrop</item>
     </style>
-    
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

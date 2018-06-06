@@ -1,43 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/list_layout"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/list_layout"
+    style="@style/layoutAllMatch"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <RelativeLayout
+        android:id="@+id/top_container"
         android:layout_width="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </LinearLayout>
-        <RelativeLayout
-            android:id="@+id/top_container"
+        <Spinner
+            android:id="@+id/user_filter"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
 
-            <Spinner
-                android:id="@+id/user_filter"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp" />
-
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_weight="1"
-                android:text="@string/only_show_my_tasks" />
-
-        </RelativeLayout>
-
-        <ListView
-            android:id="@+id/housechore_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/top_container" />
+        <Switch
+            android:id="@+id/switch1"
+            style="@style/layoutAllWrap"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:text="@string/only_show_my_tasks" />
 
     </RelativeLayout>
+
+    <ListView
+        android:id="@+id/housechore_list"
+        style="@style/layoutAllMatch"
+        android:layout_below="@id/top_container" />
+
+</RelativeLayout>
