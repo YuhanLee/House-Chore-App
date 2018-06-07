@@ -14,5 +14,5 @@
     <color name="card_text">#263238</color>
     <color name="blue">#4B77BE</color>
     <color name="lightBlue">#448AFF</color>
-
+    <color name="white"> #FFFFFF</color>
 </resources>

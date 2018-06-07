@@ -9,8 +9,8 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_drawer"
-        style="@style/layoutAllMatch" />
+        style="@style/layoutAllMatch"
+        layout="@layout/app_bar_drawer" />
 
     <RelativeLayout
         android:id="@+id/drawerInner"
@@ -20,24 +20,24 @@
             android:id="@+id/textViewWelcome"
             style="@style/textViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"
             android:textSize="20sp" />
 
         <ImageView
             android:id="@+id/imageViewMinionWelcome"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="125dp"
+            android:layout_height="175dp"
+            android:layout_below="@id/textViewWelcome"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/textViewWelcome"
+            android:layout_marginTop="40dp"
             android:src="@drawable/drawer_img" />
 
         <TextView
-            android:id="@+id/textViewSaveTheWorld"
-            android:layout_below="@+id/imageViewMinionWelcome"
+            android:id="@+id/textViewDoSomeChore"
             style="@style/textViewPrimary"
+            android:layout_below="@+id/imageViewMinionWelcome"
             android:layout_marginTop="20dp"
             android:text="@string/drawer_caption"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.Button"

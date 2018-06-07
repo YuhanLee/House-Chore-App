@@ -1,7 +1,6 @@
 
 package com.uottawa.plscuddleme;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +24,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText enterEmail;
     private EditText enterPassword;
     private TextView textViewSignUp;
-    private ProgressDialog progressDialog;
     private FirebaseAuth firebaseAuth;
 
 
@@ -38,15 +36,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         enterPassword = (EditText) findViewById(R.id.enterPassword);
         buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
-        progressDialog = new ProgressDialog(this);
         buttonSignIn.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
 
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
-            finish();
             startActivity(new Intent(this, AddFamilyMember.class));
+            finish();
         }
     }
 
@@ -67,7 +64,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String email = enterEmail.getText().toString().trim();
         String password = enterPassword.getText().toString().trim();
         if (TextUtils.isEmpty(email)) {
-
             Toast.makeText(this, "Please Enter an Email", Toast.LENGTH_LONG).show();
             return;
         }
@@ -77,19 +73,19 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             return;
         }
 
-        progressDialog.setMessage("Signing in. Please wait...");
-        progressDialog.show();
+        //at this time, both fields are filled in
+        buttonSignIn.setText(R.string.Signing_in);
 
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        progressDialog.dismiss();
                         if (task.isSuccessful()) {
                             //start add profile
-                            finish();
                             startActivity(new Intent(getApplicationContext(), DrawerActivity.class));
+                            finish();
                         } else {
+                            buttonSignIn.setText(R.string.signin);
                             Toast.makeText(getApplicationContext(), "Sign in unsuccessful: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
 

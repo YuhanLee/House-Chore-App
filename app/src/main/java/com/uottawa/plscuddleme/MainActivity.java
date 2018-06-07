@@ -1,6 +1,5 @@
 package com.uottawa.plscuddleme;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -33,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editTextEmail;
     private EditText editTextPassword;
     private TextView textViewLogin;
-    private ProgressDialog progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,9 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonRegister = (Button) findViewById(R.id.buttonRegister);
         textViewLogin = (TextView) findViewById(R.id.textViewLogin);
 
-        //Initializes progress dialog to display registering message
-//        progressDialog = new ProgressDialog(this);
-
         //attaching listener to button
         buttonRegister.setOnClickListener(this);
         textViewLogin.setOnClickListener(this);
@@ -56,8 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //checks if there is a current user context. If there is one, will directly go to the drawer activity
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() != null) {
-            finish();
             startActivity(new Intent(this, DrawerActivity.class));
+            finish();
         }
     }
 
@@ -103,9 +97,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        //if both fields are entered, a progressDialog pops up and shows the registration progress of the user
-//        progressDialog.setMessage("Registering User. Please wait...");
-//        progressDialog.show();
+        buttonRegister.setText("Registering...");
+
 
         //This directly creates a user in the authentication in firebase
         firebaseAuth.createUserWithEmailAndPassword(email, password)
@@ -114,20 +107,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
-                            finish();
                             //This sends the registeredEmail to the AddFamilyMember class which attaches the email
                             //to the memberEmail attribute of the Member class
                             Intent intent = new Intent(getApplicationContext(), AddFamilyMember.class);
                             intent.putExtra("RegisteredEmail", email);
                             Log.v(TAG, email);
                             startActivity(intent);
+                            finish();
                         } else {
                             //if there is a registration error, the error message will be displayed
                             //possible erros may include weak passwords, or preexisting members with the same email as the current registration
                             Toast.makeText(MainActivity.this, "Registration Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                            buttonRegister.setText("Register");
                         }
                     }
                 });
-//        progressDialog.dismiss();
     }
 }

@@ -48,8 +48,8 @@ public class AddFamilyMember extends AppCompatActivity implements View.OnClickLi
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
-            finish();
             startActivity(new Intent(this, SignInActivity.class));
+            finish();
         }
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -99,5 +99,6 @@ public class AddFamilyMember extends AppCompatActivity implements View.OnClickLi
     private void openDrawer() {
         Intent gotoDrawer = new Intent(this, DrawerActivity.class);
         startActivity(gotoDrawer);
+        finish();
     }
 }
