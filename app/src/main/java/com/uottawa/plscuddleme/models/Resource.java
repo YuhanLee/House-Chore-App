@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.models;
 
 /**
  * Created by Yuhan on 11/1/2017.
@@ -27,7 +27,6 @@ public class Resource {
         this.resourceName = name;
     }
 
-
     public void setID(String id) {
         this.id = id;
     }
@@ -43,7 +42,5 @@ public class Resource {
     public void setHousechore(String housechoreId) {
         this.housechore = housechoreId;
     }
-
-
 }
 

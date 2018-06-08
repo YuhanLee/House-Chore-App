@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.uottawa.plscuddleme.R;
 
 /**
  * Created by Psymon on 2017-11-21.
@@ -36,10 +38,10 @@ public class ChoreCustomAdapter extends ArrayAdapter {
         ImageView choreImage = (ImageView) rowView.findViewById(R.id.icon);
 
         if (myChores[position] != null && myChores[position].length > 0) {
-            // Chore name located in index 0 of inner array
+            // DisplayChoreActivity name located in index 0 of inner array
             choreNameTextField.setText(myChores[position][0]);
             setChoreName(myChores[position][0]);
-            // Chore note located at index 1 of inner array
+            // DisplayChoreActivity note located at index 1 of inner array
             choreDescriptionTextField.setText("Note: " + myChores[position][1]);
         }
 

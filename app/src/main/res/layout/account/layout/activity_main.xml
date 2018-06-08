@@ -5,7 +5,7 @@
     style="@style/layoutAllMatch"
     android:layout_centerInParent="true"
     android:background="@drawable/background"
-    tools:context="com.uottawa.plscuddleme.MainActivity">
+    tools:context="com.uottawa.plscuddleme.activities.MainActivity">
 
     <LinearLayout
         style="@style/layoutAllMatch"

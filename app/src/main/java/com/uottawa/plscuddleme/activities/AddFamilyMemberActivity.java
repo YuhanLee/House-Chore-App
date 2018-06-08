@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,20 +8,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.uottawa.plscuddleme.models.Member;
+import com.uottawa.plscuddleme.R;
 
 
 /**
  * Created by Yuhan on 11/29/2017.
  */
 
-public class AddFamilyMember extends AppCompatActivity implements View.OnClickListener {
+public class AddFamilyMemberActivity extends AppCompatActivity implements View.OnClickListener {
 
     //database References
     private FirebaseAuth firebaseAuth;

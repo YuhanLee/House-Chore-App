@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/minion_launch"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,13 +19,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DrawerActivity"
+            android:name=".activities.DrawerActivity"
             android:label="@string/title_activity_drawer"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".AddHouseChoreActivity" />
-        <activity android:name=".AddFamilyMember" />
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".UpdateChoreActivity"></activity>
+        <activity android:name=".activities.AddHouseChoreActivity" />
+        <activity android:name=".activities.AddFamilyMemberActivity" />
+        <activity android:name=".activities.SignInActivity" />
+        <activity android:name=".activities.UpdateChoreActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.uottawa.plscuddleme.R;
 
 /**
  * Created by Psymon on 2017-11-21.

@@ -1,15 +1,12 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,13 +16,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uottawa.plscuddleme.R;
+import com.uottawa.plscuddleme.models.Member;
 
 /**
  * Created by Yuhan on 11/19/2017.
  */
 
 
-public class Profile extends Fragment {
+public class ProfileFragment extends Fragment {
 
     //UI references in the view
     TextView textViewUserNickName;
@@ -52,7 +51,7 @@ public class Profile extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("My Profile");
+        getActivity().setTitle("My ProfileFragment");
         textViewUserNickName = (TextView) getView().findViewById(R.id.textViewUserNickName);
         textViewProfileWelcome = (TextView) getView().findViewById(R.id.textViewProfileWelcome);
         textViewUserRole = (TextView) getView().findViewById(R.id.textViewUserRole);

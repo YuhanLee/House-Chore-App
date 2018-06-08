@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -22,6 +22,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uottawa.plscuddleme.models.Housechore;
+import com.uottawa.plscuddleme.R;
+import com.uottawa.plscuddleme.models.Resource;
+import com.uottawa.plscuddleme.adapters.ResourceCustomAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.uottawa.plscuddleme.R;
 
 /**
  * Created by Yuhan on 11/29/2017.
@@ -107,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Successfully registered", Toast.LENGTH_LONG).show();
-                            //This sends the registeredEmail to the AddFamilyMember class which attaches the email
+                            //This sends the registeredEmail to the AddFamilyMemberActivity class which attaches the email
                             //to the memberEmail attribute of the Member class
-                            Intent intent = new Intent(getApplicationContext(), AddFamilyMember.class);
+                            Intent intent = new Intent(getApplicationContext(), AddFamilyMemberActivity.class);
                             intent.putExtra("RegisteredEmail", email);
                             Log.v(TAG, email);
                             startActivity(intent);

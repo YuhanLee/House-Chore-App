@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -26,6 +26,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uottawa.plscuddleme.models.Housechore;
+import com.uottawa.plscuddleme.models.Member;
+import com.uottawa.plscuddleme.R;
+import com.uottawa.plscuddleme.models.Resource;
+import com.uottawa.plscuddleme.adapters.ResourceCustomAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -238,7 +243,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final View dialogView = inflater.inflate(R.layout.child_confirm_chore, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Accept Chore");
+        dialogBuilder.setTitle("Accept DisplayChoreActivity");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -266,7 +271,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 // Update Value
                 DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("assignedTo");
                 dR.setValue(assignTo);
-                Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned Chore to " + assignTo, Toast.LENGTH_LONG).show();
+                Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned DisplayChoreActivity to " + assignTo, Toast.LENGTH_LONG).show();
                 // Remove assignToMe button
                 LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
                 buttonLinearLayout.setVisibility(View.GONE);
@@ -288,7 +293,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final View dialogView = inflater.inflate(R.layout.adult_delete_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Delete Chore");
+        dialogBuilder.setTitle("Delete DisplayChoreActivity");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -331,7 +336,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final View dialogView = inflater.inflate(R.layout.adult_assignto_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Assign Chore");
+        dialogBuilder.setTitle("Assign DisplayChoreActivity");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -395,7 +400,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final View dialogView = inflater.inflate(R.layout.chore_update_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Update Chore");
+        dialogBuilder.setTitle("Update DisplayChoreActivity");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
@@ -487,7 +492,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     private boolean assignHousechore(String id, String assignTo) {
         DatabaseReference dR = FirebaseDatabase.getInstance().getReference("housechores").child(id).child("assignedTo");
         dR.setValue(assignTo);
-        Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned Chore to " + assignTo, Toast.LENGTH_LONG).show();
+        Toast.makeText(UpdateChoreActivity.this, "Successfully Assigned DisplayChoreActivity to " + assignTo, Toast.LENGTH_LONG).show();
         return true;
     }
 

@@ -6,7 +6,7 @@
     android:layout_centerInParent="true"
     android:background="@drawable/drawer_background"
     android:paddingTop="10dp"
-    tools:context="com.uottawa.plscuddleme.MainActivity">
+    tools:context="com.uottawa.plscuddleme.activities.MainActivity">
 
     <LinearLayout
         style="@style/layoutAllMatch"

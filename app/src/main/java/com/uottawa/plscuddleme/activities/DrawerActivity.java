@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -27,6 +27,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uottawa.plscuddleme.models.FamilyMembers;
+import com.uottawa.plscuddleme.models.Member;
+import com.uottawa.plscuddleme.fragments.ProfileFragment;
+import com.uottawa.plscuddleme.R;
 
 
 public class DrawerActivity extends AppCompatActivity
@@ -231,11 +235,11 @@ public class DrawerActivity extends AppCompatActivity
         Fragment fragment = null;
         switch (navId) {
             case R.id.nav_profile:
-                fragment = new Profile();
+                fragment = new ProfileFragment();
                 setDrawerLayoutGone();
                 break;
             case R.id.nav_chores:
-                fragment = new Chore();
+                fragment = new DisplayChoreActivity();
                 setDrawerLayoutGone();
                 break;
             case R.id.nav_resources:

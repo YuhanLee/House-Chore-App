@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.models;
 
 import android.app.Fragment;
 import android.os.Build;
@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.uottawa.plscuddleme.adapters.FamilyMemberAdapter;
+import com.uottawa.plscuddleme.R;
 
 /**
  * Created by Yuhan on 11/19/2017.

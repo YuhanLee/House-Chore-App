@@ -2,7 +2,7 @@
 
 
     //MAIN ACTIVITY
-    <string name="app_name">PlsCuddleMe</string>
+    <string name="app_name">House Chore App</string>
     <string name="signin">Sign In</string>
     <string name="login">Let\'s go!</string>
     <string name="title_activity_drawer">drawer</string>

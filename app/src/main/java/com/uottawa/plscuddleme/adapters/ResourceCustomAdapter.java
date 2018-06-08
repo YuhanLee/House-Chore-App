@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.uottawa.plscuddleme.R;
 
 /**
  * Created by Psymon on 2017-11-23.
@@ -28,7 +30,6 @@ public class ResourceCustomAdapter extends ArrayAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.resource_item_layout, parent, false);
         TextView textViewResourceName = (TextView) rowView.findViewById(R.id.textViewResourceName);
-//        TextView textViewChoreBelonging = (TextView) rowView.findViewById(R.id.textViewChoreBelonging);
         ImageView imageViewResource = (ImageView) rowView.findViewById(R.id.imageViewResource);
         textViewResourceName.setText(myResource[position]);
         return rowView;

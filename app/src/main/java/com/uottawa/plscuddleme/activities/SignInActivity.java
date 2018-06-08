@@ -1,5 +1,5 @@
 
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.uottawa.plscuddleme.R;
 
 public class SignInActivity extends AppCompatActivity implements View.OnClickListener {
     public static final String EXTRA_MESSAGE = "com.uottawa.plscuddleme.EMAIL";
@@ -42,7 +43,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         firebaseAuth = FirebaseAuth.getInstance();
 
         if (firebaseAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, AddFamilyMember.class));
+            startActivity(new Intent(this, AddFamilyMemberActivity.class));
             finish();
         }
     }
@@ -88,7 +89,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             buttonSignIn.setText(R.string.signin);
                             Toast.makeText(getApplicationContext(), "Sign in unsuccessful: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                         }
-
                     }
                 });
 

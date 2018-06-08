@@ -1,4 +1,4 @@
-package com.uottawa.plscuddleme;
+package com.uottawa.plscuddleme.activities;
 
 /**
  * Created by Yuhan on 11/19/2017.
@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Locale;
 
 import com.google.firebase.database.*;
+import com.uottawa.plscuddleme.models.Housechore;
+import com.uottawa.plscuddleme.models.Member;
+import com.uottawa.plscuddleme.R;
 
 
 public class AddHouseChoreActivity extends AppCompatActivity implements View.OnClickListener {
@@ -45,19 +48,19 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_housechore);
+        setContentView(com.uottawa.plscuddleme.R.layout.add_housechore);
 
         databaseHousechores = FirebaseDatabase.getInstance().getReference("housechores");
-        editHousechoreName = (EditText) findViewById(R.id.enter_chore_name);
-        editChoreAssignedTo = (Spinner) findViewById(R.id.spinnerAssignee);
-        editChoredueDate = (EditText) findViewById(R.id.enter_dueDate);
-        editChorePriority = (Spinner) findViewById(R.id.enter_priority);
-        editChoreCategory = (Spinner) findViewById(R.id.enter_category);
-        editChoreRewards = (Spinner) findViewById(R.id.enter_rewards);
-        editNote = (EditText) findViewById(R.id.enter_note);
-        imageChore = (ImageView) findViewById(R.id.imageViewChore);
+        editHousechoreName = (EditText) findViewById(com.uottawa.plscuddleme.R.id.enter_chore_name);
+        editChoreAssignedTo = (Spinner) findViewById(com.uottawa.plscuddleme.R.id.spinnerAssignee);
+        editChoredueDate = (EditText) findViewById(com.uottawa.plscuddleme.R.id.enter_dueDate);
+        editChorePriority = (Spinner) findViewById(com.uottawa.plscuddleme.R.id.enter_priority);
+        editChoreCategory = (Spinner) findViewById(com.uottawa.plscuddleme.R.id.enter_category);
+        editChoreRewards = (Spinner) findViewById(com.uottawa.plscuddleme.R.id.enter_rewards);
+        editNote = (EditText) findViewById(com.uottawa.plscuddleme.R.id.enter_note);
+        imageChore = (ImageView) findViewById(com.uottawa.plscuddleme.R.id.imageViewChore);
 
-        buttonAddChore = (Button) findViewById(R.id.addButton);
+        buttonAddChore = (Button) findViewById(com.uottawa.plscuddleme.R.id.addButton);
         housechores = new ArrayList<>();
         buttonAddChore.setOnClickListener(this);
 
@@ -75,7 +78,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
 
                 }
 
-                Spinner userSpinner = (Spinner) findViewById(R.id.spinnerAssignee);
+                Spinner userSpinner = (Spinner) findViewById(com.uottawa.plscuddleme.R.id.spinnerAssignee);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(AddHouseChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
@@ -135,12 +138,12 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         String name = editHousechoreName.getText().toString().trim();
 
         if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Chore Name cannot be empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "DisplayChoreActivity Name cannot be empty", Toast.LENGTH_LONG).show();
             return;
         }
 
         if (TextUtils.isEmpty(editChoredueDate.getText().toString())) {
-            Toast.makeText(this, "Chore has to have a due date", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "DisplayChoreActivity has to have a due date", Toast.LENGTH_LONG).show();
             return;
         }
 
