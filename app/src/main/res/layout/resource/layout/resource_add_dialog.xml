@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/layoutAllMatch">
 
     <LinearLayout
         android:id="@+id/resourceInfo"
@@ -11,8 +10,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:text="@string/title_add_resource"
@@ -41,8 +39,7 @@
         </Spinner>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:text="@string/assign_it_to_a_chore"
@@ -56,16 +53,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/buttonCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_cancel"
+            style="@style/layoutAllWrap"
             android:layout_weight="1"
             android:text="@string/cancel" />
 
         <Button
-            android:id="@+id/buttonAddResource"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_add_resource"
+            style="@style/layoutAllWrap"
             android:layout_weight="1"
             android:text="@string/add" />
     </LinearLayout>

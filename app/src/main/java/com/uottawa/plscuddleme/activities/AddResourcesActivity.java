@@ -50,8 +50,8 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         getActivity().setTitle("Resources List");
 
         displayAllResources();
-        buttonAddNewResource = (Button) getView().findViewById(R.id.buttonAddResource);
-        buttonCancel = (Button) getView().findViewById(R.id.buttonCancel);
+        buttonAddNewResource = (Button) getView().findViewById(R.id.btn_add_resource);
+        buttonCancel = (Button) getView().findViewById(R.id.btn_cancel);
         listViewResources = (ListView) getView().findViewById(R.id.list_resources);
 
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -98,10 +98,10 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.buttonAddResource:
+            case R.id.btn_add_resource:
                 showAddResourceDialog();
                 break;
-            case R.id.buttonCancel:
+            case R.id.btn_cancel:
                displayAllResources();
         }
 
@@ -118,8 +118,8 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.buttonCancel);
-        final Button buttonAddResource = (Button) dialogView.findViewById(R.id.buttonAddResource);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonAddResource = (Button) dialogView.findViewById(R.id.btn_add_resource);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,9 +178,9 @@ public class AddResourcesActivity extends Fragment implements View.OnClickListen
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.buttonCancel);
-        final Button buttonEditResource = (Button) dialogView.findViewById(R.id.buttonEditResource);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDelete);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonEditResource = (Button) dialogView.findViewById(R.id.btn_edit_resource);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.btn_delete);
 
         DatabaseReference databaseHousechores;
         databaseHousechores = FirebaseDatabase.getInstance().getReference().child("housechores");

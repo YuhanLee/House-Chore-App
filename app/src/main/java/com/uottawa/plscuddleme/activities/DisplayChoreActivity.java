@@ -328,9 +328,9 @@ public class DisplayChoreActivity extends Fragment {
         alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonConfirmComplete = (Button) dialogView.findViewById(R.id.confirmButton);
-        final Button buttonPostpone = (Button) dialogView.findViewById(R.id.postponeButton);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonConfirmComplete = (Button) dialogView.findViewById(R.id.btn_confirm);
+        final Button buttonPostpone = (Button) dialogView.findViewById(R.id.btn_postpone);
 
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override

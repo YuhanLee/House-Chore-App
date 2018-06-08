@@ -1,97 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:id="@+id/fragment_housechoreList"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_housechoreList"
+    style="@style/layoutAllMatch"
+    tools:context="com.uottawa.plscuddleme.Tasks$PlaceholderFragment">
 
     <ImageView
         android:id="@+id/imageViewChore"
-        android:layout_centerHorizontal="true"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="15dp"
-        android:src="@drawable/add_chore_img"/>
+        android:src="@drawable/add_chore_img" />
+
     <EditText
         android:id="@+id/enter_chore_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageViewChore"
-        android:textAlignment="center"
-        android:hint="@string/enter_chore_name" />
+        android:hint="@string/enter_chore_name"
+        android:textAlignment="center" />
+
     <Spinner
         android:id="@+id/spinnerAssignee"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
         android:layout_below="@id/enter_chore_name"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp" />
+        android:layout_marginTop="10dp"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/enter_dueDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_below="@id/spinnerAssignee"
-        android:hint="@string/enter_due_date" />
+        android:hint="@string/enter_due_date"
+        android:textAlignment="center" />
 
     <EditText
         android:id="@+id/enter_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
         android:layout_below="@id/enter_dueDate"
-        android:hint="@string/enter_note" />
+        android:hint="@string/enter_note"
+        android:textAlignment="center" />
 
     <Spinner
         android:id="@+id/enter_priority"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/layoutAllWrap"
         android:layout_below="@id/enter_note"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:entries="@array/priority_array"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:entries="@array/priority_array"
+        android:textAlignment="center" />
 
     <Spinner
         android:id="@+id/enter_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textAlignment="center"
+        style="@style/layoutAllWrap"
         android:layout_below="@id/enter_priority"
-        android:entries="@array/category_array"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:entries="@array/category_array"
+        android:textAlignment="center" />
 
     <Spinner
         android:id="@+id/enter_rewards"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/layoutAllWrap"
         android:layout_below="@id/enter_category"
         android:layout_centerHorizontal="true"
-        android:textAlignment="center"
-        android:entries="@array/reward_array"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:entries="@array/reward_array"
+        android:textAlignment="center" />
 
     <Button
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/btn_add"
+        style="@style/layoutAllWrap"
         android:layout_below="@id/enter_rewards"
         android:layout_centerInParent="true"
         android:text="@string/add" />
 
     <TextView
         android:id="@+id/housechore_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/addButton"
+        style="@style/layoutAllWrap"
+        android:layout_below="@id/btn_add"
         android:layout_centerHorizontal="true"
         android:text="@string/housechore"
         android:textAlignment="center" />

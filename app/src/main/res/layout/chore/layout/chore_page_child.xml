@@ -176,7 +176,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="50dp"
-                    android:src="@drawable/schedule_icon" />
+                    android:src="@drawable/ic_schedule" />
 
                 <TextView
                     android:id="@+id/textViewPriority"
@@ -198,7 +198,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="50dp"
-                    android:src="@drawable/reward_icon" />
+                    android:src="@drawable/ic_reward" />
 
                 <TextView
                     android:id="@+id/textViewReward"
@@ -218,7 +218,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/note_icon" />
+                    android:src="@drawable/ic_note" />
 
 
                 <TextView
@@ -258,7 +258,7 @@
 
         </LinearLayout>
 
-        <!--above end of otherinfo layout-->
+        <!--above end of other info layout-->
 
         <LinearLayout
             android:id="@+id/layoutAssignToMe"
@@ -269,7 +269,7 @@
             android:weightSum="1">
 
             <Button
-                android:id="@+id/buttonAssignToMe"
+                android:id="@+id/btn_assign_to_me"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Assign to me" />

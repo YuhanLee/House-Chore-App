@@ -34,7 +34,7 @@
         android:hint="@string/edit_note" />
 
     <Spinner
-        android:id="@+id/edit_priority"
+        android:id="@+id/spinner_priority"
         style="@style/spinnerPrimary"
         android:layout_below="@id/edit_note"
         android:entries="@array/priority_array" />
@@ -42,10 +42,8 @@
     <Spinner
         android:id="@+id/edit_category"
         style="@style/spinnerPrimary"
-        android:layout_below="@id/edit_priority"
-        android:entries="@array/category_array"
-
-        />
+        android:layout_below="@id/spinner_priority"
+        android:entries="@array/category_array" />
 
     <Spinner
         android:id="@+id/edit_rewards"
@@ -54,19 +52,19 @@
         android:entries="@array/reward_array" />
 
     <LinearLayout
-        android:id="@+id/buttonLayout"
+        android:id="@+id/layout_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_rewards"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/btn_cancel"
             style="@style/buttonPrimary"
             android:text="@string/cancel" />
 
         <Button
-            android:id="@+id/updateButton"
+            android:id="@+id/btn_update"
             style="@style/buttonPrimary"
             android:text="@string/update" />
     </LinearLayout>
@@ -74,7 +72,7 @@
     <TextView
         android:id="@+id/housechore_hint"
         style="@style/textViewPrimary"
-        android:layout_below="@id/buttonLayout"
+        android:layout_below="@id/layout_btn"
         android:text="@string/updatehousechore_hint" />
-    
+
 </RelativeLayout>

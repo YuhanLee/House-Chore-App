@@ -106,15 +106,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/layoutAllWrap"
                         android:text="@string/due_date"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/textViewDueDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/layoutAllWrap"
                         android:paddingTop="10dp"
                         android:text="2017/11/20"
                         android:textColor="@color/card_text"
@@ -131,15 +129,13 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/layoutAllWrap"
                         android:text="Status"
                         android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/textViewStatus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/layoutAllWrap"
                         android:paddingTop="10dp"
                         android:text="Completed"
                         android:textColor="@color/card_text"
@@ -174,12 +170,11 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="50dp"
-                    android:src="@drawable/schedule_icon" />
+                    android:src="@drawable/ic_schedule" />
 
                 <TextView
                     android:id="@+id/textViewPriority"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/layoutAllWrap"
                     android:layout_alignBaseline="@id/imageViewPriority"
                     android:text="High Priority"
                     android:textSize="15sp" />
@@ -197,7 +192,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginLeft="50dp"
-                    android:src="@drawable/reward_icon" />
+                    android:src="@drawable/ic_reward" />
 
                 <TextView
                     android:id="@+id/textViewReward"
@@ -219,7 +214,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="8dp"
-                    android:src="@drawable/note_icon" />
+                    android:src="@drawable/ic_note" />
 
 
                 <TextView
@@ -266,19 +261,19 @@
             android:weightSum="3">
 
             <Button
-                android:id="@+id/buttonEdit"
+                android:id="@+id/btn_edit"
                 style="@style/buttonPrimary"
-                android:text="Edit" />
+                android:text="@string/edit" />
 
             <Button
-                android:id="@+id/buttonAssignTo"
+                android:id="@+id/btn_assign_to"
                 style="@style/buttonPrimary"
-                android:text="Assign To" />
+                android:text="@string/assign_to" />
 
             <Button
-                android:id="@+id/buttonDelete"
+                android:id="@+id/btn_delete"
                 style="@style/buttonPrimary"
-                android:text="Delete" />
+                android:text="@string/delete" />
         </LinearLayout>
 
     </RelativeLayout>

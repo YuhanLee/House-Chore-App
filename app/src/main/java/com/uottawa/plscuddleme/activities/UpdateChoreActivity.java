@@ -183,9 +183,9 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     private void setView() {
         if (userRole.equals("Adult")) {
             setContentView(R.layout.chore_page_adult);
-            Button buttonAssignTo = (Button) findViewById(R.id.buttonAssignTo);
-            Button buttonEdit = (Button) findViewById(R.id.buttonEdit);
-            Button buttonDelete = (Button) findViewById(R.id.buttonDelete);
+            Button buttonAssignTo = (Button) findViewById(R.id.btn_assign_to);
+            Button buttonEdit = (Button) findViewById(R.id.btn_edit);
+            Button buttonDelete = (Button) findViewById(R.id.btn_delete);
             buttonDelete.setOnClickListener(this);
             buttonAssignTo.setOnClickListener(this);
             buttonEdit.setOnClickListener(this);
@@ -195,7 +195,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 LinearLayout buttonLinearLayout = (LinearLayout) findViewById(R.id.layoutAssignToMe);
                 buttonLinearLayout.setVisibility(View.GONE);
             } else {
-                Button buttonAssignToMe = (Button) findViewById(R.id.buttonAssignToMe);
+                Button buttonAssignToMe = (Button) findViewById(R.id.btn_assign_to_me);
                 buttonAssignToMe.setOnClickListener(this);
             }
         }
@@ -240,7 +240,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         // Build Dialog and show
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.child_confirm_chore, null);
+        final View dialogView = inflater.inflate(R.layout.dialog_child_confirm_chore, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Accept DisplayChoreActivity");
@@ -290,16 +290,16 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         // Build Dialog and show
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.adult_delete_confirm, null);
+        final View dialogView = inflater.inflate(R.layout.dialog_adult_delete_confirm, null);
         dialogBuilder.setView(dialogView);
 
-        dialogBuilder.setTitle("Delete DisplayChoreActivity");
+        dialogBuilder.setTitle("Delete this chore");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
         // Set variables
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonDelete = (Button) dialogView.findViewById(R.id.deleteButton);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonDelete = (Button) dialogView.findViewById(R.id.btn_delete);
         TextView description = (TextView) dialogView.findViewById(R.id.descriptionConfirm);
 
         // Set text corresponding to housechore name that will be deleted
@@ -333,15 +333,15 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         // Build and show dialog
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.adult_assignto_confirm, null);
+        final View dialogView = inflater.inflate(R.layout.dialog_adult_assignto_confirm, null);
         dialogBuilder.setView(dialogView);
 
         dialogBuilder.setTitle("Assign DisplayChoreActivity");
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        final Button buttonCancelAdult = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonAssignAdult = (Button) dialogView.findViewById(R.id.assignButton);
+        final Button buttonCancelAdult = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonAssignAdult = (Button) dialogView.findViewById(R.id.btn_assign);
 
         DatabaseReference databaseMembers;
         databaseMembers = FirebaseDatabase.getInstance().getReference().child("familyMembers");
@@ -360,7 +360,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 }
 
                 // Add all array elements to the spinner
-                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.assignto_spinner);
+                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.spinner_assign_to);
                 ArrayAdapter<String> usersAdapter = new ArrayAdapter<String>(UpdateChoreActivity.this, android.R.layout.simple_spinner_item, users);
                 usersAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 userSpinner.setAdapter(usersAdapter);
@@ -383,7 +383,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         buttonAssignAdult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.assignto_spinner);
+                Spinner userSpinner = (Spinner) dialogView.findViewById(R.id.spinner_assign_to);
                 assignHousechore(choreID, userSpinner.getSelectedItem().toString());
                 b.dismiss();
                 finish();
@@ -404,8 +404,8 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
         final AlertDialog b = dialogBuilder.create();
         b.show();
 
-        final Button buttonCancelChore = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonUpdateChore = (Button) dialogView.findViewById(R.id.updateButton);
+        final Button buttonCancelChore = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonUpdateChore = (Button) dialogView.findViewById(R.id.btn_update);
 
         myCalendar = Calendar.getInstance();
         editChoredueDate = (EditText) dialogView.findViewById(R.id.edit_dueDate);
@@ -446,7 +446,7 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
                 EditText editHousechoreName = (EditText) dialogView.findViewById(R.id.edit_chore_name);
                 EditText editChoredueDate = (EditText) dialogView.findViewById(R.id.edit_dueDate);
                 EditText editNote = (EditText) dialogView.findViewById(R.id.edit_note);
-                Spinner editChorePriority = (Spinner) dialogView.findViewById(R.id.edit_priority);
+                Spinner editChorePriority = (Spinner) dialogView.findViewById(R.id.spinner_priority);
                 Spinner editChoreCategory = (Spinner) dialogView.findViewById(R.id.edit_category);
                 Spinner editChoreRewards = (Spinner) dialogView.findViewById(R.id.edit_rewards);
 
@@ -582,20 +582,20 @@ public class UpdateChoreActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View view) {
         switch (view.getId()) {
 
-            case R.id.buttonDelete:
+            case R.id.btn_delete:
                 showAdultConfirmDeleteDialog();
                 break;
 
-            case R.id.buttonAssignTo:
+            case R.id.btn_assign_to:
                 showAdultConfirmAssignToDialog();
                 break;
 
 
-            case R.id.buttonEdit:
+            case R.id.btn_edit:
                 showAdultConfirmUpdateDialog();
                 break;
 
-            case R.id.buttonAssignToMe:
+            case R.id.btn_assign_to_me:
                 showChildConfirmDialog(choreID, userName);
         }
 

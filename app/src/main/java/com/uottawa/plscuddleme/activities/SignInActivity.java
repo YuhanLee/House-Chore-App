@@ -35,7 +35,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         enterEmail = (EditText) findViewById(R.id.enterEmail);
         enterPassword = (EditText) findViewById(R.id.enterPassword);
-        buttonSignIn = (Button) findViewById(R.id.buttonSignIn);
+        buttonSignIn = (Button) findViewById(R.id.btn_sign_in);
         textViewSignUp = (TextView) findViewById(R.id.textViewSignUp);
         buttonSignIn.setOnClickListener(this);
         textViewSignUp.setOnClickListener(this);
@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buttonSignIn:
+            case R.id.btn_sign_in:
                 userLogIn();
                 break;
 

@@ -60,7 +60,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
         editNote = (EditText) findViewById(com.uottawa.plscuddleme.R.id.enter_note);
         imageChore = (ImageView) findViewById(com.uottawa.plscuddleme.R.id.imageViewChore);
 
-        buttonAddChore = (Button) findViewById(com.uottawa.plscuddleme.R.id.addButton);
+        buttonAddChore = (Button) findViewById(com.uottawa.plscuddleme.R.id.btn_add);
         housechores = new ArrayList<>();
         buttonAddChore.setOnClickListener(this);
 
@@ -185,7 +185,7 @@ public class AddHouseChoreActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.addButton:
+            case R.id.btn_add:
                 addHousechore();
                 break;
         }

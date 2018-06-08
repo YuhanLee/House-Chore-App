@@ -25,8 +25,7 @@
 
         <TextView
             android:id="@+id/textViewUserEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/add_family_member_title"
@@ -44,24 +43,21 @@
 
         <Spinner
             android:id="@+id/memberRole"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:entries="@array/userRole_array"
             android:textAlignment="center" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/pick_a_role" />
 
         <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btn_save"
+            style="@style/layoutAllWrap"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:text="@string/add_new_member" />

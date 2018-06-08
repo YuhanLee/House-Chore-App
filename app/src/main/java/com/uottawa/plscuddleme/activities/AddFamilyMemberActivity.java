@@ -55,7 +55,7 @@ public class AddFamilyMemberActivity extends AppCompatActivity implements View.O
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         editTextNickName = (EditText) findViewById(R.id.userNickName);
-        buttonSave = (Button) findViewById(R.id.buttonSave);
+        buttonSave = (Button) findViewById(R.id.btn_save);
         userRole = (Spinner) findViewById(R.id.memberRole);
 
         buttonSave.setOnClickListener(this);
@@ -64,7 +64,7 @@ public class AddFamilyMemberActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.buttonSave:
+            case R.id.btn_save:
                 buttonSave();
                 break;
         }

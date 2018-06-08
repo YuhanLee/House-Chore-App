@@ -204,8 +204,8 @@ public class DrawerActivity extends AppCompatActivity
         b.show();
 
         // Set variables
-        final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancelButton);
-        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.confirmButton);
+        final Button buttonCancel = (Button) dialogView.findViewById(R.id.btn_cancel);
+        final Button buttonConfirm = (Button) dialogView.findViewById(R.id.btn_confirm);
 
         // Close dialog on cancel click
         buttonCancel.setOnClickListener(new View.OnClickListener() {

@@ -57,11 +57,9 @@
     <string name="yuhan">Yuhan</string>
     <string name="category">Category</string>
     <string name="pet">Pet</string>
-    <string name="enter_email">Email Please</string>
     <string name="enter_password">Password Please</string>
     <string name="sign_up">Sign Up</string>
     <string name="enter_nick_name">Enter Nick Name</string>
-    <string name="existing_member_signin">Already a member? Sign in here</string>
     <string name="select_a_new_avatar">Select a new avatar!</string>
     <string name="update_your_info">Update your info!</string>
     <string name="verify_password">* Verify Password</string>
@@ -82,7 +80,6 @@
     <string name="unassigned">Unassigned</string>
     <string name="priority_low">Priority (Low)</string>
     <string name="priority_high">Priority (High)</string>
-    <string name="register">Register</string>
     <string name="save_information">Save Information</string>
     <string name="welcome_back">Welcome back!</string>
     <string name="accept_description">The Chore %1$s will be assigned to you.</string>
@@ -126,6 +123,7 @@
     <string name="edit_resource_name">Edit Resource Name</string>
     <string name="allocate_to_another_chore">Allocate to another chore</string>
     <string name="confirm">Confirm</string>
+    <string name="postpone">Postpone</string>
     <string name="drawer_intro_text">Open the drawer on your left allows you to navigate through different parts of the app</string>
     <string name="drawer_caption">Let\'s do some chore</string>
     <string name="add_family_member_title">I heard you have a new member?</string>
@@ -135,6 +133,11 @@
     <string name="profile_disp_userEmail">Email: </string>
     <string name="profile_disp_userChores">Number of Chores: </string>
     <string name="profile_disp_userRewardPoints">Current reward points: </string>
-
-
+    <string name="edit_chore_confirm">Would you like to postpone or confirm this chore?</string>
+    <string name="assign_to">Assign To</string>
+    <string name="edit">Edit</string>
+    <string name="Signing_in">Signing in...</string>
+    <string name="enter_email">Email Please</string>
+    <string name="register">Register</string>
+    <string name="existing_member_signin">Already a member? Sign in here</string>
 </resources>
